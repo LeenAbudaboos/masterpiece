@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Responsive Login and Signup Form </title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/style.css">
+                
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+             <style>
+                /* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    column-gap: 30px;
+}
+.form{
+    position: absolute;
+    max-width: 430px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 6px;
+    background: #FFF;
+}
+.form.signup{
+    opacity: 0;
+    pointer-events: none;
+}
+.forms.show-signup .form.signup{
+    opacity: 1;
+    pointer-events: auto;
+}
+.forms.show-signup .form.login{
+    opacity: 0;
+    pointer-events: none;
+}
+header{
+    font-size: 28px;
+    font-weight: 600;
+    color: #232836;
+    text-align: center;
+}
+form{
+    margin-top: 30px;
+}
+.form .field{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+.field input,
+.field button{
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 6px;
+}
+.field input{
+    outline: none;
+    padding: 0 15px;
+    border: 1px solid#CACACA;
+}
+.field input:focus{
+    border-bottom-width: 2px;
+}
+.eye-icon{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #8b8b8b;
+    cursor: pointer;
+    padding: 5px;
+}
+.field button{
+    color: #fff;
+    background-color: #0171d3;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.field button:hover{
+    background-color: #016dcb;
+}
+.form-link{
+    text-align: center;
+    margin-top: 10px;
+}
+.form-link span,
+.form-link a{
+    font-size: 14px;
+    font-weight: 400;
+    color: #232836;
+}
+.form a{
+    color: #0171d3;
+    text-decoration: none;
+}
+.form-content a:hover{
+    text-decoration: underline;
+}
+.line{
+    position: relative;
+    height: 1px;
+    width: 100%;
+    margin: 36px 0;
+    background-color: #d4d4d4;
+}
+.line::before{
+    content: 'Or';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFF;
+    color: #8b8b8b;
+    padding: 0 15px;
+}
+.media-options a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+a.facebook{
+    color: #fff;
+    background-color: #4267b2;
+}
+a.facebook .facebook-icon{
+    height: 28px;
+    width: 28px;
+    color: #0171d3;
+    font-size: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+.facebook-icon,
+img.google-img{
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+}
+img.google-img{
+    height: 20px;
+    width: 20px;
+    object-fit: cover;
+}
+a.google{
+    border: 1px solid #CACACA;
+}
+a.google span{
+    font-weight: 500;
+    opacity: 0.6;
+    color: #232836;
+}
+/* تنسيق الفورم */
+.form {
+    border: .2px solid #000000; /* إضافة حدود زرقاء للفورم */
+    border-radius: 10px; /* جعل الحواف دائرية */
+    padding: 20px; /* إضافة بعض المساحة الداخلية */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+    background-color: #fff; /* خلفية بيضاء للفورم */
+}
+
+/* لتنسيق الـinput */
+.input-field input {
+    border: 1px solid #ccc; /* حدود داخلية لحقل الإدخال */
+    border-radius: 5px; /* جعل الحواف دائرية لحقل الإدخال */
+    padding: 10px; /* إضافة مسافة داخلية لحقل الإدخال */
+    width: 100%; /* جعل العرض 100% من مساحة الفورم */
+    box-sizing: border-box; /* تضمن أن الحقول تتناسب مع حجمها */
+}
+
+/* تنسيق زر تسجيل الدخول وإنشاء حساب */
+.button-field button {
+    background-color: #007bff; /* لون خلفية الزر */
+    color: white; /* لون النص في الزر */
+    border: none; /* إزالة الحدود الافتراضية */
+    padding: 10px 20px; /* إضافة مساحة داخلية */
+    border-radius: 5px; /* جعل حواف الزر دائرية */
+    cursor: pointer; /* تغيير المؤشر عند التمرير فوق الزر */
+}
+
+.button-field button:hover {
+    background-color: #0056b3; /* تغيير لون الخلفية عند التمرير */
+}
+
+@media screen and (max-width: 400px) {
+    .form{
+        padding: 20px 10px;
+    }
+    
+}
+             </style>  
+                <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">         
+    </head>
+    <body>
+          <!-- Navbar Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+            
+            <a href="login.html" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول </a>
+
+
+            
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="contact.html" class="nav-item nav-link" style="color: #000000;">تواصل معنا</a>
+                    <a href="prodect.html" class="nav-item nav-link" style="color: #000000;">المنتجات</a>
+                    <a href="job.html" class="nav-item nav-link" style="color: #000000;">الوظائف</a>
+                    <a href="service.html" class="nav-item nav-link" style="color: #000000;">خدماتنا</a>
+                    <a href="about.html" class="nav-item nav-link" style="color: #000000;">نبذة عنا</a>
+                    <a href="index.html" class="nav-item nav-link active" style="color: #000000;">الصفحة الرئيسية</a>
+                   
+                    
+                </div>
+            </div>
+            
+            <a href="index.html" class="navbar-brand p-4">
+                <h1 class="m-0" style="color: #2c79fd;">بلا شهادة</h1>
+            </a>
+        </nav>
+
+
+     
+    </div>
+    <!-- Navbar End -->
+        <section class="container forms">
+            
+             <div class="form login" >
+                <div class="form-content">
+                    <div class="form-content">
+                        <header>إنشاء حساب</header>
+                        <form id="registerForm">
+                            <div class="field input-field">
+                                <input type="text" id="username" name="userName" required placeholder="الاسم الكامل" class="input">
+                            </div>
+    
+                            <div class="field input-field">
+                                <input type="text" id="phone" name="phoneNumber" required placeholder="رقم الهاتف" class="input">
+                            </div>
+                            
+                            <div class="field input-field">
+                                <input type="password" id="password" name="password" placeholder=" كلمة السر" class="password">
+                                <i class='bx bx-hide eye-icon'></i>
+                            </div>
+    
+                            <div class="field input-field">
+                                <input type="password" id="password" name="password" placeholder="تأكيد كلمة السر" class="password">
+                                <i class='bx bx-hide eye-icon'></i>
+                            </div>
+                            <div class="field input-field">
+                                <input type="text" id="address" name="address" required placeholder="العنوان" class="input">
+                            </div>
+    
+                            <div class="field button-field">
+                                <button type="submit" onclick="regster()">إنشاء</button>
+                            </div>
+                        </form>
+    
+                        <div class="form-link">
+                            <span>هل لديك حساب بالفعل؟ <a href="login.html" class="link login-link">تسجيل الدخول</a></span>
+                        </div>
+                    </div>
+    
+                    <div class="line"></div>
+    
+                
+                    <div class="media-options">
+                        <a href="#" class="field google">
+                            <img src="img/google.jpg" alt="" class="google-img">
+                            <span>تسجيل الدخول ياستخدام قوقل</span>
+                        </a>
+
+            </div> 
+          
+        </section>
+
+
+
+        <!-- JavaScript -->
+        <script >
+
+
+
+// document.getElementById('registerForm').addEventListener('submit', async function (event) {
+   
+//     async function regster(){
+//     event.preventDefault();
+//     const formData = new FormData();
+//     formData.append('UserName', document.getElementById('username').value);
+//     formData.append('Password', document.getElementById('password').value);
+//     formData.append('PhoneNumber', document.getElementById('phone').value);
+//     formData.append('Address', document.getElementById('address').value);
+
+  
+//         const response = await fetch('https://localhost:7226/api/User/register', {
+//             method: 'POST',
+//             body: formData
+//         });
+
+//         if (response.ok) {
+//             alert(' تم انشاء حساب بنجاح , اهلا بك ' );
+//             window.location.href="login.html"
+//         } else {
+//             alert('حدث خطأ الرجاء اعادة محاولة انشاء الحساب');
+//         }
+//       alert(' حدث خطأ اثناء انشاء الحساب ');
+//     _}
+// });
+
+const url="https://localhost:7226/api/User/register";
+
+let form=document.getElementById("registerForm");
+async function regster() {
+    event.preventDefault();
+    let data=new FormData(form);
+    let response=await fetch(url,{
+        method:"POST",
+        body:data
+    });
+    if(response.ok){
+  alert("لقد تم تم انشاء الحساب بنجاح , اهلا بك معنا ");
+  window.location.href="login.html";
+}else{
+  alert("حدث خطأ اثناء انشاء الحساب الرجاء اعادة المحاولة ");
+}
+}
+
+
+
+
+        </script>
+    </body>
+</html>

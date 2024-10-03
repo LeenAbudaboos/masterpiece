@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>لوحة تحكم - الوظائف</title>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CSS الخاص بالشريط الجانبي -->
+    <style>
+        body {
+            direction: rtl;
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #212529;
+            padding-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .sidebar h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f8f9fa;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            font-size: 18px;
+            color: #ddd;
+            padding: 15px 20px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .sidebar .active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .sidebar i {
+            margin-left: 10px;
+        }
+
+        .main-content {
+            margin-right: 250px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h2 {
+            color: #343a40;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        table.table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #f9f9f9;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table.table thead {
+            background-color: #007bff;
+            color: white;
+        }
+
+        table.table th, table.table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table.table th {
+            font-weight: bold;
+        }
+
+        table.table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            transition: background-color 0.3s;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .add-job-btn {
+            margin-bottom: 20px;
+        }
+
+        .add-job-btn a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- الشريط الجانبي -->
+    <div class="sidebar">
+        <h3 class="text-center text-light">إدارة الوظائف</h3>
+        <a href="jobs.html" class="active"><i class="fas fa-briefcase"></i> الوظائف</a>
+        <a href="add_job.html"><i class="fas fa-plus"></i> إضافة وظيفة</a>
+    </div>
+
+    <div class="main-content">
+        <h2>الوظائف المتاحة</h2>
+        
+        <!-- زر إضافة وظيفة جديدة -->
+        <button type="submit" class="btn btn-primary add-product-btn">
+            <a href="add_job.html" style="color: white; text-decoration: none;">إضافة منتج</a>
+        </button>
+
+        <!-- الجدول لعرض الوظائف -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>اسم الوظيفة</th>
+                    <th>الموقع</th>
+                    <th>الراتب</th>
+                    <th>الوصف</th>
+                    <th>الإجراء</th>
+                </tr>
+            </thead>
+            <tbody id="job-table-body">
+                <!-- سيتم إضافة الوظائف هنا ديناميكيًا -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript لجلب وعرض الوظائف ديناميكيًا -->
+    <script>
+        // URL الخاص بالـ API
+        let url = 'https://localhost:7226/api/Job/GetAllJob';
+
+        async function fetchJobs() {
+            try {
+                let response = await fetch(url);
+                let result = await response.json();
+
+                let tableBody = document.getElementById('job-table-body');
+
+                // مسح محتوى الجدول القديم قبل إضافة الوظائف الجديدة
+                tableBody.innerHTML = '';
+
+                // عرض الوظائف في الجدول
+                result.forEach(element => {
+                    tableBody.innerHTML += `
+                        <tr>
+                            <td>${element.jobTitle}</td>
+                            <td>${element.location}</td>
+                            <td>${element.salary} دينار</td>
+                            <td>${element.description}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">تعديل</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteJob(${element.jobId})">حذف</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                console.error('Error fetching jobs:', error);
+            }
+        }
+
+        // استدعاء الدالة لجلب الوظائف عند تحميل الصفحة
+        fetchJobs();
+
+        // دالة لحذف وظيفة بناءً على معرف الوظيفة
+        function deleteJob(jobId) {
+            const deleteUrl = `https://localhost:7226/api/Product/Deleteprodecte?id=${jobId}`;
+
+            fetch(deleteUrl, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('تم حذف الوظيفة بنجاح');
+                    fetchJobs(); // إعادة تحميل الوظائف بعد الحذف
+                } else {
+                    alert('حدث خطأ أثناء حذف الوظيفة');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting job:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>

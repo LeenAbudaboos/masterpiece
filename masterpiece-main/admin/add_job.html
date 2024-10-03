@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>لوحة تحكم - موقع مواد البناء</title>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CSS للستايل الخاص بالشريط الجانبي وتحسين الفورم -->
+    <style>
+        body {
+            direction: rtl;
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+        }
+
+        /* الشريط الجانبي */
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            font-size: 18px;
+            color: #ddd;
+            padding: 15px 20px;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .sidebar .active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .sidebar i {
+            margin-left: 10px;
+        }
+
+        /* محتوى الصفحة */
+        .main-content {
+            margin-right: 250px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h2 {
+            color: #343a40;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* تحسين شكل الفورم */
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+
+        .card label {
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .card .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- شريط جانبي ثابت -->
+    <div class="sidebar">
+        <h3 class="text-center text-light">مواد البناء</h3>
+        <a href="products.html" class="active"><i class="fas fa-box"></i> المنتجات</a>
+        <a href="add_category.html"><i class="fas fa-plus"></i> إضافة فئة</a>
+        <a href="add_product.html"><i class="fas fa-plus"></i> إضافة منتج</a>
+        <a href="employees.html"><i class="fas fa-users"></i> الوظائف</a>
+        <a href="add_job.html"><i class="fas fa-user-plus"></i> إضافة وظائف</a>
+        <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
+        <a href="contact_requests.html"><i class="fas fa-envelope"></i> طلبات التواصل</a>
+    </div>
+
+    <!-- محتوى الصفحة -->
+    <div class="main-content">
+        <h2>إضافة وظائف جديد</h2>
+        <div class="card">
+            <form id="formjob">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="employeeName">اسم الوظيفة</label>
+                        <input type="text" name="jobTitle" class="form-control" id="employeeName" placeholder="أدخل اسم الوظيفة">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="employeeEmail">تفاصيل الوظيفة</label>
+                        <input type="text" name="description" class="form-control" id="employeeEmail" placeholder="أدخل تفاصيل الوظيفة">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="employeeRole">موقع</label>
+                        <input type="text" name="location" class="form-control" id="employeeRole" placeholder="أدخل موقع الوظيفة">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="employeeSalary">الراتب</label>
+                        <input type="number"  name="salary" class="form-control" id="employeeSalary" placeholder="أدخل الراتب">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    
+                    <div class="col-md-6">
+                        <label for="workDuration">فئة الوظيفة</label>
+                        <input type="text" name="categoryId" class="form-control" id="workDuration" placeholder="فئة الوظيفة">
+                    </div>
+
+                    <div class="col-md-6"></div>
+                        <label for="workDuration">اسم الشركة او المؤسسة</label>
+                        <input type="text" name="PostedBy" class="form-control" id="workDuration" placeholder="اسم الشركة الناشرة للوظيفة">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="workDuration">الصورة</label>
+                        <input type="file" name="jobImg" class="form-control" id="workDuration" placeholder="أدخل الوصف">
+                    </div>
+                </div>
+                <button type="submit" onclick="addjob()" class="btn btn-primary w-100 py-2"> نشر الوظيفة</button>
+            </form>
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
+
+
+
+    <script>
+           const url = "https://localhost:7226/api/Job/AddJob";
+var form = document.getElementById("formjob");
+
+async function addjob(){
+
+    var formdatd = new FormData(form);
+    event.preventDefault();
+
+    let response = await fetch(url,{
+
+        method: "POST",
+        body: formdatd,
+        
+    });
+    var data =response.json();
+window.alert("تم نشر الوظيفة بنجاح");
+
+}
+    </script>
+
+</body>
+</html>

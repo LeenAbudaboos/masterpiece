@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Startup - Startup Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Rubik:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner"></div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+            
+            <a href="login.html" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول </a>
+
+
+            
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="contact.html" class="nav-item nav-link">تواصل معنا</a>
+                    <a href="prodect.html" class="nav-item nav-link">المنتجات</a>
+                    <a href="job.html" class="nav-item nav-link">الوظائف</a>
+                    <a href="service.html" class="nav-item nav-link">خدماتنا</a>
+                    <a href="about.html" class="nav-item nav-link">نبذة عنا</a>
+                    <a href="index.html" class="nav-item nav-link active">الصفحة الرئيسية</a>
+                   
+                    
+                </div>
+            </div>
+            
+            <a href="index.html" class="navbar-brand p-4">
+                <h1 class="m-0">بلا شهادة</h1>
+            </a>
+        </nav>
+
+
+        <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
+            <div class="row py-5">
+                <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+                    <h1 class="display-4 text-white animated zoomIn">كل المنتجات</h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+    <div class="container py-5">
+        <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+            <h5 class="fw-bold text-primary text-uppercase">المنتجات</h5>
+            <h1 class="mb-0">اكتشف أنواع الطوب المختلفة</h1>
+        </div>
+        <div class="row g-4">
+            <!-- Product Card 1 -->
+            <div class="row g-4">
+                <!-- Product Card 1: طوب أحمر -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/6.jpg" style="width: 405px; height: 230px;" class="card-img-top" alt="طوب أحمر">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">طوب أحمر</h5>
+                            <p class="card-text">الوصف: طوب أحمر صلب للبناء عالي الجودة</p>
+                            <p class="card-text">السعر: 200 دينار للألف طوبة</p>
+                            <button class="btn btn-primary"
+                                onclick="showProductDetails('طوب أحمر', 'طوب أحمر صلب للبناء عالي الجودة', '200 دينار', 'img/طوب-احمر.jpg')">شؤاء</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 2: طوب أسمنتي -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/5.jpg" style="width: 405px; height: 230px;" class="card-img-top" alt="طوب أسمنتي">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">طوب أسمنتي</h5>
+                            <p class="card-text">الوصف: طوب أسمنتي مقاوم للرطوبة للاستخدامات المختلفة</p>
+                            <p class="card-text">السعر: 250 دينار للألف طوبة</p>
+                            <button class="btn btn-primary"
+                                onclick="showProductDetails('طوب أسمنتي', 'طوب أسمنتي مقاوم للرطوبة للاستخدامات المختلفة', '250 دينار', 'img/طوب-اسمنتي.jpg')">شراء</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 3: طوب حراري -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/6.jpg" style="width: 405px; height: 230px;" class="card-img-top" alt="طوب حراري">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">طوب حراري</h5>
+                            <p class="card-text">الوصف: طوب حراري مقاوم للحرارة للبناء في المناطق الصناعية</p>
+                            <p class="card-text">السعر: 300 دينار للألف طوبة</p>
+                            <button class="btn btn-primary"
+                                onclick="showProductDetails('طوب حراري', 'طوب حراري مقاوم للحرارة للبناء في المناطق الصناعية', '300 دينار', 'img/طوب-حراري.jpg')">شراء</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 4: طوب خفيف الوزن -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/6.jpg" style="width: 405px; height: 230px;" class="card-img-top" alt="طوب خفيف الوزن">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">طوب خفيف الوزن</h5>
+                            <p class="card-text">الوصف: طوب خفيف الوزن يستخدم لتقليل الحمل على الهياكل</p>
+                            <p class="card-text">السعر: 220 دينار للألف طوبة</p>
+                            <button class="btn btn-primary"
+                                onclick="showProductDetails('طوب خفيف الوزن', 'طوب خفيف الوزن لتقليل الحمل على الهياكل', '220 دينار', 'img/طوب-خفيف.jpg')">شراء</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 5: طوب أبيض -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/6.jpg" style="width: 405px; height: 230px;" class="card-img-top" alt="طوب أبيض">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">طوب أبيض</h5>
+                            <p class="card-text">الوصف: طوب أبيض مميز لعزل الحرارة والصوت</p>
+                            <p class="card-text">السعر: 270 دينار للألف طوبة</p>
+                            <button class="btn btn-primary"
+                                onclick="showProductDetails('طوب أبيض', 'طوب أبيض لعزل الحرارة والصوت', '270 دينار', 'img/طوب-ابيض.jpg')">شراء</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 6: طوب طيني -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/6.jpg" style="width: 405px; height: 230px;" class="card-img-top" alt="طوب طيني">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">طوب طيني</h5>
+                            <p class="card-text">الوصف: طوب طيني تقليدي يستخدم في البيوت الريفية</p>
+                            <p class="card-text">السعر: 180 دينار للألف طوبة</p>
+                            <button class="btn btn-primary"
+                                onclick="showProductDetails('طوب طيني', 'طوب طيني تقليدي يستخدم في البيوت الريفية', '180 دينار', 'img/طوب-طيني.jpg')">شراء</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">منتجات الأسمنت</h5>
+                <h1 class="mb-0">اكتشف أنواع الأسمنت المختلفة</h1>
+            </div>
+            <div class="row g-4">
+                <!-- Cement Product Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/1.jpg" style="width: 415px ; height: 230px;" class="card-img-top" alt="Cement Image">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">أسمنت بورتلاند العادي</h5>
+                            <p class="card-text">الوصف: يستخدم في جميع أنواع البناء</p>
+                            <p class="card-text">السعر: 50 دينار للطن</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cement Product Card 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/2.jpg" style="width: 415px ; height: 230px;" class="card-img-top" alt="Cement Image">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">أسمنت مقاوم للكبريتات</h5>
+                            <p class="card-text">الوصف: مثالي للمناطق ذات التربة الحمضية</p>
+                            <p class="card-text">السعر: 55 دينار للطن</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cement Product Card 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/3.jpg" style="width: 415px ; height: 230px;" class="card-img-top" alt="Cement Image">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">أسمنت سريع التصلب</h5>
+                            <p class="card-text">الوصف: يوفر وقتًا أسرع في البناء</p>
+                            <p class="card-text">السعر: 60 دينار للطن</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cement Product Card 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/4.jpg" style="width: 415px ; height: 230px;" class="card-img-top" alt="Cement Image">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">أسمنت مقاوم للرطوبة</h5>
+                            <p class="card-text">الوصف: مثالي للاستخدام في المناطق الرطبة</p>
+                            <p class="card-text">السعر: 70 دينار للطن</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cement Product Card 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="img/5.jpg" style="width: 415px ; height: 230px;" class="card-img-top" alt="Cement Image">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">أسمنت بورتلاند الأبيض</h5>
+                            <p class="card-text">الوصف: يستخدم في الديكور والبناء الخفيف</p>
+                            <p class="card-text">السعر: 65 دينار للطن</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+            <h5 class="fw-bold text-primary text-uppercase">منتجات الحديد</h5>
+            <h1 class="mb-0">اكتشف أنواع الحديد المختلفة</h1>
+        </div>
+        <div class="row g-4">
+            <!-- Iron Product Card 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img src="img/4.jpg" style="width: 415px; height: 230px;" class="card-img-top" alt="Iron Image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">حديد تسليح عادي</h5>
+                        <p class="card-text">الوصف: يستخدم في البناء لدعم الهياكل الخرسانية</p>
+                        <p class="card-text">السعر: 400 دينار للطن</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Iron Product Card 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img src="img/4.jpg" style="width: 415px; height: 230px;" class="card-img-top" alt="Iron Image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">حديد مقاوم للصدأ</h5>
+                        <p class="card-text">الوصف: مثالي للمناطق الرطبة حيث يتطلب مقاومة للصدأ</p>
+                        <p class="card-text">السعر: 450 دينار للطن</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Iron Product Card 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img src="img/4.jpg" style="width: 415px; height: 230px;" class="card-img-top" alt="Iron Image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">حديد زاوية</h5>
+                        <p class="card-text">الوصف: يستخدم في أعمال الإطارات والهياكل الحديدية</p>
+                        <p class="card-text">السعر: 380 دينار للطن</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Iron Product Card 4 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img src="img/4.jpg" style="width: 415px; height: 230px;" class="card-img-top" alt="Iron Image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">حديد على شكل I-Beam</h5>
+                        <p class="card-text">الوصف: مثالي لدعم الأحمال في المنشآت الكبيرة</p>
+                        <p class="card-text">السعر: 500 دينار للطن</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Iron Product Card 5 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img src="img/4.jpg" style="width: 415px; height: 230px;" class="card-img-top" alt="Iron Image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">حديد مجلفن</h5>
+                        <p class="card-text">الوصف: معالج لحمايته من التآكل والصدأ</p>
+                        <p class="card-text">السعر: 470 دينار للطن</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Iron Product Card 6 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img src="img/3.jpg" style="width: 415px; height: 230px;" class="card-img-top" alt="Iron Image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">حديد مربعات</h5>
+                        <p class="card-text">الوصف: يستخدم في تصنيع الهياكل المعدنية والصناعية</p>
+                        <p class="card-text">السعر: 420 دينار للطن</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container py-5">
+        <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+            <h5 class="fw-bold text-primary text-uppercase">وظائف خاصة بأعمال البناء</h5>
+            <h1 class="mb-0">اكتشف الفرص المتاحة في مجال البناء</h1>
+        </div>
+        <div class="owl-carousel product-carousel">
+            <!-- Job Card 1 -->
+            <div class="product-item bg-light text-center rounded p-4">
+                <img src="img/5.jpg" alt="Job Image" class="img-fluid mb-3">
+                <h5 class="mb-1">عامل بناء</h5>
+                <p class="small">موقع: عمان، الأردن</p>
+                <p class="small">الراتب: يومية 20 دينار</p>
+                <a href="#" class="btn btn-primary btn-sm" onclick="showJobDetails('عامل بناء', 'عمان، الأردن', '300 دينار', 'img/construction1.jpg')">تقدم للوظيفة</a>
+            </div>
+            <!-- Job Card 2 -->
+            <div class="product-item bg-light text-center rounded p-4">
+                <img src="img/7.jpg" alt="Job Image" class="img-fluid mb-3">
+                <h5 class="mb-1">نجار بناء</h5>
+                <p class="small">موقع: إربد، الأردن</p>
+                <p class="small">الراتب: 250 دينار شهريًا</p>
+                <a href="#" class="btn btn-primary btn-sm" onclick="showJobDetails('نجار بناء', 'إربد، الأردن', '250 دينار', 'img/construction2.jpg')">تقدم للوظيفة</a>
+            </div>
+            <!-- Job Card 3 -->
+            <div class="product-item bg-light text-center rounded p-4">
+                <img src="img/8.jpg" alt="Job Image" class="img-fluid mb-3">
+                <h5 class="mb-1">مراقب أعمال بناء</h5>
+                <p class="small">موقع: الزرقاء، الأردن</p>
+                <p class="small">الراتب: 350 دينار شهريًا</p>
+                <a href="#" class="btn btn-primary btn-sm" onclick="showJobDetails('مراقب أعمال بناء', 'الزرقاء، الأردن', '350 دينار', 'img/construction3.jpg')">تقدم للوظيفة</a>
+            </div>
+            <!-- Job Card 4 -->
+            <div class="product-item bg-light text-center rounded p-4">
+                <img src="img/8.jpg" alt="Job Image" class="img-fluid mb-3">
+                <h5 class="mb-1">عامل أسمنت</h5>
+                <p class="small">موقع: العقبة، الأردن</p>
+                <p class="small">الراتب: 280 دينار شهريًا</p>
+                <a href="#" class="btn btn-primary btn-sm" onclick="showJobDetails('عامل أسمنت', 'العقبة، الأردن', '280 دينار', 'img/construction4.jpg')">تقدم للوظيفة</a>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-lg-4 col-md-6 footer-about">
+                    <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-primary p-4">
+                        <a href="index.html" class="navbar-brand">
+                            <h1 class="m-0 text-white">بلا شهادة</h1>
+                        </a>
+                        <p class="mt-3 mb-4" style="text-align: right;">بلا شهادة هو موقع يجمع فيه الوظائف التي لا تتطلب شهادة جامعية كالاعمال الحرفية كالنجار والحداد وعامل البناء . بالاضافة الى تقديم العديد من لاصحاب المتاجر الذي يمكنهم من خلالنا عرض الباضعة الخاصة بهم والحصول على موظفين في آن واحد</p>
+    
+                        
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 col-md-12 pt-5 mb-5">
+                            <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                                <h3 class="text-light mb-0">معلومات التواصل</h3>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="bi bi-geo-alt text-primary me-2"></i>
+                                <p class="mb-0">الاردن , اربد ,اكاديمة اورنج للبرمجة</p>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="bi bi-envelope-open text-primary me-2"></i>
+                                <p class="mb-0">job@email.com</p>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="bi bi-telephone text-primary me-2"></i>
+                                <p class="mb-0">+962 7994 86795</p>
+                            </div>
+                            <div class="d-flex mt-4">
+                                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+                            <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                                <h3 class="text-light mb-0">روابط</h3>
+                            </div>
+                            <div class="link-animated d-flex flex-column justify-content-start">
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>الصفحة الرئيسية</a>
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>عنا</a>
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>خدماتنا</a>
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>الوظائف</a>
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>المنتجات</a>
+                                <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>تواصل معنا</a>
+                            </div>
+                        </div>
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-white" style="background: #061429;">
+        <div class="container text-center">
+            <div class="row justify-content-end">
+                <div class="col-lg-8 col-md-6">
+                    <div class="d-flex align-items-center justify-content-center" style="height: 75px;">
+                        <p class="mb-0"> <a class="text-white border-bottom" href="#">بلا شهادة</a> &copy; كل الحقوق محفوظة  2024
+                        
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+               </a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/counterup/counterup.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+
+        <!-- Owl Carousel Initialization -->
+        <script>
+            $(document).ready(function () {
+                $(".product-carousel").owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 3
+                        }
+                    }
+                });
+            });
+        </script>
+
+
+        <script>
+            function showJobDetails(jobTitle, jobLocation, jobSalary, jobImage) {
+                // تخزين البيانات في Local Storage لإرسالها إلى صفحة التفاصيل
+                localStorage.setItem('jobTitle', jobTitle);
+                localStorage.setItem('jobLocation', jobLocation);
+                localStorage.setItem('jobSalary', jobSalary);
+                localStorage.setItem('jobImage', jobImage);
+
+                // التوجيه إلى صفحة تفاصيل الوظيفة
+                window.location.href = 'job-details.html';
+            }
+        </script>
+</body>
+
+</html>

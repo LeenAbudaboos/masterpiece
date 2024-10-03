@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الوظيفة</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        /* تصميم بطاقة تفاصيل الوظيفة */
+        .job-details {
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .job-details img {
+            max-width: 100%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .job-details h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .job-details p {
+            font-size: 1.3rem;
+            color: #666;
+        }
+        .job-details .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 1.2rem;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+        .job-details .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .similar-jobs h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        .similar-jobs .job-item {
+            transition: transform 0.3s ease;
+        }
+        .similar-jobs .job-item:hover {
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+<body>
+   <!-- Navbar Start -->
+   <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+            <a href="login.html" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول </a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="contact.html" class="nav-item nav-link">تواصل معنا</a>
+                    <a href="prodect.html" class="nav-item nav-link">المنتجات</a>
+                    <a href="job.html" class="nav-item nav-link">الوظائف</a>
+                    <a href="service.html" class="nav-item nav-link">خدماتنا</a>
+                    <a href="about.html" class="nav-item nav-link">نبذة عنا</a>
+                    <a href="index.html" class="nav-item nav-link active">الصفحة الرئيسية</a>
+                </div>
+            </div>
+            <a href="index.html" class="navbar-brand p-4">
+                <h1 class="m-0">بلا شهادة</h1>
+            </a>
+        </nav>
+        <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
+            <div class="row py-5">
+                <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+                    <h1 class="display-4 text-white animated zoomIn">تفاصيل الوظيفة</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Job Details Section -->
+    <div id="job-details" class="row justify-content-center">
+    </div>
+
+    <!-- Similar Jobs Slider Start -->
+
+ 
+
+    <div class="container py-5 similar-jobs">
+        <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+            <h5 class="fw-bold text-primary text-uppercase">وظائف مشابهة</h5>
+            <h1 class="mb-0">فرص قد تهمك</h1>
+
+        </div>
+        <div class="owl-carousel owl-theme" id="jobs-container">
+            <!-- سيتم إضافة الوظائف هنا ديناميكيًا -->
+        </div>
+    </div>
+    <!-- Similar Jobs Slider End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-lg-4 col-md-6 footer-about">
+                    <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-primary p-4">
+                        <a href="index.html" class="navbar-brand">
+                            <h1 class="m-0 text-white">بلا شهادة</h1>
+                        </a>
+                        <p class="mt-3 mb-4" style="text-align: right;">بلا شهادة هو موقع يجمع فيه الوظائف التي لا تتطلب شهادة جامعية كالاعمال الحرفية كالنجار والحداد وعامل البناء . بالاضافة الى تقديم العديد من لاصحاب المتاجر الذي يمكنهم من خلالنا عرض الباضعة الخاصة بهم والحصول على موظفين في آن واحد</p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 col-md-12 pt-5 mb-5">
+                            <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                                <h3 class="text-light mb-0">معلومات التواصل</h3>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="bi bi-geo-alt text-primary me-2"></i>
+                                <p class="mb-0">الاردن , اربد ,اكاديمة اورنج للبرمجة</p>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="bi bi-envelope-open text-primary me-2"></i>
+                                <p class="mb-0">job@email.com</p>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="bi bi-telephone text-primary me-2"></i>
+                                <p class="mb-0">+962 7994 86795</p>
+                            </div>
+                            <div class="d-flex mt-4">
+                                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+                            <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                                <h3 class="text-light mb-0">روابط</h3>
+                            </div>
+                            <div class="link-animated d-flex flex-column justify-content-start">
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>الصفحة الرئيسية</a>
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>عنا</a>
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>خدماتنا</a>
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>الوظائف</a>
+                                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>المنتجات</a>
+                                <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>تواصل معنا</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-white" style="background: #061429;">
+        <div class="container text-center">
+            <div class="row justify-content-end">
+                <div class="col-lg-8 col-md-6">
+                    <div class="d-flex align-items-center justify-content-center" style="height: 75px;">
+                        <p class="mb-0"> <a class="text-white border-bottom" href="#">بلا شهادة</a> &copy; كل الحقوق محفوظة  2024
+               </a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+<!--رسالة التأكيد-->
+    <div class="modal fade" id="applyConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">تأكيد التقديم للوظيفة</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              هل أنت متأكد من أنك تريد التقديم لهذه الوظيفة؟
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا</button>
+              <button type="button" class="btn btn-primary" id="confirmApplyBtn">نعم</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <!-- Owl Carousel CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+<!-- Owl Carousel JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+    <!-- Owl Carousel Initialization -->
+ 
+    <script>
+
+        
+const urlGetJobById = 'https://localhost:7226/api/Job/JobById'; // Base URL of your API
+
+async function getJobDetails() {
+    const jobId = localStorage.getItem('jobId'); // Get the jobId from localStorage
+    const userId = localStorage.getItem('userId');
+    if (!jobId) {
+        document.getElementById('job-details').innerHTML = '<p class="text-center">لم يتم العثور على الوظيفة</p>';
+        return;
+    }
+
+    const response = await fetch(urlGetJobById + jobId ); // Fetch job details by ID
+    const job = await response.json();
+    debugger;
+
+    // Display job details in the page
+    var jobDetails = document.getElementById('job-details');
+    jobDetails.innerHTML = `
+        <div class="col-md-8">
+            <div class="card">
+                <img src="../Masterpiece-CoreAPI/Masterpiece-CoreAPI/Uploads/${job.jobImg}" class="card-img-top" alt="Job Image">
+                <div class="card-body">
+                    <h3 class="card-title">${job.jobTitle}</h3>
+                    <p class="card-text"><strong>الوصف:</strong> ${job.description}</p>
+                    <p class="card-text"><strong>الراتب:</strong> ${job.salary}</p>
+                    <p class="card-text"><strong>الموقع:</strong> ${job.location}</p>
+                    <p class="card-text"><strong>اسم الشركة:</strong> ${job.postedBy}</p>
+                        <button class="btn btn-primary" onclick="confirmApplyForJob(${job.jobId},${userId})" >التقدم للوظيفة</button>
+
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+getJobDetails();
+
+function IDJob(id){
+    debugger
+    localStorage.setItem('jobId',(id));
+    window.location.href = "prodectdetels.html";
+
+}
+
+
+//*********************************************************************
+
+
+function confirmApplyForJob(jobId, userId) {
+    debugger;
+    // إعداد البيانات التي سيتم إرسالها باستخدام FormData
+    const formData = new FormData();
+    formData.append("UserId", userId);
+    formData.append("JobId", jobId);
+
+    // إرسال الطلب إلى الـ API
+    fetch('https://localhost:7226/api/JobApplication/ApplyForJob', {
+        method: 'POST',
+        body: formData // استخدام FormData بدلاً من JSON
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("شكراً لك لقد تقدمت لهذه الوظيفة بنجاح.");
+        } else {
+            alert("الرجاء تسجيل الدخول لتتمكن من التقديم للوظيفة ");
+              window.location.href="login.html";
+
+        }
+    })
+    .catch(error => {
+        console.error("Error during job application:", error);
+        alert("حدث خطأ غير معروف أثناء التقديم للوظيفة.");
+    });
+}
+
+
+
+
+
+//*******************************************************************
+let url = `https://localhost:7226/api/Job/GetAllJob`;
+
+async function GetJobs() {
+    try {
+        var response = await fetch(url);
+        if (!response.ok) {
+            throw new Error("Error fetching jobs data");
+        }
+
+        var result = await response.json();
+        
+        var container = document.getElementById('jobs-container'); // تأكد من أن لديك هذا العنصر في HTML
+
+        result.forEach(element => {
+            container.innerHTML += `
+            <div class="job-item bg-light rounded text-center p-4">
+                <img src="../Masterpiece-CoreAPI/Masterpiece-CoreAPI/Uploads/${element.jobImg}" alt="Job Image" class="img-fluid mb-3">
+                <h5>${element.jobTitle}</h5>
+                <p class="text-muted">موقع العمل: ${element.location}</p>
+                <button onClick="store(${element.jobId})" class="btn btn-primary">عرض التفاصيل</button>
+            </div>
+            `;
+        });
+
+        // Initialize the Owl Carousel after data is loaded
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
+        
+    } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+    }
+}
+
+function store(jobId) {
+    localStorage.setItem("jobId", jobId);
+    window.location.href="job-details.html";
+}
+
+GetJobs();
+
+
+
+    </script>
+</body>
+</html>
+
+
+

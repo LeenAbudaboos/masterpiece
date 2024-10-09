@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Orange\\Desktop\\Master\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj": {}
+    "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Orange\\Desktop\\Master\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj": {
+    "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Orange\\Desktop\\Master\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj",
         "projectName": "Masterpiece-CoreAPI",
-        "projectPath": "C:\\Users\\Orange\\Desktop\\Master\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj",
+        "projectPath": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj",
         "packagesPath": "C:\\Users\\Orange\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Orange\\Desktop\\Master\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\obj\\",
+        "outputPath": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

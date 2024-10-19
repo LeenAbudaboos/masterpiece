@@ -15,7 +15,7 @@ namespace Masterpiece_CoreAPI.DTO
         public string? Salary { get; set; }
 
         public int? CategoryId { get; set; }
-        public int? PostedBy { get; set; }
+        public string? PostedBy { get; set; }
 
 
         public IFormFile? JobImg { get; set; }

@@ -25,11 +25,13 @@ public partial class User
 
     public string? Role { get; set; }
 
+    public string? Description { get; set; }
+
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
-    public virtual ICollection<JobApplication> JobApplications { get; set; } = new List<JobApplication>();
+    public virtual ICollection<CartsProduct> CartsProducts { get; set; } = new List<CartsProduct>();
 
-    public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();
+    public virtual ICollection<JobApplication> JobApplications { get; set; } = new List<JobApplication>();
 
     public virtual ICollection<UserService> UserServices { get; set; } = new List<UserService>();
 }

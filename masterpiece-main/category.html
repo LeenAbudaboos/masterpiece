@@ -8,29 +8,58 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+ <!-- Favicon -->
+ <link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Rubik:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+ <!-- Google Web Fonts -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link
+     href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Rubik:wght@400;500;600;700&display=swap"
+     rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+ <!-- Icon Font Stylesheet -->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
+ <!-- Libraries Stylesheet -->
+ <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+ <link href="lib/animate/animate.min.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+ <!-- Customized Bootstrap Stylesheet -->
+ <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+ <!-- Template Stylesheet -->
+ <link href="css/style.css" rel="stylesheet">
+    <style>.job-item {
+        min-height: 400px; /* تعيين ارتفاع أدنى لضمان تساوي الكروت */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* توزيع متساوٍ للمحتوى */
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .job-item img {
+        width: 100%; /* ضمان أن الصورة تغطي العرض الكامل للكرت */
+        height: 200px; /* تحديد ارتفاع ثابت للصورة */
+        object-fit: cover; /* جعل الصورة متجاوبة مع الحاوية دون فقدان النسبة */
+    }
+    
+    .job-item h5, .job-item p, .job-item button {
+        margin-top: 10px;
+    }
+    
+    @media (max-width: 600px) {
+        .job-item {
+            min-height: 350px; /* تعديل ارتفاع الكرت للشاشات الصغيرة */
+        }
+    
+        .job-item img {
+            height: 150px; /* تعديل ارتفاع الصورة للشاشات الصغيرة */
+        }
+    }
+    </style>
 </head>
 
 <body>
@@ -45,30 +74,28 @@
     <!-- Navbar Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
-            
-            <a href="login.html" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول </a>
+            <!-- زر تسجيل الدخول/الخروج -->
+            <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
 
+            <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
 
-            
+    
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="contact.html" class="nav-item nav-link">تواصل معنا</a>
-                    <a href="prodect.html" class="nav-item nav-link">المنتجات</a>
-                    <a href="job.html" class="nav-item nav-link">الوظائف</a>
-                    <a href="service.html" class="nav-item nav-link">خدماتنا</a>
-                    <a href="about.html" class="nav-item nav-link">نبذة عنا</a>
+                    <a href="contact.html" class="nav-item nav-link" >تواصل معنا</a>
+                    <a href="category.html" class="nav-item nav-link" >المنتجات</a>
+                    <a href="job.html" class="nav-item nav-link" >الوظائف</a>
+                    <a href="service.html" class="nav-item nav-link" >خدماتنا</a>
+                    <a href="about.html" class="nav-item nav-link" >نبذة عنا</a>
                     <a href="index.html" class="nav-item nav-link active">الصفحة الرئيسية</a>
-                   
-                    
                 </div>
             </div>
-            
+    
             <a href="index.html" class="navbar-brand p-4">
-                <h1 class="m-0">بلا شهادة</h1>
+                <h1 class="m-0" style="color: #2c79fd;">بلا شهادة</h1>
             </a>
         </nav>
-
-
+    
         <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
             <div class="row py-5">
                 <div class="col-12 pt-lg-5 mt-lg-5 text-center">
@@ -100,46 +127,16 @@
 
 
 
+
 <!-- start job -->
 
     <div class="container py-5">
         <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
             <h5 class="fw-bold text-primary text-uppercase">وظائف خاصة بأعمال البناء</h5>
-            <h1 class="mb-0">اكتشف الفرص المتاحة في مجال البناء</h1>
+            <h1 class="mb-0">اكتشف  فرص العمل المتاحة في عدة مجالات </h1>
         </div>
-        <div class="owl-carousel product-carousel">
-            <!-- Job Card 1 -->
-            <div class="product-item bg-light text-center rounded p-4">
-                <img src="img/5.jpg" alt="Job Image" class="img-fluid mb-3">
-                <h5 class="mb-1">عامل بناء</h5>
-                <p class="small">موقع: عمان، الأردن</p>
-                <p class="small">الراتب: يومية 20 دينار</p>
-                <a href="#" class="btn btn-primary btn-sm" onclick="showJobDetails('عامل بناء', 'عمان، الأردن', '300 دينار', 'img/construction1.jpg')">تقدم للوظيفة</a>
-            </div>
-            <!-- Job Card 2 -->
-            <div class="product-item bg-light text-center rounded p-4">
-                <img src="img/7.jpg" alt="Job Image" class="img-fluid mb-3">
-                <h5 class="mb-1">نجار بناء</h5>
-                <p class="small">موقع: إربد، الأردن</p>
-                <p class="small">الراتب: 250 دينار شهريًا</p>
-                <a href="#" class="btn btn-primary btn-sm" onclick="showJobDetails('نجار بناء', 'إربد، الأردن', '250 دينار', 'img/construction2.jpg')">تقدم للوظيفة</a>
-            </div>
-            <!-- Job Card 3 -->
-            <div class="product-item bg-light text-center rounded p-4">
-                <img src="img/8.jpg" alt="Job Image" class="img-fluid mb-3">
-                <h5 class="mb-1">مراقب أعمال بناء</h5>
-                <p class="small">موقع: الزرقاء، الأردن</p>
-                <p class="small">الراتب: 350 دينار شهريًا</p>
-                <a href="#" class="btn btn-primary btn-sm" onclick="showJobDetails('مراقب أعمال بناء', 'الزرقاء، الأردن', '350 دينار', 'img/construction3.jpg')">تقدم للوظيفة</a>
-            </div>
-            <!-- Job Card 4 -->
-            <div class="product-item bg-light text-center rounded p-4">
-                <img src="img/8.jpg" alt="Job Image" class="img-fluid mb-3">
-                <h5 class="mb-1">عامل أسمنت</h5>
-                <p class="small">موقع: العقبة، الأردن</p>
-                <p class="small">الراتب: 280 دينار شهريًا</p>
-                <a href="#" class="btn btn-primary btn-sm" onclick="showJobDetails('عامل أسمنت', 'العقبة، الأردن', '280 دينار', 'img/construction4.jpg')">تقدم للوظيفة</a>
-            </div>
+        <div class="owl-carousel owl-theme" id="jobs-container">
+            <!-- سيتم إضافة الوظائف هنا ديناميكيًا -->
         </div>
     </div>
     
@@ -237,6 +234,9 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
 
+<!-- Owl Carousel JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
        
         </script>
 
@@ -276,6 +276,107 @@ function myFunction111(id){
     window.location.href = 'prodect.html';
 }
 
+       
+
+/////////**************************
+
+//السلايدر الخاص بعرض  فرص الوظائف
+
+let urljob = `https://localhost:7226/api/Job/GetAllJob`;
+
+async function GetJobs() {
+    try {
+        var response = await fetch(urljob);
+        if (!response.ok) {
+            throw new Error("Error fetching jobs data");
+        }
+
+        var result = await response.json();
+        
+        var container = document.getElementById('jobs-container'); // تأكد من أن لديك هذا العنصر في HTML
+
+        result.forEach(element => {
+            container.innerHTML += `
+            <div class="job-item bg-light rounded text-center p-4">
+                <img src="../Masterpiece-CoreAPI/Masterpiece-CoreAPI/Uploads/${element.jobImg}" alt="Job Image" class="img-fluid mb-3">
+                <h5>${element.jobTitle}</h5>
+                <p class="text-muted">موقع العمل: ${element.location}</p>
+                <button onClick="store2(${element.jobId})" class="btn btn-primary">عرض التفاصيل</button>
+            </div>
+            `;
+        });
+
+        // Initialize the Owl Carousel after data is loaded
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
+        
+    } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+    }
+}
+
+function store2(jobId) {
+    localStorage.setItem("jobId", jobId);
+    window.location.href="job-details.html";
+}
+
+GetJobs();
+//*************************************
+
+
+    // جلب الزر الخاص بالمصادقة (تسجيل الدخول/تسجيل الخروج) وزر البروفايل
+    var authButton = document.getElementById("authButton");
+    var profileButton = document.getElementById("profileButton");
+    
+    // التحقق من حالة تسجيل الدخول
+    function checkLoginStatus() {
+        var userId = localStorage.getItem('userId');
+        if (userId) {
+            // إذا كان المستخدم مسجل الدخول
+            authButton.innerText = "تسجيل الخروج";
+            authButton.href = "#"; // إلغاء رابط تسجيل الدخول
+            authButton.addEventListener('click', logout); // إضافة وظيفة تسجيل الخروج
+    
+            // عرض زر البروفايل
+            profileButton.style.display = "inline-block";
+        } else {
+            // إذا لم يكن المستخدم مسجل الدخول
+            authButton.innerText = "تسجيل الدخول";
+            authButton.href = "login.html"; // إعادة توجيه إلى صفحة تسجيل الدخول
+    
+            // إخفاء زر البروفايل
+            profileButton.style.display = "none";
+        }
+    }
+    
+    // وظيفة تسجيل الخروج
+    function logout() {
+        // حذف userId من localStorage
+        localStorage.removeItem('userId');
+        alert("تم تسجيل الخروج بنجاح!");
+    
+        // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
+        window.location.href = "login.html";
+    }
+    
+    // استدعاء الدالة عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+    
         </script>
 </body>
 

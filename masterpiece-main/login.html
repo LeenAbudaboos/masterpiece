@@ -16,12 +16,8 @@
                 /* Google Fonts - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
+
+
 .container{
     height: 100vh;
     width: 100%;
@@ -215,6 +211,51 @@ a.google span{
     }
     
 }
+
+
+    /* تعديل على الفورم لجعله أقرب للعنوان */
+    .container.forms {
+        margin-top: -30px; /* تقليل المسافة بين العنوان والفورم */
+        padding: 0 15px; /* تقليل المسافة الخارجية على الجوانب */
+    }
+
+    /* فورم التسجيل */
+    .form {
+        max-width: 400px; /* تحديد العرض الأقصى للفورم */
+        margin: 0 auto; /* لجعل الفورم في المنتصف */
+    }
+
+    /* ضبط أحجام الحقول والزر لتناسب الأجهزة الصغيرة */
+    .field input,
+    .field button {
+        width: 100%; /* جعل الحقول تملأ العرض الكامل */
+    }
+
+    /* تحسين التجاوب */
+    @media (max-width: 768px) {
+        .container.forms {
+            margin-top: -20px; /* تقليل المسافة بين العنوان والفورم على الشاشات الصغيرة */
+            padding: 0 10px; /* تحسين المساحة على الجوانب */
+        }
+
+        .form {
+            max-width: 350px; /* تقليل العرض الأقصى للفورم على الشاشات الصغيرة */
+        }
+
+        h1.display-4 {
+            font-size: 28px; /* تقليل حجم العنوان على الشاشات الصغيرة */
+        }
+
+        .field input,
+        .field button {
+            font-size: 14px; /* تقليل حجم النص في الحقول والأزرار للشاشات الصغيرة */
+        }
+
+        .field button {
+            padding: 8px 10px; /* تحسين المساحة الداخلية للزر */
+        }
+    }
+    
              </style>  
                 <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -240,33 +281,40 @@ a.google span{
     </head>
     <body>
           <!-- Navbar Start -->
-    <div class="container-fluid position-relative p-0">
+   <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
-            
-            <a href="login.html" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول </a>
+            <!-- زر تسجيل الدخول/الخروج -->
+            <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
 
+            <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
 
-            
+    
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="contact.html" class="nav-item nav-link" style="color: #000000;">تواصل معنا</a>
-                    <a href="prodect.html" class="nav-item nav-link" style="color: #000000;">المنتجات</a>
-                    <a href="job.html" class="nav-item nav-link" style="color: #000000;">الوظائف</a>
-                    <a href="service.html" class="nav-item nav-link" style="color: #000000;">خدماتنا</a>
-                    <a href="about.html" class="nav-item nav-link" style="color: #000000;">نبذة عنا</a>
-                    <a href="index.html" class="nav-item nav-link active" style="color: #000000;">الصفحة الرئيسية</a>
-                   
-                    
+                    <a href="contact.html" class="nav-item nav-link" >تواصل معنا</a>
+                    <a href="category.html" class="nav-item nav-link" >المنتجات</a>
+                    <a href="job.html" class="nav-item nav-link" >الوظائف</a>
+                    <a href="service.html" class="nav-item nav-link" >خدماتنا</a>
+                    <a href="about.html" class="nav-item nav-link" >نبذة عنا</a>
+                    <a href="index.html" class="nav-item nav-link active">الصفحة الرئيسية</a>
                 </div>
             </div>
-            
+    
             <a href="index.html" class="navbar-brand p-4">
                 <h1 class="m-0" style="color: #2c79fd;">بلا شهادة</h1>
             </a>
         </nav>
+    
 
 
-     
+        <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
+            <div class="row py-5">
+                <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+                    <h1 class="display-4 text-white animated zoomIn">تسجيل الدخول  </h1>
+                   
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Navbar End -->
         <section class="container forms">
@@ -313,46 +361,41 @@ a.google span{
             </div> 
 
         
+      
+        </section >
+
+   
 
 
-        
-
-        <!-- JavaScript -->
-        <script >
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/counterup/counterup.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-// var url="https://localhost:7226/api/User/login";
-//     var form = document.getElementById("login")
-//     async function login() {
-//       debugger;
-//       event.preventDefault();
-//         var data= new FormData(form);
-//         var response =await fetch(url,{
-//             method:"POST",
-//             body: data
-            
-//         });
-//         var result = await response.json();
-        
-//         window.location.href="index.html";
-//         if(response.ok){
-//   alert("تم تسجيل الدخول بنجاح  ");
-//   window.location.href="index.html";
-// }else{
-//   alert("خطأ بكلمة السر او رقم الهاتف ");
-// }
-// localStorage.setItem('userId',(id));
-
-//     }
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+<Script>
 
 
 
     var url = "https://localhost:7226/api/User/login";
-var form = document.getElementById("login");
+    var form = document.getElementById("login");
 
-async function login() {
+    async function login() {
     event.preventDefault(); // منع إعادة تحميل الصفحة عند إرسال النموذج
     
     var data = new FormData(form); // جمع البيانات من النموذج
@@ -385,13 +428,52 @@ async function login() {
         console.error('Error:', error);
         alert("حدث خطأ أثناء الاتصال بالخادم.");
     }
-}
+    }
 
    
     
 
 
 
+
+            // جلب الزر الخاص بالمصادقة (تسجيل الدخول/تسجيل الخروج) وزر البروفايل
+            var authButton = document.getElementById("authButton");
+            var profileButton = document.getElementById("profileButton");
+            
+            // التحقق من حالة تسجيل الدخول
+            function checkLoginStatus() {
+                var userId = localStorage.getItem('userId');
+                if (userId) {
+                    // إذا كان المستخدم مسجل الدخول
+                    authButton.innerText = "تسجيل الخروج";
+                    authButton.href = "#"; // إلغاء رابط تسجيل الدخول
+                    authButton.addEventListener('click', logout); // إضافة وظيفة تسجيل الخروج
+            
+                    // عرض زر البروفايل
+                    profileButton.style.display = "inline-block";
+                } else {
+                    // إذا لم يكن المستخدم مسجل الدخول
+                    authButton.innerText = "تسجيل الدخول";
+                    authButton.href = "login.html"; // إعادة توجيه إلى صفحة تسجيل الدخول
+            
+                    // إخفاء زر البروفايل
+                    profileButton.style.display = "none";
+                }
+            }
+            
+            // وظيفة تسجيل الخروج
+            function logout() {
+                // حذف userId من localStorage
+                localStorage.removeItem('userId');
+                alert("تم تسجيل الخروج بنجاح!");
+            
+                // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
+                window.location.href = "login.html";
+            }
+            
+            // استدعاء الدالة عند تحميل الصفحة
+            document.addEventListener('DOMContentLoaded', checkLoginStatus);
+            
         </script>
     </body>
 </html>

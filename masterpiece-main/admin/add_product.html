@@ -105,7 +105,7 @@
 
     <!-- شريط جانبي ثابت -->
     <div class="sidebar">
-        <h3 class="text-center text-light">مواد البناء</h3>
+        <h3 class="text-center text-light">بلا شهادة</h3>
         <a href="products.html" class="active"><i class="fas fa-box"></i> المنتجات</a>
         <a href="add_category.html"><i class="fas fa-plus"></i> إضافة فئة</a>
         <a href="add_product.html"><i class="fas fa-plus"></i> إضافة منتج</a>
@@ -131,17 +131,17 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="productQuantity">الكمية</label>
-                        <input type="number" class="form-control" name="quantity" id="productQuantity" placeholder="أدخل الكمية">
-                    </div>
+                   
                     <div class="col-md-6">
                         <label for="productQuantity">الصورة</label>
                         <input type="file" name="productImg" class="form-control" id="workDuration" placeholder="أدخل الوصف">
                     </div>
-                    <div class="col-md-6"></div>
-                        <label for="productQuantity">الفئة </label>
-                        <input type="number" class="form-control" name="categoryId" id="productQuantity" placeholder="أدخل الكمية">
+                    <div class="col-md-6">
+                        <label for="categoryDropdown">الفئة </label>  
+                        <select class="form-control" name="categoryId" id="categoryDropdown">
+                            <option value="">اختر الفئة</option>
+                            <!-- سيتم إضافة الخيارات هنا باستخدام JavaScript -->
+                        </select>
                     </div>
                   
                 </div>
@@ -163,22 +163,84 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
     <script>
-        const url ='https://localhost:7226/api/Product/AddNewProdect';
-        var form = document.getElementById('form');
-        async function AddNewProdect() {
+        // const url ='https://localhost:7226/api/Product/AddNewProdect';
+        // var form = document.getElementById('form');
+        // async function AddNewProdect() {
 
-            var fromdata=new FormData();
-            event.preventDefault();
+        //     var fromdata=new FormData();
+        //     event.preventDefault();
 
-            let response = await fetch(url,{
-                method: 'POST',
-                body: fromdata,
+        //     let response = await fetch(url,{
+        //         method: 'POST',
+        //         body: fromdata,
                
-            });
-            var data = response.json();
-            window.alert("تم اضافة المنتج بنجاح");
+        //     });
+        //     var data = response.json();
+        //     window.alert("تم اضافة المنتج بنجاح");
 
+        // }
+
+        const url = 'https://localhost:7226/api/Product/AddNewProdect';
+const categoriesUrl = 'https://localhost:7226/api/Categorie/GetAllCategorie'; // رابط API لجلب الفئات
+var form = document.getElementById('form');
+
+// دالة لجلب الفئات وإضافتها إلى الدروب داون
+async function loadCategories() {
+    debugger;
+    try {
+        let response = await fetch(categoriesUrl);
+        let categories = await response.json();
+
+        const categoryDropdown = document.getElementById('categoryDropdown');
+        categoryDropdown.innerHTML = '<option value="">اختر الفئة</option>'; // تعيين الخيار الافتراضي
+
+        categories.forEach(category => {
+            categoryDropdown.innerHTML += `
+                <option value="${category.categoryId}">${category.categoryName}</option>
+            `;
+        });
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        alert("حدث خطأ أثناء تحميل الفئات.");
+    }
+}
+
+// استدعاء الدالة لجلب الفئات عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', loadCategories);
+
+async function AddNewProdect() {
+    debugger;
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const selectedCategoryId = document.getElementById('categoryDropdown').value;
+
+    if (!selectedCategoryId) {
+        alert("يرجى اختيار الفئة.");
+        return;
+    }
+
+    formData.append("categoryId", selectedCategoryId);
+
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            alert("تم إضافة المنتج بنجاح.");
+            form.reset(); // إعادة تعيين النموذج بعد الإضافة
+        } else {
+            const errorData = await response.json();
+            alert(`حدث خطأ: ${errorData.message}`);
         }
+    } catch (error) {
+        console.error('Error adding product:', error);
+        alert("حدث خطأ أثناء إضافة المنتج.");
+    }
+}
+
 
     </script>
 </body>

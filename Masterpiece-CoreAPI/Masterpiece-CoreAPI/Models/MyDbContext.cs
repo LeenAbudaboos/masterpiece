@@ -21,6 +21,8 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<CartItem> CartItems { get; set; }
 
+    public virtual DbSet<CartsProduct> CartsProducts { get; set; }
+
     public virtual DbSet<Categorie> Categories { get; set; }
 
     public virtual DbSet<ContactU> ContactUs { get; set; }
@@ -28,6 +30,10 @@ public partial class MyDbContext : DbContext
     public virtual DbSet<Job> Jobs { get; set; }
 
     public virtual DbSet<JobApplication> JobApplications { get; set; }
+
+    public virtual DbSet<PartnerJob> PartnerJobs { get; set; }
+
+    public virtual DbSet<PartnerProduct> PartnerProducts { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
 
@@ -77,13 +83,31 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.CartId).HasColumnName("CartID");
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
-            entity.HasOne(d => d.Cart).WithMany(p => p.CartItems)
-                .HasForeignKey(d => d.CartId)
-                .HasConstraintName("FK__CartItems__CartI__4316F928");
+            entity.HasOne(d => d.Cart).WithMany(p => p.CartItems).HasForeignKey(d => d.CartId);
 
             entity.HasOne(d => d.Product).WithMany(p => p.CartItems)
                 .HasForeignKey(d => d.ProductId)
                 .HasConstraintName("FK__CartItems__Produ__440B1D61");
+        });
+
+        modelBuilder.Entity<CartsProduct>(entity =>
+        {
+            entity.HasKey(e => e.CartId).HasName("PK__CartsPro__51BCD7972EDB9298");
+
+            entity.ToTable("CartsProduct");
+
+            entity.Property(e => e.CartId).HasColumnName("CartID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.User).WithMany(p => p.CartsProducts)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__CartsProd__UserI__6FE99F9F");
         });
 
         modelBuilder.Entity<Categorie>(entity =>
@@ -116,10 +140,6 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.Category).WithMany(p => p.Jobs)
                 .HasForeignKey(d => d.CategoryId)
                 .HasConstraintName("FK__Jobs__CategoryID__46E78A0C");
-
-            entity.HasOne(d => d.PostedByNavigation).WithMany(p => p.Jobs)
-                .HasForeignKey(d => d.PostedBy)
-                .HasConstraintName("FK__Jobs__PostedBy__47DBAE45");
         });
 
         modelBuilder.Entity<JobApplication>(entity =>
@@ -140,6 +160,32 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.JobApplications)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__JobApplic__UserI__4BAC3F29");
+        });
+
+        modelBuilder.Entity<PartnerJob>(entity =>
+        {
+            entity.HasKey(e => e.JobId).HasName("PK__Partner___056690E2FB9946B2");
+
+            entity.ToTable("Partner_Jobs");
+
+            entity.Property(e => e.JobId).HasColumnName("JobID");
+            entity.Property(e => e.DateSubmitted)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.JobTitle).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<PartnerProduct>(entity =>
+        {
+            entity.HasKey(e => e.ProductId).HasName("PK__Partner___B40CC6EDB22FFB7D");
+
+            entity.ToTable("Partner_Products");
+
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+            entity.Property(e => e.DateSubmitted)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.PartnerPhone).HasMaxLength(10);
         });
 
         modelBuilder.Entity<Product>(entity =>

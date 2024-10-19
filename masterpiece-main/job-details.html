@@ -62,27 +62,63 @@
         .similar-jobs .job-item:hover {
             transform: translateY(-10px);
         }
+        .job-item {
+        min-height: 400px; /* تعيين ارتفاع أدنى لضمان تساوي الكروت */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* توزيع متساوٍ للمحتوى */
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .job-item img {
+        width: 100%; /* ضمان أن الصورة تغطي العرض الكامل للكرت */
+        height: 200px; /* تحديد ارتفاع ثابت للصورة */
+        object-fit: cover; /* جعل الصورة متجاوبة مع الحاوية دون فقدان النسبة */
+    }
+    
+    .job-item h5, .job-item p, .job-item button {
+        margin-top: 10px;
+    }
+    
+    @media (max-width: 600px) {
+        .job-item {
+            min-height: 350px; /* تعديل ارتفاع الكرت للشاشات الصغيرة */
+        }
+    
+        .job-item img {
+            height: 150px; /* تعديل ارتفاع الصورة للشاشات الصغيرة */
+        }
+    }
+
     </style>
 </head>
 <body>
    <!-- Navbar Start -->
    <div class="container-fluid position-relative p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
-            <a href="login.html" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول </a>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="contact.html" class="nav-item nav-link">تواصل معنا</a>
-                    <a href="prodect.html" class="nav-item nav-link">المنتجات</a>
-                    <a href="job.html" class="nav-item nav-link">الوظائف</a>
-                    <a href="service.html" class="nav-item nav-link">خدماتنا</a>
-                    <a href="about.html" class="nav-item nav-link">نبذة عنا</a>
-                    <a href="index.html" class="nav-item nav-link active">الصفحة الرئيسية</a>
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+        <!-- زر تسجيل الدخول/الخروج -->
+        <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
+
+        <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
+
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="contact.html" class="nav-item nav-link" >تواصل معنا</a>
+                <a href="category.html" class="nav-item nav-link" >المنتجات</a>
+                <a href="job.html" class="nav-item nav-link" >الوظائف</a>
+                <a href="service.html" class="nav-item nav-link" >خدماتنا</a>
+                <a href="about.html" class="nav-item nav-link" >نبذة عنا</a>
+                <a href="index.html" class="nav-item nav-link active">الصفحة الرئيسية</a>
             </div>
-            <a href="index.html" class="navbar-brand p-4">
-                <h1 class="m-0">بلا شهادة</h1>
-            </a>
-        </nav>
+        </div>
+
+        <a href="index.html" class="navbar-brand p-4">
+            <h1 class="m-0" style="color: #2c79fd;">بلا شهادة</h1>
+        </a>
+    </nav>
+
         <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
             <div class="row py-5">
                 <div class="col-12 pt-lg-5 mt-lg-5 text-center">
@@ -244,21 +280,29 @@ async function getJobDetails() {
     // Display job details in the page
     var jobDetails = document.getElementById('job-details');
     jobDetails.innerHTML = `
-        <div class="col-md-8">
-            <div class="card">
-                <img src="../Masterpiece-CoreAPI/Masterpiece-CoreAPI/Uploads/${job.jobImg}" class="card-img-top" alt="Job Image">
-                <div class="card-body">
-                    <h3 class="card-title">${job.jobTitle}</h3>
-                    <p class="card-text"><strong>الوصف:</strong> ${job.description}</p>
-                    <p class="card-text"><strong>الراتب:</strong> ${job.salary}</p>
-                    <p class="card-text"><strong>الموقع:</strong> ${job.location}</p>
-                    <p class="card-text"><strong>اسم الشركة:</strong> ${job.postedBy}</p>
-                        <button class="btn btn-primary" onclick="confirmApplyForJob(${job.jobId},${userId})" >التقدم للوظيفة</button>
+    <div class="container py-5">
+    <div class="row align-items-center">
 
-                </div>
+        <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+            <div class="p-3" style="border: 1px solid #ddd; border-radius: 10px;">
+                <img src="../Masterpiece-CoreAPI/Masterpiece-CoreAPI/Uploads/${job.jobImg}" alt="Job Image" class="img-fluid rounded" style="object-fit: cover;">
             </div>
         </div>
+        
+        <div class="col-lg-6 col-md-12 text-center">
+            <h3 class="mb-3">${job.jobTitle}</h3>
+            <p class="lead"><strong>الوصف:</strong> ${job.description}</p>
+            <p><strong>الراتب:</strong> ${job.salary}</p>
+            <p><strong>الموقع:</strong> ${job.location}</p>
+            <p><strong>اسم الشركة:</strong> ${job.postedBy}</p>
+            <button class="btn btn-primary" onclick="confirmApplyForJob(${job.jobId}, ${userId})">التقدم للوظيفة</button>
+        </div>
+    </div>
+</div>
+
+
     `;
+
 }
 
 getJobDetails();
@@ -363,7 +407,47 @@ GetJobs();
 
 
 
-    </script>
+
+
+        // جلب الزر الخاص بالمصادقة (تسجيل الدخول/تسجيل الخروج) وزر البروفايل
+        var authButton = document.getElementById("authButton");
+        var profileButton = document.getElementById("profileButton");
+        
+        // التحقق من حالة تسجيل الدخول
+        function checkLoginStatus() {
+            var userId = localStorage.getItem('userId');
+            if (userId) {
+                // إذا كان المستخدم مسجل الدخول
+                authButton.innerText = "تسجيل الخروج";
+                authButton.href = "#"; // إلغاء رابط تسجيل الدخول
+                authButton.addEventListener('click', logout); // إضافة وظيفة تسجيل الخروج
+        
+                // عرض زر البروفايل
+                profileButton.style.display = "inline-block";
+            } else {
+                // إذا لم يكن المستخدم مسجل الدخول
+                authButton.innerText = "تسجيل الدخول";
+                authButton.href = "login.html"; // إعادة توجيه إلى صفحة تسجيل الدخول
+        
+                // إخفاء زر البروفايل
+                profileButton.style.display = "none";
+            }
+        }
+        
+        // وظيفة تسجيل الخروج
+        function logout() {
+            // حذف userId من localStorage
+            localStorage.removeItem('userId');
+            alert("تم تسجيل الخروج بنجاح!");
+        
+            // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
+            window.location.href = "login.html";
+        }
+        
+        // استدعاء الدالة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', checkLoginStatus);
+        
+            </script>
 </body>
 </html>
 

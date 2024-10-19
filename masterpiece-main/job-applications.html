@@ -36,22 +36,28 @@
     <!-- Navbar Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
-            <a href="login.html" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
+            <!-- زر تسجيل الدخول/الخروج -->
+            <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
+
+            <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
+
+    
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="contact.html" class="nav-item nav-link">تواصل معنا</a>
-                    <a href="prodect.html" class="nav-item nav-link">المنتجات</a>
-                    <a href="job.html" class="nav-item nav-link">الوظائف</a>
-                    <a href="service.html" class="nav-item nav-link">خدماتنا</a>
-                    <a href="about.html" class="nav-item nav-link">نبذة عنا</a>
+                    <a href="contact.html" class="nav-item nav-link" >تواصل معنا</a>
+                    <a href="category.html" class="nav-item nav-link" >المنتجات</a>
+                    <a href="job.html" class="nav-item nav-link" >الوظائف</a>
+                    <a href="service.html" class="nav-item nav-link" >خدماتنا</a>
+                    <a href="about.html" class="nav-item nav-link" >نبذة عنا</a>
                     <a href="index.html" class="nav-item nav-link active">الصفحة الرئيسية</a>
                 </div>
             </div>
+    
             <a href="index.html" class="navbar-brand p-4">
-                <h1 class="m-0">بلا شهادة</h1>
+                <h1 class="m-0" style="color: #2c79fd;">بلا شهادة</h1>
             </a>
         </nav>
-
+    
         <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
             <div class="row py-5">
                 <div class="col-12 pt-lg-5 mt-lg-5 text-center">
@@ -221,7 +227,48 @@
 
         // استدعاء دالة getUserApplications عند تحميل الصفحة
         getUserApplications();
-    </script>
+    
+
+
+    // جلب الزر الخاص بالمصادقة (تسجيل الدخول/تسجيل الخروج) وزر البروفايل
+    var authButton = document.getElementById("authButton");
+    var profileButton = document.getElementById("profileButton");
+    
+    // التحقق من حالة تسجيل الدخول
+    function checkLoginStatus() {
+        var userId = localStorage.getItem('userId');
+        if (userId) {
+            // إذا كان المستخدم مسجل الدخول
+            authButton.innerText = "تسجيل الخروج";
+            authButton.href = "#"; // إلغاء رابط تسجيل الدخول
+            authButton.addEventListener('click', logout); // إضافة وظيفة تسجيل الخروج
+    
+            // عرض زر البروفايل
+            profileButton.style.display = "inline-block";
+        } else {
+            // إذا لم يكن المستخدم مسجل الدخول
+            authButton.innerText = "تسجيل الدخول";
+            authButton.href = "login.html"; // إعادة توجيه إلى صفحة تسجيل الدخول
+    
+            // إخفاء زر البروفايل
+            profileButton.style.display = "none";
+        }
+    }
+    
+    // وظيفة تسجيل الخروج
+    function logout() {
+        // حذف userId من localStorage
+        localStorage.removeItem('userId');
+        alert("تم تسجيل الخروج بنجاح!");
+    
+        // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
+        window.location.href = "login.html";
+    }
+    
+    // استدعاء الدالة عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+    
+        </script>
 </body>
 
 </html>

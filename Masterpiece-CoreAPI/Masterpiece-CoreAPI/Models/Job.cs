@@ -17,13 +17,11 @@ public partial class Job
 
     public int? CategoryId { get; set; }
 
-    public int? PostedBy { get; set; }
-
     public string? JobImg { get; set; }
+
+    public string? PostedBy { get; set; }
 
     public virtual Categorie? Category { get; set; }
 
     public virtual ICollection<JobApplication> JobApplications { get; set; } = new List<JobApplication>();
-
-    public virtual User? PostedByNavigation { get; set; }
 }

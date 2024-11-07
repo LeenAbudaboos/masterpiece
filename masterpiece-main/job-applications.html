@@ -82,7 +82,7 @@
                         <th>الموقع</th>
                         <th>نبذة عن الوظيفة</th>
                         <th>الراتب</th>
-                        <th>إجراءات</th>
+                        <!-- <th>إجراءات</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -199,11 +199,8 @@
                     <td>${application.jobTitle}</td>
                     <td>${application.location}</td>
                     <td>${application.description}</td>
-                    <td>${application.salary}</td>
+                    <td>دينار ${application.salary}  </td>
 
-                    <td>
-                    <button class="btn btn-danger" onclick="deleteApplication(${application.Id})">مسح الطلب</button>
-                    </td>
                 `;
 
                 tableBody.appendChild(row);

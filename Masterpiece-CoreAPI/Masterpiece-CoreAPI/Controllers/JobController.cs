@@ -115,6 +115,7 @@ namespace Masterpiece_CoreAPI.Controllers
             data.Location = jobDto.Location;
             data.Salary = jobDto.Salary;
             data.CategoryId = jobDto.CategoryId;
+            data.PostedBy = jobDto.PostedBy;
 
             _db.Jobs.Update(data);
            _db.SaveChangesAsync();

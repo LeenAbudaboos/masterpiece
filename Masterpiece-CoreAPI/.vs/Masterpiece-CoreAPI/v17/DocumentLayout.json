@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|c:\\users\\orange\\desktop\\master\\masterpiece\\masterpiece-coreapi\\masterpiece-coreapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|solutionrelative:masterpiece-coreapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|c:\\users\\orange\\desktop\\master\\masterpiece\\masterpiece-coreapi\\masterpiece-coreapi\\dto\\userlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|solutionrelative:masterpiece-coreapi\\dto\\userlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|c:\\users\\orange\\desktop\\master\\masterpiece\\masterpiece-coreapi\\masterpiece-coreapi\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|solutionrelative:masterpiece-coreapi\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -91,10 +99,6 @@
       "RelativeMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|solutionrelative:masterpiece-coreapi\\dto\\admindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|c:\\users\\orange\\desktop\\master\\masterpiece\\masterpiece-coreapi\\masterpiece-coreapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|solutionrelative:masterpiece-coreapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|c:\\users\\orange\\desktop\\master\\masterpiece\\masterpiece-coreapi\\masterpiece-coreapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|solutionrelative:masterpiece-coreapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -121,10 +125,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|c:\\users\\orange\\desktop\\master\\masterpiece\\masterpiece-coreapi\\masterpiece-coreapi\\models\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|solutionrelative:masterpiece-coreapi\\models\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|c:\\users\\orange\\desktop\\master\\masterpiece\\masterpiece-coreapi\\masterpiece-coreapi\\dto\\userlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|solutionrelative:masterpiece-coreapi\\dto\\userlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E314E4AE-B99B-4718-B38D-9609223E56EB}|Masterpiece-CoreAPI\\Masterpiece-CoreAPI.csproj|c:\\users\\orange\\desktop\\master\\masterpiece\\masterpiece-coreapi\\masterpiece-coreapi\\dto\\userregisterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -158,31 +158,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CartItemController.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\CartItemController.cs",
-              "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\CartItemController.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\CartItemController.cs",
-              "RelativeToolTip": "Masterpiece-CoreAPI\\Controllers\\CartItemController.cs",
-              "ViewState": "AQIAAGwAAAAAAAAAAAAcwIkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T23:26:28.898Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CategorieController.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\CategorieController.cs",
-              "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\CategorieController.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\CategorieController.cs",
-              "RelativeToolTip": "Masterpiece-CoreAPI\\Controllers\\CategorieController.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAkwDwAAABaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T13:39:00.366Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "PartnerProductController.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\PartnerProductController.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\PartnerProductController.cs",
@@ -194,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "CartItemDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\CartItemDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\CartItemDTO.cs",
@@ -206,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "JobApplicationController.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\JobApplicationController.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\JobApplicationController.cs",
@@ -218,20 +194,70 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "JobController.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\JobController.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\JobController.cs",
               "ToolTip": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\JobController.cs",
               "RelativeToolTip": "Masterpiece-CoreAPI\\Controllers\\JobController.cs",
-              "ViewState": "AQIAAGcAAAAAAAAAAAAowG8AAAAMAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABQAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-25T12:47:43.621Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
+              "Title": "UserLoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\UserLoginDTO.cs",
+              "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\UserLoginDTO.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\UserLoginDTO.cs",
+              "RelativeToolTip": "Masterpiece-CoreAPI\\DTO\\UserLoginDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-20T18:13:13.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Masterpiece-CoreAPI\\Controllers\\UserController.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwBsAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-20T18:16:26.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CategorieController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\CategorieController.cs",
+              "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\CategorieController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\CategorieController.cs",
+              "RelativeToolTip": "Masterpiece-CoreAPI\\Controllers\\CategorieController.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAkwDwAAABaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-20T13:39:00.366Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CartItemController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\CartItemController.cs",
+              "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\CartItemController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\CartItemController.cs",
+              "RelativeToolTip": "Masterpiece-CoreAPI\\Controllers\\CartItemController.cs",
+              "ViewState": "AQIAAGwAAAAAAAAAAAAcwIkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T23:26:28.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "CategorieDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\CategorieDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\CategorieDTO.cs",
@@ -243,7 +269,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "CartItem.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Models\\CartItem.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Models\\CartItem.cs",
@@ -255,7 +281,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "PartnerJobController.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\PartnerJobController.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\PartnerJobController.cs",
@@ -267,7 +293,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "JobApplicationDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\JobApplicationDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\JobApplicationDTO.cs",
@@ -279,7 +305,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "ProductController.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\ProductController.cs",
@@ -291,7 +317,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "CartDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\CartDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\CartDTO.cs",
@@ -303,7 +329,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "PartnerProduct.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Models\\PartnerProduct.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Models\\PartnerProduct.cs",
@@ -315,7 +341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "JobDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\JobDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\JobDTO.cs",
@@ -327,7 +353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "PartnerJob.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Models\\PartnerJob.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Models\\PartnerJob.cs",
@@ -339,7 +365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "PartnerJobDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\PartnerJobDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\PartnerJobDTO.cs",
@@ -351,7 +377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "PartnerProductDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\PartnerProductDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\PartnerProductDTO.cs",
@@ -363,7 +389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "Job.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Models\\Job.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Models\\Job.cs",
@@ -375,7 +401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "AdminDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\AdminDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\AdminDTO.cs",
@@ -387,7 +413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Program.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Program.cs",
@@ -399,7 +425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "emailServiceDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\emailServiceDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\emailServiceDTO.cs",
@@ -411,7 +437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "ProductDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\ProductDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\ProductDTO.cs",
@@ -423,7 +449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "ContactUDTO.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\ContactUDTO.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\ContactUDTO.cs",
@@ -435,19 +461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Masterpiece-CoreAPI\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAG4AAAAAAAAAAAAcwIQAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T18:16:26.165Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\appsettings.json",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\appsettings.json",
@@ -459,7 +473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Controllers\\WeatherForecastController.cs",
@@ -471,7 +485,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "Cart.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Models\\Cart.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Models\\Cart.cs",
@@ -483,7 +497,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Models\\User.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Models\\User.cs",
@@ -495,7 +509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "JobApplication.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Models\\JobApplication.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Models\\JobApplication.cs",
@@ -507,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "Categorie.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\Models\\Categorie.cs",
               "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\Models\\Categorie.cs",
@@ -516,18 +530,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-22T06:25:00.35Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "UserLoginDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\UserLoginDTO.cs",
-              "RelativeDocumentMoniker": "Masterpiece-CoreAPI\\DTO\\UserLoginDTO.cs",
-              "ToolTip": "C:\\Users\\Orange\\Desktop\\Master\\masterpiece\\Masterpiece-CoreAPI\\Masterpiece-CoreAPI\\DTO\\UserLoginDTO.cs",
-              "RelativeToolTip": "Masterpiece-CoreAPI\\DTO\\UserLoginDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T18:13:13.787Z"
             },
             {
               "$type": "Document",

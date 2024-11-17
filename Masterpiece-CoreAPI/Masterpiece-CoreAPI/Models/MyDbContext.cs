@@ -37,6 +37,10 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<RentalRequest> RentalRequests { get; set; }
+
+    public virtual DbSet<RentalVehicle> RentalVehicles { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserService> UserServices { get; set; }
@@ -198,6 +202,50 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CategoryId)
                 .HasConstraintName("FK__Products__Catego__398D8EEE");
+        });
+
+        modelBuilder.Entity<RentalRequest>(entity =>
+        {
+            entity.HasKey(e => e.RequestId).HasName("PK__RentalRe__33A8519AC662D3B3");
+
+            entity.Property(e => e.RequestId).HasColumnName("RequestID");
+            entity.Property(e => e.RentalEndDate).HasColumnType("datetime");
+            entity.Property(e => e.RentalStartDate).HasColumnType("datetime");
+            entity.Property(e => e.RequestDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.RequestStatus)
+                .HasMaxLength(50)
+                .HasDefaultValue("Pending");
+            entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.VehicleId).HasColumnName("VehicleID");
+
+            entity.HasOne(d => d.User).WithMany(p => p.RentalRequests)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__RentalReq__UserI__08B54D69");
+
+            entity.HasOne(d => d.Vehicle).WithMany(p => p.RentalRequests)
+                .HasForeignKey(d => d.VehicleId)
+                .HasConstraintName("FK__RentalReq__Vehic__07C12930");
+        });
+
+        modelBuilder.Entity<RentalVehicle>(entity =>
+        {
+            entity.HasKey(e => e.VehicleId).HasName("PK__RentalVe__476B54B28470D86A");
+
+            entity.Property(e => e.VehicleId).HasColumnName("VehicleID");
+            entity.Property(e => e.AvailabilityStatus)
+                .HasMaxLength(50)
+                .HasDefaultValue("Available");
+            entity.Property(e => e.DateAdded)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.RentalPricePerDay).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.AddedByNavigation).WithMany(p => p.RentalVehicles)
+                .HasForeignKey(d => d.AddedBy)
+                .HasConstraintName("FK__RentalVeh__Added__03F0984C");
         });
 
         modelBuilder.Entity<User>(entity =>

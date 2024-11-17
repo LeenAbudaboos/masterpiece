@@ -242,7 +242,9 @@
           </div>
         </div>
       </div>
-      
+
+
+
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -258,8 +260,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 
-    <!-- Owl Carousel Initialization -->
- 
+    
     <script>
 
         
@@ -318,35 +319,95 @@ function IDJob(id){
 //*********************************************************************
 
 
+// function confirmApplyForJob(jobId, userId) {
+//     debugger;
+//     // إعداد البيانات التي سيتم إرسالها باستخدام FormData
+//     const formData = new FormData();
+//     formData.append("UserId", userId);
+//     formData.append("JobId", jobId);
+
+//     // إرسال الطلب إلى الـ API
+//     fetch('https://localhost:7226/api/JobApplication/ApplyForJob', {
+//         method: 'POST',
+//         body: formData // استخدام FormData بدلاً من JSON
+//     })
+//     .then(response => {
+//         if (response.ok) {
+//             alert("شكراً لك لقد تقدمت لهذه الوظيفة بنجاح.");
+//         } else {
+//             alert("الرجاء تسجيل الدخول لتتمكن من التقديم للوظيفة ");
+//               window.location.href="login.html";
+
+//         }
+//     })
+//     .catch(error => {
+//         console.error("Error during job application:", error);
+//         alert("حدث خطأ غير معروف أثناء التقديم للوظيفة.");
+//     });
+// }
 function confirmApplyForJob(jobId, userId) {
-    debugger;
-    // إعداد البيانات التي سيتم إرسالها باستخدام FormData
-    const formData = new FormData();
-    formData.append("UserId", userId);
-    formData.append("JobId", jobId);
+    // التحقق من صحة البيانات
+    if (!userId || !jobId) {
+        alert("الرجاء التأكد من تسجيل الدخول واختيار الوظيفة المناسبة.");
+        localStorage.setItem("redirectAfterLogin", window.location.href); // حفظ الصفحة الحالية
+        window.location.href = "login.html";
+        return;
+    }
 
-    // إرسال الطلب إلى الـ API
-    fetch('https://localhost:7226/api/JobApplication/ApplyForJob', {
-        method: 'POST',
-        body: formData // استخدام FormData بدلاً من JSON
-    })
-    .then(response => {
-        if (response.ok) {
-            alert("شكراً لك لقد تقدمت لهذه الوظيفة بنجاح.");
-        } else {
-            alert("الرجاء تسجيل الدخول لتتمكن من التقديم للوظيفة ");
-              window.location.href="login.html";
+    // التحقق من استكمال بيانات المستخدم قبل التقديم
+    fetch(`https://localhost:7226/api/User/GetUserById/${userId}`)
+        .then(async response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch user data");
+            }
+            const user = await response.json();
 
-        }
-    })
-    .catch(error => {
-        console.error("Error during job application:", error);
-        alert("حدث خطأ غير معروف أثناء التقديم للوظيفة.");
-    });
+            // التحقق من استكمال بيانات المستخدم
+            if (!user.profession || !user.address || !user.phoneNumber) {
+                alert("الرجاء استكمال معلوماتك قبل التقديم.");
+                localStorage.setItem("redirectAfterProfileUpdate", window.location.href); // حفظ الصفحة الحالية
+                window.location.href = "profile.html"; // توجيه المستخدم إلى صفحة البروفايل
+                return;
+            }
+
+            // إعداد البيانات باستخدام FormData
+            const formData = new FormData();
+            formData.append("UserId", userId);
+            formData.append("JobId", jobId);
+
+            // إرسال الطلب إلى الـ API
+            return fetch('https://localhost:7226/api/JobApplication/ApplyForJob', {
+                method: 'POST',
+                body: formData
+            });
+        })
+        .then(async response => {
+            if (response.ok) {
+                // الطلب تم بنجاح
+                alert("شكراً لك لقد تقدمت لهذه الوظيفة بنجاح.");
+            } else if (response.status === 400) {
+                const errorText = await response.text();
+                alert(`خطأ: ${errorText}`);
+            } else if (response.status === 401) {
+                alert("الرجاء تسجيل الدخول لتتمكن من التقديم للوظيفة.");
+                window.location.href = "login.html";
+            } else {
+                alert("حدث خطأ أثناء التقديم. الرجاء المحاولة لاحقاً.");
+            }
+        })
+        .catch(error => {
+            console.error("Error during job application:", error);
+            alert("حدث خطأ غير معروف أثناء التقديم للوظيفة.");
+        });
 }
 
 
 
+//****************************************
+
+
+
+//*********************************
 
 
 //*******************************************************************
@@ -448,6 +509,8 @@ GetJobs();
         document.addEventListener('DOMContentLoaded', checkLoginStatus);
         
             </script>
+
+            
 </body>
 </html>
 

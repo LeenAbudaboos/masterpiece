@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض الوظائف والمتقدمين</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            overflow-x: hidden;
+        }
+
+        /* السايدبار */
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #ddd;
+            padding: 15px 20px;
+            width: 100%;
+            text-align: right;
+        }
+
+        .sidebar a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .sidebar .active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .sidebar i {
+            margin-left: 10px;
+        }
+
+        /* محتوى الصفحة */
+        .main-content {
+            margin-right: 250px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h1 {
+            color: #343a40;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* تحسين الجدول */
+        .table {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: right;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            text-align: right;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* تحسين قائمة المتقدمين */
+        .list-group-item {
+            text-align: right;
+        }
+
+        .modal-header .btn-close {
+            margin-left: auto;
+            margin-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- الشريط الجانبي -->
+    <div class="sidebar">
+        <h3 class="text-center text-light">بلا شهادة</h3>
+        <a href="products.html"><i class="fas fa-box"></i> المنتجات</a>
+        <a href="add_category.html"><i class="fas fa-plus"></i> إضافة فئة</a>
+        <a href="add_product.html"><i class="fas fa-plus"></i> إضافة منتج</a>
+        <a href="employees.html"><i class="fas fa-users"></i> الوظائف</a>
+        <a href="add_job.html"><i class="fas fa-user-plus"></i> إضافة وظائف</a>
+        <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
+        <a href="alljob.html" class="active"><i class="fas fa-shopping-cart"></i> المتقدمون للوظائف</a>
+    </div>
+
+    <!-- محتوى الصفحة -->
+    <div class="main-content">
+        <h1 class="text-center mb-4">عرض الوظائف</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>اسم الوظيفة</th>
+                    <th>الوصف</th>
+                    <th>الموقع</th>
+                    <th>الراتب</th>
+                    <th>عدد المتقدمين</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody id="jobsTableBody">
+                <!-- الوظائف ستُضاف هنا ديناميكياً -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal لعرض المتقدمين -->
+    <div class="modal fade" id="applicantsModal" tabindex="-1" aria-labelledby="applicantsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="applicantsModalLabel">المتقدمون للوظيفة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="applicantsList" class="list-group">
+                        <!-- الرسالة ستضاف هنا ديناميكياً -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const jobsApiUrl = "https://localhost:7226/api/Job/GetAllJob";
+        const applicantsApiUrl = "https://localhost:7226/api/Job/GetApplicantsByJobId/";
+
+        // جلب الوظائف وعرضها في الجدول
+        async function fetchJobs() {
+            try {
+                const response = await fetch(jobsApiUrl);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch jobs");
+                }
+                const jobs = await response.json();
+                const jobsTableBody = document.getElementById("jobsTableBody");
+
+                for (const job of jobs) {
+                    // جلب عدد المتقدمين لكل وظيفة
+                    const applicantsCount = await fetch(`${applicantsApiUrl}${job.jobId}`)
+                        .then(res => res.json())
+                        .then(data => data.length)
+                        .catch(() => undefined);
+
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                     <td>${job.jobTitle}</td>
+                     <td>${job.description}</td>
+                      <td>${job.location}</td>
+                     <td>${job.salary}</td>
+                     <td>${applicantsCount !== undefined && applicantsCount > 0 ? applicantsCount : "ليس هناك متقدمون بعد"}</td>
+                     <td>
+                     <button class="btn btn-primary" onclick="fetchApplicants(${job.jobId})">عرض المتقدمين</button>
+                     </td>
+                      `;
+                    jobsTableBody.appendChild(row);
+                }
+
+            } catch (error) {
+                console.error("Error fetching jobs:", error);
+            }
+        }
+
+        // جلب المتقدمين بناءً على JobId
+        async function fetchApplicants(jobId) {
+            try {
+                const response = await fetch(applicantsApiUrl + jobId);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch applicants");
+                }
+                const applicants = await response.json();
+                const applicantsList = document.getElementById("applicantsList");
+                applicantsList.innerHTML = "";
+
+                if (!applicants || applicants.length === 0) {
+                    applicantsList.innerHTML = "<li class='list-group-item'>لا يوجد متقدمون لهذه الوظيفة</li>";
+                    return;
+                }
+
+                applicants.forEach(applicant => {
+                    const listItem = document.createElement("li");
+                    listItem.classList.add("list-group-item");
+
+                    const applicantName = document.createElement("div");
+                    applicantName.textContent = applicant.userName;
+                    applicantName.style.cursor = "pointer";
+                    applicantName.classList.add("fw-bold");
+
+                    const detailsList = document.createElement("ul");
+                    detailsList.classList.add("list-group", "mt-2", "d-none");
+
+                    const details = `
+                        <li class="list-group-item">رقم الهاتف: ${applicant.phoneNumber}</li>
+                        <li class="list-group-item">العنوان: ${applicant.address}</li>
+                        <li class="list-group-item">المهنة: ${applicant.profession}</li>
+                        <li class="list-group-item">وصف المهنة: ${applicant.professionDescription}</li>
+                        <li class="list-group-item">سنوات الخبرة: ${applicant.yearsOfExperience}</li>
+                        <li class="list-group-item">ضمان: ${applicant.hasWarranty ? "نعم" : "لا"}</li>
+                    `;
+                    detailsList.innerHTML = details;
+
+                    applicantName.addEventListener("click", () => {
+                        detailsList.classList.toggle("d-none");
+                    });
+
+                    listItem.appendChild(applicantName);
+                    listItem.appendChild(detailsList);
+                    applicantsList.appendChild(listItem);
+                });
+
+                const modal = new bootstrap.Modal(document.getElementById("applicantsModal"));
+                modal.show();
+            } catch (error) {
+                console.error("Error fetching applicants:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchJobs);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

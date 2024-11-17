@@ -3,6 +3,7 @@ using Masterpiece_CoreAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using static Masterpiece_CoreAPI.Shared.ImageSaver;
 
@@ -12,15 +13,15 @@ namespace Masterpiece_CoreAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        
 
-     
-            private readonly MyDbContext _db;
 
-            public UserController(MyDbContext db)
-            {
-                _db =db;
-            }
+
+        private readonly MyDbContext _db;
+
+        public UserController(MyDbContext db)
+        {
+            _db = db;
+        }
 
         [HttpGet("GetAllUsers")]
         public IActionResult GetAllUsers()
@@ -29,63 +30,66 @@ namespace Masterpiece_CoreAPI.Controllers
             return Ok(users);
         }
 
-            [HttpPost("register")]
-            public async Task<IActionResult> Register([FromForm] UserRegisterDTO request)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromForm] UserRegisterDTO request)
+        {
+            // Hash and Salt password before saving
+            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            var user = new User
             {
-                // Hash and Salt password before saving
-                CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-
-                var user = new User
-                {
-                    UserName = request.UserName,
-                    Email = request.Email,
-                    Password=request.Password,
-                    PasswordHash = passwordHash,
-                    PasswordSalt = passwordSalt,
-                    PhoneNumber = request.PhoneNumber,
-                    Address = request.Address,
-                    Role = request.Role
-                };
+                UserName = request.UserName,
+                Password = request.Password,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                PhoneNumber = request.PhoneNumber,
+                Address = request.Address,
+                Profession = request.Profession,
+                ProfessionDescription = request.ProfessionDescription,
+                YearsOfExperience = request.YearsOfExperience,
+                HasWarranty = request.HasWarranty,
+            };
 
 
-                _db.Users.Add(user);
-                await _db.SaveChangesAsync();
+            _db.Users.Add(user);
+            await _db.SaveChangesAsync();
 
-                 var creatcart = new Cart
-                {
+            var creatcart = new Cart
+            {
                 UserId = user.UserId
-                 };
+            };
 
 
-                  _db.Carts.Add(creatcart);
-                  await _db.SaveChangesAsync();
+            _db.Carts.Add(creatcart);
+            await _db.SaveChangesAsync();
 
-                 var creatjobapp = new JobApplication
-                 {
+            var creatjobapp = new JobApplication
+            {
                 UserId = user.UserId
-                 };
-                _db.JobApplications.Add(creatjobapp);
-                 await _db.SaveChangesAsync();
+            };
+            _db.JobApplications.Add(creatjobapp);
+            await _db.SaveChangesAsync();
 
             return Ok("تم انشاء الحساب بنجاح");
 
 
-            }
+        }
 
 
-            private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
-                using (var hmac = new System.Security.Cryptography.HMACSHA512())
-                {
-                    passwordSalt = hmac.Key;
-                    passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                }
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
+        }
 
 
         [HttpPost("login")]
 
-        public IActionResult login([FromForm] UserLoginDTO userLoginDTO) {
+        public IActionResult login([FromForm] UserLoginDTO userLoginDTO)
+        {
 
             // التحقق من أن الحقول غير فارغة
             if (string.IsNullOrEmpty(userLoginDTO.PhoneNumber) || string.IsNullOrEmpty(userLoginDTO.Password))
@@ -114,7 +118,6 @@ namespace Masterpiece_CoreAPI.Controllers
                 var Admin = new User
                 {
                     UserId = user.UserId,
-                    Email = user.Email,
                     Password = user.Password,
                     Role = user.Role
                 };
@@ -129,7 +132,6 @@ namespace Masterpiece_CoreAPI.Controllers
                 PhoneNumber = user.PhoneNumber,
                 Password = user.Password,
                 UserImage = user.UserImage,
-                Email = user.Email,
                 Address = user.Address,
                 Role = user.Role
             };
@@ -140,9 +142,74 @@ namespace Masterpiece_CoreAPI.Controllers
 
 
 
+        //[HttpGet("GetAllUsers")]
+        //public async Task<IActionResult> GetAllUsers()
+        //{
+        //    var users = await _db.Users.Select(user => new
+        //    {
+        //        user.UserId,
+        //        user.UserName,
+        //        user.PhoneNumber,
+        //        user.Address,
+        //        user.Profession,
+        //        user.ProfessionDescription,
+        //        user.YearsOfExperience,
+        //        user.HasWarranty
+        //    }).ToListAsync();
+
+        //    return Ok(users);
+        //}
+
+        [HttpPut("UpdateUser/{id}")]
+        public async Task<IActionResult> UpdateUser(int id, [FromForm] UserRegisterDTO request)
+        {
+            var user = await _db.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound("المستخدم غير موجود.");
+            }
+
+            // تحديث بيانات المستخدم
+            user.UserName = request.UserName ?? user.UserName;
+            user.PhoneNumber = request.PhoneNumber ?? user.PhoneNumber;
+            user.Address = request.Address ?? user.Address;
+            user.Profession = request.Profession ?? user.Profession;
+            user.ProfessionDescription = request.ProfessionDescription ?? user.ProfessionDescription;
+            user.YearsOfExperience = request.YearsOfExperience ?? user.YearsOfExperience;
+            user.HasWarranty = request.HasWarranty ?? user.HasWarranty;
+
+            _db.Users.Update(user);
+            await _db.SaveChangesAsync();
+
+            return Ok("تم تحديث بيانات المستخدم بنجاح.");
+        }
 
 
 
+
+        [HttpGet("GetUserById/{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await _db.Users.Select(u => new
+            {
+                u.UserId,
+                u.UserName,
+                u.PhoneNumber,
+                u.Address,
+                u.Profession,
+                u.ProfessionDescription,
+                u.YearsOfExperience,
+                u.HasWarranty
+            }).FirstOrDefaultAsync(u => u.UserId == id);
+
+            if (user == null)
+            {
+                return NotFound("المستخدم غير موجود.");
+            }
+
+            return Ok(user);
+        }
 
 
 

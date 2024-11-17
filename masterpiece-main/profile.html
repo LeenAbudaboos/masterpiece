@@ -225,30 +225,58 @@
         <!-- محتوى الصفحة -->
         <div class="main-content">
             <!-- معلومات المستخدم -->
-            <div id="profile-tab" class="profile-info">
-                <h1>معلومات المستخدم</h1>
-                <p><strong>الاسم:</strong> <span id="userName">أحمد عبدالله</span></p>
-                <p><strong>البريد الإلكتروني:</strong> <span id="userEmail">ahmad@example.com</span></p>
-                <p><strong>الهاتف:</strong> <span id="userPhone">+962 799999999</span></p>
-                <button class="btn-edit" onclick="enableEditing()">تعديل البيانات</button>
-
-                <!-- نموذج تعديل البيانات (مخفي افتراضياً) -->
-                <form id="userForm" style="display: none;">
-                    <div class="form-group">
-                        <label for="editUserName">الاسم:</label>
-                        <input type="text" class="form-control" id="editUserName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editUserEmail">البريد الإلكتروني:</label>
-                        <input type="email" class="form-control" id="editUserEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editUserPhone">الهاتف:</label>
-                        <input type="text" class="form-control" id="editUserPhone" required>
-                    </div>
-                    <button type="submit" class="btn-edit mt-3">حفظ التعديلات</button>
-                </form>
+            <div class="main-content">
+                <!-- معلومات المستخدم -->
+                <div id="profile-tab" class="profile-info">
+                    <h1>معلومات المستخدم</h1>
+                    <p><strong>الاسم:</strong> <span id="userName"></span></p>
+                    <p><strong>الهاتف:</strong> <span id="userPhone"></span></p>
+                    <p><strong>العنوان:</strong> <span id="userAddress"></span></p>
+                    <p><strong>المهنة:</strong> <span id="userProfession"></span></p>
+                    <p><strong>وصف المهنة:</strong> <span id="userProfessionDescription"></span></p>
+                    <p><strong>سنوات الخبرة:</strong> <span id="userYearsOfExperience"></span></p>
+                    <p><strong>ضمان:</strong> <span id="userHasWarranty"></span></p>
+            
+                    <button class="btn-edit" onclick="enableEditing()">تعديل البيانات</button>
+            
+                    <!-- نموذج تعديل البيانات -->
+                    <form id="userForm" style="display: none;">
+                        <div class="form-group">
+                            <label for="editUserName">الاسم:</label>
+                            <input type="text" class="form-control" id="editUserName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserPhone">الهاتف:</label>
+                            <input type="text" class="form-control" id="editUserPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserAddress">العنوان:</label>
+                            <input type="text" class="form-control" id="editUserAddress" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserProfession">المهنة:</label>
+                            <input type="text" class="form-control" id="editUserProfession" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserProfessionDescription">وصف المهنة:</label>
+                            <textarea class="form-control" id="editUserProfessionDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserYearsOfExperience">سنوات الخبرة:</label>
+                            <input type="number" class="form-control" id="editUserYearsOfExperience" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserHasWarranty">ضمان:</label>
+                            <select class="form-control" id="editUserHasWarranty" required>
+                                <option value="true">نعم</option>
+                                <option value="false">لا</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-edit mt-3">حفظ التعديلات</button>
+                    </form>
+                </div>
             </div>
+            
 
             <!-- تبويبة طلبات التوظيف -->
             <div id="applications-tab" class="tabs-content" style="display:none;">
@@ -364,133 +392,96 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
        
        
+
 <script>
-    // بيانات المستخدم الافتراضية (يمكن استبدالها لاحقًا ببيانات من API)
-    const userId = localStorage.getItem('userId') || 1; // استبدل بالقيمة من API
+  const apiUrl = "https://localhost:7226/api/User/GetUserById/";
 
-    // دالة لجلب بيانات المستخدم
-    async function getUserData() {
-        try {
-            let response = await fetch(`https://localhost:7226/api/User/GetUserById?id=${userId}`);
-            let user = await response.json();
+// جلب بيانات المستخدم
+async function getUserData() {
+    const userId = localStorage.getItem("userId");
 
-            document.getElementById('userName').textContent = user.userName;
-            document.getElementById('userEmail').textContent = user.email;
-            document.getElementById('userPhone').textContent = user.phone;
-            document.getElementById('editUserName').value = user.userName;
-            document.getElementById('editUserEmail').value = user.email;
-            document.getElementById('editUserPhone').value = user.phone;
-        } catch (error) {
-            console.error('Error fetching user data:', error);
+    if (!userId) {
+        alert("الرجاء تسجيل الدخول أولاً!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    try {
+        const response = await fetch(`${apiUrl}${userId}`);
+        if (response.ok) {
+            const user = await response.json();
+
+            // تحديث الحقول ببيانات المستخدم
+            document.getElementById("userName").textContent = user.userName || "غير متوفر";
+            document.getElementById("userPhone").textContent = user.phoneNumber || "غير متوفر";
+            document.getElementById("userAddress").textContent = user.address || "غير متوفر";
+            document.getElementById("userProfession").textContent = user.profession || "غير متوفر";
+            document.getElementById("userProfessionDescription").textContent = user.professionDescription || "غير متوفر";
+            document.getElementById("userYearsOfExperience").textContent = user.yearsOfExperience || "غير متوفر";
+            document.getElementById("userHasWarranty").textContent = user.hasWarranty ? "نعم" : "لا";
+
+            // إعداد النموذج للتعديل
+            document.getElementById("editUserName").value = user.userName || "";
+            document.getElementById("editUserPhone").value = user.phoneNumber || "";
+            document.getElementById("editUserAddress").value = user.address || "";
+            document.getElementById("editUserProfession").value = user.profession || "";
+            document.getElementById("editUserProfessionDescription").value = user.professionDescription || "";
+            document.getElementById("editUserYearsOfExperience").value = user.yearsOfExperience || "";
+            document.getElementById("editUserHasWarranty").value = user.hasWarranty ? "true" : "false";
+        } else {
+            alert("تعذر جلب بيانات المستخدم.");
         }
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+        alert("حدث خطأ أثناء الاتصال بالخادم.");
+    }
+}
+
+// تمكين تعديل البيانات
+function enableEditing() {
+    document.getElementById("userForm").style.display = "block";
+}
+
+// حفظ التعديلات
+document.getElementById("userForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+        alert("الرجاء تسجيل الدخول أولاً!");
+        return;
     }
 
-    // تمكين تعديل البيانات
-    function enableEditing() {
-        document.getElementById('userDetails').style.display = 'none';
-        document.getElementById('userForm').style.display = 'block';
-    }
+    try {
+        const formData = new FormData();
+        formData.append("userName", document.getElementById("editUserName").value);
+        formData.append("phoneNumber", document.getElementById("editUserPhone").value);
+        formData.append("address", document.getElementById("editUserAddress").value);
+        formData.append("profession", document.getElementById("editUserProfession").value);
+        formData.append("professionDescription", document.getElementById("editUserProfessionDescription").value);
+        formData.append("yearsOfExperience", document.getElementById("editUserYearsOfExperience").value);
+        formData.append("hasWarranty", document.getElementById("editUserHasWarranty").value);
 
-    // حفظ التعديلات
-    document.getElementById('userForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        try {
-            const formData = new FormData();
-            formData.append('userName', document.getElementById('editUserName').value);
-            formData.append('email', document.getElementById('editUserEmail').value);
-            formData.append('phone', document.getElementById('editUserPhone').value);
+        const response = await fetch(`https://localhost:7226/api/User/UpdateUser/${userId}`, {
+            method: "PUT",
+            body: formData,
+        });
 
-            let response = await fetch(`https://localhost:7226/api/User/UpdateUser?id=${userId}`, {
-                method: 'PUT',
-                body: formData
-            });
-
-            if (response.ok) {
-                alert('تم تحديث بياناتك بنجاح!');
-                getUserData(); // إعادة تحميل البيانات
-                document.getElementById('userDetails').style.display = 'block';
-                document.getElementById('userForm').style.display = 'none';
-            } else {
-                alert('حدث خطأ أثناء التحديث.');
-            }
-        } catch (error) {
-            console.error('Error updating user data:', error);
+        if (response.ok) {
+            alert("تم تحديث بياناتك بنجاح!");
+            getUserData(); // إعادة تحميل البيانات
+            document.getElementById("userForm").style.display = "none";
+        } else {
+            alert("حدث خطأ أثناء تحديث البيانات.");
         }
-    });
-
-    // جلب البيانات عند تحميل الصفحة
-    getUserData();
-
-    // دالة للتبديل بين التبويبات
-    function showTab(tabId) {
-        document.getElementById('profile-tab').style.display = 'none';
-        document.getElementById('applications-tab').style.display = 'none';
-        document.getElementById('products-tab').style.display = 'none';
-
-        document.getElementById(`${tabId}-tab`).style.display = 'block';
-        
-        // تحديث الشريط الجانبي لتحديد التبويبة النشطة
-        document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-        document.querySelector(`.sidebar a[href="#${tabId}"]`).classList.add('active');
+    } catch (error) {
+        console.error("Error updating user data:", error);
     }
+});
 
-    // دالة لجلب طلبات التوظيف
-    async function getUserApplications() {
-        try {
-            let response = await fetch(`https://localhost:7226/api/Job/GetUserApplications?userId=${userId}`);
-            let applications = await response.json();
+// جلب بيانات المستخدم عند تحميل الصفحة
+document.addEventListener("DOMContentLoaded", getUserData);
 
-            let applicationsContainer = document.getElementById('applications-container');
-            applicationsContainer.innerHTML = '';
-
-            applications.forEach(application => {
-                applicationsContainer.innerHTML += `
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">${application.jobTitle}</h5>
-                                <p class="card-text">تاريخ التقديم: ${application.dateApplied}</p>
-                                <p class="card-text">الشركة: ${application.companyName}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        } catch (error) {
-            console.error('Error fetching applications:', error);
-        }
-    }
-
-    // دالة لجلب المنتجات التي يريد المستخدم شراءها
-    async function getUserProducts() {
-        try {
-            let response = await fetch(`https://localhost:7226/api/Product/GetUserProducts?userId=${userId}`);
-            let products = await response.json();
-
-            let productsContainer = document.getElementById('products-container');
-            productsContainer.innerHTML = '';
-
-            products.forEach(product => {
-                productsContainer.innerHTML += `
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">${product.productName}</h5>
-                                <p class="card-text">السعر: ${product.price} دينار</p>
-                                <p class="card-text">الوصف: ${product.description}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        } catch (error) {
-            console.error('Error fetching products:', error);
-        }
-    }
-
-    // استدعاء بيانات طلبات التوظيف والمنتجات
-    getUserApplications();
-    getUserProducts();
 </script>
 
 

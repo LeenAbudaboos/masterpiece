@@ -133,6 +133,60 @@ namespace Masterpiece_CoreAPI.Controllers
             return Ok(jod);
         }
 
+
+
+        [HttpGet("GetJobApplicationsWithUsers")]
+        public IActionResult GetJobApplicationsWithUsers()
+        {
+            var jobsWithApplications = _db.Jobs
+                .Include(j => j.JobApplications) // تضمين التقديمات على الوظائف
+                .ThenInclude(ja => ja.User) // تضمين بيانات المستخدمين الذين قدموا الطلبات
+                .Select(j => new
+                {
+                    JobId = j.JobId,
+                    JobTitle = j.JobTitle,
+                    JobDescription = j.Description,
+                    Applicants = j.JobApplications.Select(ja => new
+                    {
+                        UserName = ja.User.UserName,
+                        Address = ja.User.Address,
+                        Profession = ja.User.Profession
+                    }).ToList()
+                })
+                .ToList();
+
+            return Ok(jobsWithApplications);
+        }
+
+
+        [HttpGet("GetApplicantsByJobId/{jobId}")]
+        public async Task<IActionResult> GetApplicantsByJobId(int jobId)
+        {
+            var applicants = await _db.JobApplications
+                .Where(a => a.JobId == jobId) // استعلام عن الأشخاص المتقدمين للوظيفة
+                .Include(a => a.User) // تضمين بيانات المستخدم المرتبطة
+                .Select(a => new
+                {
+                    a.UserId,
+                    UserName = a.User.UserName,
+                    PhoneNumber=a.User.PhoneNumber,
+                    Address = a.User.Address,
+                    Profession = a.User.Profession,
+                    ProfessionDescription=a.User.ProfessionDescription,
+                    YearsOfExperience=a.User.YearsOfExperience,
+                    HasWarranty=a.User.HasWarranty,
+
+                })
+                .ToListAsync();
+
+            if (applicants == null || !applicants.Any())
+            {
+                return NotFound(new { message = "لا يوجد متقدمون لهذه الوظيفة" });
+            }
+
+            return Ok(applicants);
+        }
+
     }
 }
    

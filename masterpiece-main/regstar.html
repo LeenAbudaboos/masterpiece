@@ -215,6 +215,34 @@ a.google span{
     }
     
 }
+
+.input-field {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+.input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
              </style>  
                 <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -308,6 +336,18 @@ a.google span{
                             <div class="field input-field">
                                 <input type="text" id="address" name="address" required placeholder="العنوان" class="input">
                             </div>
+                            <div class="field input-field">
+                                <select id="profession" name="profession" required class="input">
+                                    <option value="" disabled selected>اختر المهنة</option>
+                                    <option value="نجار">نجار</option>
+                                    <option value="حداد">حداد</option>
+                                    <option value="سباك">سباك</option>
+                                    <option value="عامل بناء">عامل بناء</option>
+                                    <option value="فني كهرباء">فني كهرباء</option>
+                                </select>
+                            </div>
+                            <div class="field input-field"></div>
+                            
     
                             <div class="field button-field">
                                 <button type="submit" onclick="regster()">إنشاء</button>
@@ -368,6 +408,7 @@ const url="https://localhost:7226/api/User/register";
 let form=document.getElementById("registerForm");
 async function regster() {
     event.preventDefault();
+    debugger;
     let data=new FormData(form);
     let response=await fetch(url,{
         method:"POST",
@@ -382,7 +423,7 @@ async function regster() {
 }
 
 
-
+//************************************************
 
 
             // جلب الزر الخاص بالمصادقة (تسجيل الدخول/تسجيل الخروج) وزر البروفايل

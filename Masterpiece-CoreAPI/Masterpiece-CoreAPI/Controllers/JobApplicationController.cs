@@ -17,6 +17,36 @@ namespace Masterpiece_CoreAPI.Controllers
             _db = db;
         }
 
+        //[HttpPost("ApplyForJob")]
+        //public async Task<IActionResult> ApplyForJob([FromForm] JobApplicationDTO applicationDTO)
+        //{
+        //    if (applicationDTO == null || applicationDTO.UserId == null || applicationDTO.JobId == null)
+        //    {
+        //        return BadRequest("سجل الدخول حتى تتمكن من التقديم على الوظيفة");
+        //    }
+
+        //    var jobApplication = new JobApplication
+        //    {
+        //        UserId = applicationDTO.UserId,
+        //        JobId = applicationDTO.JobId,
+        //    };
+
+        //    _db.JobApplications.Add(jobApplication);
+        //    await _db.SaveChangesAsync();
+
+        //    return Ok("لقد تم تقديم الطلب بنجاح");
+        //}
+
+
+        //[HttpGet("getallapply")]
+
+        //public IActionResult getallapply() {
+
+        //    var data = _db.JobApplications.ToList();
+        //return Ok("");
+        //}
+
+
         [HttpPost("ApplyForJob")]
         public async Task<IActionResult> ApplyForJob([FromForm] JobApplicationDTO applicationDTO)
         {
@@ -25,6 +55,36 @@ namespace Masterpiece_CoreAPI.Controllers
                 return BadRequest("سجل الدخول حتى تتمكن من التقديم على الوظيفة");
             }
 
+            // جلب بيانات المستخدم من قاعدة البيانات
+            var user = await _db.Users.FindAsync(applicationDTO.UserId);
+            if (user == null)
+            {
+                return NotFound("المستخدم غير موجود");
+            }
+
+            // جلب بيانات الوظيفة من قاعدة البيانات
+            var job = await _db.Jobs.FindAsync(applicationDTO.JobId);
+            if (job == null)
+            {
+                return NotFound("الوظيفة غير موجودة");
+            }
+
+            // التحقق من تطابق المهنة
+            if (!string.Equals(user.Profession, job.JobTitle, StringComparison.OrdinalIgnoreCase))
+            {
+                return BadRequest("لا يمكنك التقديم على هذه الوظيفة لأنها لا تتطابق مع مهنتك المسجلة");
+            }
+
+            // التحقق مما إذا كان المستخدم قد تقدم مسبقًا لنفس الوظيفة
+            var existingApplication = await _db.JobApplications
+                .FirstOrDefaultAsync(a => a.UserId == applicationDTO.UserId && a.JobId == applicationDTO.JobId);
+
+            if (existingApplication != null)
+            {
+                return BadRequest("لقد قمت بالتقديم على هذه الوظيفة مسبقًا");
+            }
+
+            // إنشاء طلب جديد
             var jobApplication = new JobApplication
             {
                 UserId = applicationDTO.UserId,
@@ -38,28 +98,6 @@ namespace Masterpiece_CoreAPI.Controllers
         }
 
 
-        [HttpGet("getallapply")]
-
-        public IActionResult getallapply() {
-        
-            var data = _db.JobApplications.ToList();
-        return Ok("");
-        }
-
-
-
-        //[HttpGet("CheckApplication")]
-        //public async Task<IActionResult> HasApplied(int userId, int jobId)
-        //{
-        //    var application = await _db.JobApplications.FirstOrDefaultAsync(a => a.UserId == userId && a.JobId == jobId);
-
-        //    if (application != null)
-        //    {
-        //        return Ok( true); // المستخدم قد تقدم لهذه الوظيفة من قبل
-        //    }
-
-        //    return Ok(false); // المستخدم لم يتقدم لهذه الوظيفة
-        //}
 
         [HttpGet("HasApplied")]
         public async Task<IActionResult> HasApplied(int userId, int jobId)

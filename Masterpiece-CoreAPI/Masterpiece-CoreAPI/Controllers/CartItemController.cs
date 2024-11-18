@@ -135,6 +135,20 @@ namespace Masterpiece_CoreAPI.Controllers
         }
 
 
+        [HttpPut("UpdateCartItem")]
+        public async Task<IActionResult> UpdateCartItem([FromForm] int CartItemId, [FromForm] int Quantity)
+        {
+            var cartItem = await _db.CartItems.FindAsync(CartItemId);
+            if (cartItem == null)
+            {
+                return NotFound("العنصر غير موجود في السلة");
+            }
+
+            cartItem.Quantity = Quantity;
+            await _db.SaveChangesAsync();
+
+            return Ok("تم تحديث الكمية بنجاح");
+        }
 
         //[HttpPost]
         //public IActionResult AddItemToCart(int userId, [FromForm] CartItemDTO cartItemDto)

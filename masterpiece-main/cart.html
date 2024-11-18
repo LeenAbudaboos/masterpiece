@@ -30,6 +30,28 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group .btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.input-group .form-control {
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+    font-size: 1rem;
+}
+</style>
+
+    </style>
 </head>
 
 <body>
@@ -200,23 +222,90 @@ async function getCartItems() {
         cartItemsContainer.innerHTML = '';  // تفريغ العناصر الحالية
         
         cartItems.forEach(item => {
+    cartItemsContainer.innerHTML += `
+        <tr>
+            <td>${item.productDetails.productName}</td>
+            <td>
+                <div class="input-group">
+                            <button class="btn btn-outline-secondary" onclick="updateCartItem(${item.cartItemId}, ${item.productDetails.price}, -1)">-</button>
+                            <input type="number" id="quantity-${item.cartItemId}" value="${item.quantity}" min="1" class="form-control text-center">
+                            <button class="btn btn-outline-secondary" onclick="updateCartItem(${item.cartItemId}, ${item.productDetails.price}, 1)">+</button>
+                        </div>
+            </td>
+            <td id="price-${item.cartItemId}">${item.productDetails.price * item.quantity}</td>
+            <td>
+                <button class="btn btn-danger" onclick="removeFromCart(${item.cartItemId})">إزالة</button>
+            </td>
+        </tr>
+    `;
+});
 
-            cartItemsContainer.innerHTML += `
-                <tr>
-                    <td>${item.productDetails.productName}</td>
-                    <td>${item.Quantity}</td>
-                    <td>${item.productDetails.price}</td>
-                    <td>
-                        <button class="btn btn-danger" onclick="removeFromCart(${item.cartItemId})">إزالة</button>
-                    </td>
-                </tr>
-            `;
-        });
     } catch (error) {
         console.error('Error fetching cart items:', error);
         alert("حدث خطأ أثناء جلب بيانات السلة.");
     }
 }
+
+
+
+
+
+async function updateCartItem(cartItemId, productPrice, change) {
+    const quantityInput = document.getElementById(`quantity-${cartItemId}`);
+
+    if (!quantityInput) {
+        console.error(`Input field for cart item ${cartItemId} not found`);
+        return;
+    }
+
+    // الحصول على الكمية الحالية
+    let currentQuantity = parseInt(quantityInput.value);
+
+    if (isNaN(currentQuantity) || currentQuantity <= 0) {
+        console.warn(`Invalid quantity value for cart item ${cartItemId}. Resetting to 1.`);
+        currentQuantity = 1; // تعيين قيمة افتراضية
+    }
+
+    // تحديث الكمية
+    currentQuantity += change;
+
+    // التأكد من أن الكمية لا تقل عن 1
+    if (currentQuantity < 1) {
+        currentQuantity = 1;
+    }
+
+    // تحديث الكمية في الواجهة
+    quantityInput.value = currentQuantity;
+
+    // تحديث السعر في الواجهة
+    const newPrice = currentQuantity * productPrice;
+    const priceElement = document.getElementById(`price-${cartItemId}`);
+    if (priceElement) {
+        priceElement.textContent = newPrice.toFixed(2); // تنسيق الرقم لعرضه بشكل جميل
+    }
+
+    // إرسال الطلب لتحديث الكمية في قاعدة البيانات
+    try {
+        const formData = new FormData();
+        formData.append("CartItemId", cartItemId);
+        formData.append("Quantity", currentQuantity);
+
+        const response = await fetch(`https://localhost:7226/api/CartItem/UpdateCartItem`, {
+            method: 'PUT',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to update cart item");
+        }
+
+        console.log("Cart item updated successfully");
+    } catch (error) {
+        console.error("Error updating cart item:", error);
+        alert("حدث خطأ أثناء تحديث الكمية.");
+    }
+}
+
 
 ////***************
 

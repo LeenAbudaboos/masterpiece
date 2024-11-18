@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض الكاتيجوري</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #ddd;
+            padding: 15px 20px;
+            width: 100%;
+            text-align: right;
+        }
+
+        .sidebar a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .sidebar .active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .sidebar i {
+            margin-left: 10px;
+        }
+
+        .main-content {
+            margin-right: 250px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h1 {
+            color: #343a40;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .table img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+   <!-- شريط جانبي ثابت -->
+   <div class="sidebar">
+    <h3 class="text-center text-light">بلا شهادة</h3>
+    <a href="all_category.html" class="active"><i class="fas fa-boxes"></i>  الفئات</a>
+    <a href="add_category.html"><i class="fas fa-plus"></i> إضافة فئة</a>
+    <a href="products.html" ><i class="fas fa-box"></i> المنتجات</a>
+    <a href="add_product.html" ><i class="fas fa-plus"></i> إضافة منتج</a>
+    <a href="employees.html"><i class="fas fa-users"></i> الوظائف</a>
+    <a href="add_job.html"><i class="fas fa-user-plus"></i> إضافة وظائف</a>
+    <a href="alljob.html" ><i class="fas fa-shopping-cart"></i> المتقدمون للوظائف</a>
+
+    <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
+    <!-- <a href="contact_requests.html"><i class="fas fa-envelope"></i> طلبات التواصل</a> -->
+</div>
+    <!-- محتوى الصفحة -->
+    <div class="main-content">
+        <h1 class="text-center mb-4">عرض جميع الفئات</h1>
+        <table class="table table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>الصورة</th>
+                    <th>اسم الفئة</th>
+                    <th>الوصف</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody id="categoriesTableBody">
+                <!-- سيتم إضافة الفئات ديناميكياً -->
+            </tbody>
+        </table>
+    </div>
+ <!-- Modal لعرض المنتجات -->
+ <div class="modal fade" id="productsModal" tabindex="-1" aria-labelledby="productsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productsModalLabel">عرض المنتجات</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>اسم المنتج</th>
+                            <th>الوصف</th>
+                            <th>السعر</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                        <!-- سيتم إضافة المنتجات ديناميكياً -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        const categoriesApiUrl = "https://localhost:7226/api/Categorie";
+        const productsApiUrl = "https://localhost:7226/api/Product/GetProductsByCategory/";
+
+        // جلب الكاتيجوري وعرضها
+        async function fetchCategories() {
+            try {
+                const response = await fetch(`${categoriesApiUrl}/GetAllCategorie`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch categories");
+                }
+                const categories = await response.json();
+                const categoriesTableBody = document.getElementById("categoriesTableBody");
+
+                categoriesTableBody.innerHTML = "";
+                categories.forEach(category => {
+                    categoriesTableBody.innerHTML += `
+                        <tr id="category-${category.categoryId}">
+                            <td><img src="../Uploads/${category.categoryImg}" alt="Category Image"></td>
+                            <td>${category.categoryName}</td>
+                            <td>${category.description}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm" onclick="editCategory(${category.categoryId}, '${category.categoryName}', '${category.description}')">تعديل</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteCategory(${category.categoryId})">حذف</button>
+                                <button class="btn btn-primary btn-sm" onclick="fetchProducts(${category.categoryId})">عرض المنتجات</button>
+
+                                </td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            }
+        }
+
+        // وظيفة لحذف الكاتيجوري
+        async function deleteCategory(categoryId) {
+            const confirmDelete = confirm("هل أنت متأكد أنك تريد حذف هذه الفئة؟");
+            if (!confirmDelete) return;
+
+            try {
+                
+                const response = await fetch(`https://localhost:7226/api/Categorie/DeleteCategorie/${categoryId}`, {
+                    method: "DELETE"
+                });
+
+                if (response.ok) {
+                    alert("تم حذف الفئة بنجاح");
+                    document.getElementById(`category-${categoryId}`).remove();
+                } else {
+                    throw new Error("Failed to delete category");
+                }
+            } catch (error) {
+                console.error("Error deleting category:", error);
+                alert("حدث خطأ أثناء حذف الفئة.");
+            }
+        }
+
+        // وظيفة لتعديل الكاتيجوري
+        async function editCategory(categoryId, currentName, currentDescription) {
+            const newName = prompt("تعديل اسم الفئة:", currentName);
+            const newDescription = prompt("تعديل الوصف:", currentDescription);
+
+            if (!newName || !newDescription) {
+                alert("يجب ملء جميع الحقول لتحديث الفئة.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("CategoryName", newName);
+            formData.append("Description", newDescription);
+
+            try {
+                const response = await fetch(`https://localhost:7226/api/Categorie/UpdateCategorie/${categoryId}`, {
+                    method: "PUT",
+                    body: formData
+                });
+
+                if (response.ok) {
+                    alert("تم تحديث الفئة بنجاح");
+                    fetchCategories(); // تحديث القائمة
+                } else {
+                    throw new Error("Failed to update category");
+                }
+            } catch (error) {
+                console.error("Error updating category:", error);
+                alert("حدث خطأ أثناء تحديث الفئة.");
+            }
+        }
+
+
+           // وظيفة لجلب المنتجات الخاصة بفئة
+           async function fetchProducts(categoryId) {
+            try {
+                const response = await fetch(`https://localhost:7226/api/Categorie/GetProductsByCategory/${categoryId}`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch products");
+                }
+                const products = await response.json();
+                const productsTableBody = document.getElementById("productsTableBody");
+                productsTableBody.innerHTML = "";
+
+                if (products.length === 0) {
+                    productsTableBody.innerHTML = "<tr><td colspan='5'>لا توجد منتجات لهذه الفئة</td></tr>";
+                    return;
+                }
+
+                products.forEach(product => {
+                    productsTableBody.innerHTML += `
+                        <tr>
+                            <td>${product.productName}</td>
+                            <td>${product.descriptions}</td>
+                            <td>${product.price}</td>
+                        </tr>
+                    `;
+                });
+
+                const modal = new bootstrap.Modal(document.getElementById("productsModal"));
+                modal.show();
+            } catch (error) {
+                console.error("Error fetching products:", error);
+                alert("ليس هناك منتجات تنتمي لهذه الفئة بعد ");
+            }
+        }
+
+        // استدعاء دالة جلب الكاتيجوري عند تحميل الصفحة
+        document.addEventListener("DOMContentLoaded", fetchCategories);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+ 
+    
+     
+
+  

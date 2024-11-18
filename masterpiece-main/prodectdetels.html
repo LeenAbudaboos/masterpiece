@@ -113,6 +113,36 @@
     }
 }
 
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.quantity-control .input-group {
+    display: flex;
+    width: 150px;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity-control .form-control {
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+.quantity-control .btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+</style>
+
+
 </style>
 </head>
 
@@ -319,8 +349,15 @@ async function getprodectDetails() {
                 <div class="card-body">
                     <h3 class="card-title">${prodect.productName}</h3>
                     <p class="card-text"><strong>الوصف:</strong> ${prodect.descriptions}</p>
-                    <p class="card-text"><strong>الراتب:</strong> ${prodect.price}</p>
-                    <p class="card-text"><strong>الكمية:</strong> ${prodect.quantity}</p>
+                    <p class="card-text"><strong>السعر:</strong> ${prodect.price}</p>
+<div class="quantity-control">
+    <label><strong>الكمية:</strong></label>
+    <div class="input-group">
+        <button class="btn btn-outline-secondary" id="decreaseQuantity" onclick="updateQuantity(-1)">-</button>
+        <input type="number" id="quantityInput" class="form-control text-center" value="1" min="1" max="${prodect.quantity}">
+        <button class="btn btn-outline-secondary" id="increaseQuantity" onclick="updateQuantity(1)">+</button>
+    </div>
+</div>
                     <button class="btn btn-primary" onclick="addToCart(${prodect.productId})" >شراء</button>
 
                 </div>
@@ -342,21 +379,22 @@ function IDprodect(id){
 async function addToCart(productId) {
     debugger;
     const userId = localStorage.getItem('userId');
-    
+    const quantity = parseInt(document.getElementById('quantityInput').value); // جلب الكمية
+
     if (!userId) {
         alert("يجب تسجيل الدخول قبل الشراء.");
         return;
     }
 
-    // Create FormData object to send data in form-encoded format
     const formData = new FormData();
-    formData.append("ProductId", productId); // Add product ID
-    formData.append("CartId", ""); // يمكن تمرير null أو قيمة فارغة للسلة الجديدة
+    formData.append("ProductId", productId);
+    formData.append("Quantity", quantity); // إرسال الكمية المحددة
+    formData.append("CartId", "");
 
     try {
         const response = await fetch(`https://localhost:7226/api/CartItem/addToCart?userId=${userId}`, {
             method: 'POST',
-            body: formData // Sending the data as FormData
+            body: formData
         });
 
         if (response.ok) {
@@ -373,8 +411,26 @@ async function addToCart(productId) {
 
 
 
+function updateQuantity(change) {
+    const quantityInput = document.getElementById("quantityInput");
+    let currentQuantity = parseInt(quantityInput.value);
 
+    // التأكد من أن القيمة الحالية عدد صحيح وإذا لم تكن صالحة، تعيينها إلى 1
+    if (isNaN(currentQuantity) || currentQuantity < 1) {
+        currentQuantity = 1;
+    }
 
+    // تحديث الكمية بناءً على الزر الذي تم النقر عليه
+    currentQuantity += change;
+
+    // التأكد من أن الكمية لا تقل عن 1
+    if (currentQuantity < 1) {
+        currentQuantity = 1;
+    }
+
+    // تحديث القيمة في الحقل
+    quantityInput.value = currentQuantity;
+}
 
 
 

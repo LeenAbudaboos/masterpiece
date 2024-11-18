@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Masterpiece-CoreAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+225ae6c9f2b4c8aaa2205ad07a6eec8c2488cea8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d6dc419e45d983455ecf8af5c34e93d731beb83")]
 [assembly: System.Reflection.AssemblyProductAttribute("Masterpiece-CoreAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Masterpiece-CoreAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

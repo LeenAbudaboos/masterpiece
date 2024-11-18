@@ -123,15 +123,60 @@ namespace Masterpiece_CoreAPI.Controllers
             return Ok(data);
         }
 
-        [HttpDelete("Deletejob")]
-        public IActionResult Delete(int id)
-        {
 
-            var jod = _db.Jobs.FirstOrDefault(c => c.JobId == id);
-            _db.Jobs.Remove(jod);
-            _db.SaveChanges();
-            return Ok(jod);
+
+        //[HttpDelete("Deletejob/{id}")]
+        //public IActionResult DeleteJob(int id)
+        //{
+        //    try
+        //    {
+        //        var job =  _db.Jobs.Find(id); // ابحث عن الوظيفة باستخدام المعرف
+        //        if (job == null) // إذا لم يتم العثور على الوظيفة
+        //        {
+        //            return NotFound("الوظيفة غير موجودة");
+        //        }
+
+        //        _db.Jobs.Remove(job); // حذف الوظيفة
+        //         _db.SaveChanges(); // حفظ التغييرات
+        //        return Ok("تم حذف الوظيفة بنجاح");
+        //    }
+        //    catch
+        //    {
+        //        return StatusCode(500, "حدث خطأ أثناء الحذف.");
+        //    }
+        //}
+
+        [HttpDelete("Deletejob/{id}")]
+        public async Task<IActionResult> DeleteJob(int id)
+        {
+            try
+            {
+                // احذف الطلبات المرتبطة بهذه الوظيفة
+                var jobApplications = _db.JobApplications.Where(ja => ja.JobId == id).ToList();
+                if (jobApplications.Any())
+                {
+                    _db.JobApplications.RemoveRange(jobApplications);
+                }
+
+                // ابحث عن الوظيفة
+                var job = await _db.Jobs.FindAsync(id);
+                if (job == null)
+                {
+                    return NotFound("الوظيفة غير موجودة");
+                }
+
+                // احذف الوظيفة
+                _db.Jobs.Remove(job);
+                await _db.SaveChangesAsync();
+
+                return Ok("تم حذف الوظيفة بنجاح");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"حدث خطأ أثناء الحذف: {ex.Message}");
+            }
         }
+
 
 
 

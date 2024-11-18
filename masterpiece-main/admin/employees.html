@@ -140,11 +140,14 @@
     <!-- شريط جانبي ثابت -->
     <div class="sidebar">
         <h3 class="text-center text-light">بلا شهادة</h3>
-        <a href="products.html" ><i class="fas fa-box"></i> المنتجات</a>
+        <a href="all_category.html" ><i class="fas fa-boxes"></i>  الفئات</a>
         <a href="add_category.html"><i class="fas fa-plus"></i> إضافة فئة</a>
-        <a href="add_product.html"><i class="fas fa-plus"></i> إضافة منتج</a>
-        <a href="employees.html" class="active"><i class="fas fa-users"></i> الوظائف</a>
+        <a href="products.html" ><i class="fas fa-box"></i> المنتجات</a>
+        <a href="add_product.html" ><i class="fas fa-plus"></i> إضافة منتج</a>
+        <a href="employees.html" class="active"> <i class="fas fa-users"></i> الوظائف</a>
         <a href="add_job.html"><i class="fas fa-user-plus"></i> إضافة وظائف</a>
+        <a href="alljob.html" ><i class="fas fa-shopping-cart"></i> المتقدمون للوظائف</a>
+    
         <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
         <!-- <a href="contact_requests.html"><i class="fas fa-envelope"></i> طلبات التواصل</a> -->
     </div>
@@ -204,7 +207,7 @@
                                 <td>${element.salary} دينار</td>
                                 <td>${element.description}</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm" onclick="editJob()">تعديل</button>
+                                    <button class="btn btn-warning btn-sm" onclick="editJob(${element.jobId})">تعديل</button>
                                     <button class="btn btn-danger btn-sm" onclick="deleteJob(${element.jobId})">حذف</button>
                                 </td>
                             </tr>
@@ -220,18 +223,21 @@
 }
 
             fetchJobs();
+
+
             function deleteJob(jobId) {
                 debugger;
-                const deleteUrl = `https://localhost:7226/api/Job/Deletejob?id=${jobId}`;
+                const deleteUrl = `https://localhost:7226/api/Job/Deletejob/${jobId}`;
     
                 fetch(deleteUrl, {
                     method: 'DELETE'
                 })
                 .then(response => {
                     if (response.ok) {
+                        debugger;
                         alert('تم حذف الوظيفة بنجاح');
-                        fetchJobs(); 
                     } else {
+                        debugger;
                         alert('حدث خطأ أثناء حذف الوظيفة');
                     }
                 })

@@ -5,7 +5,7 @@
     
     <head>
         <meta charset="utf-8">
-        <title>Startup - Startup Website Template</title>
+        <title>الملف الشخصي</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
@@ -33,135 +33,79 @@
     
      <!-- Template Stylesheet -->
      <link href="css/style.css" rel="stylesheet">
-        <style>.job-item {
-            min-height: 400px; /* تعيين ارتفاع أدنى لضمان تساوي الكروت */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* توزيع متساوٍ للمحتوى */
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .job-item img {
-            width: 100%; /* ضمان أن الصورة تغطي العرض الكامل للكرت */
-            height: 200px; /* تحديد ارتفاع ثابت للصورة */
-            object-fit: cover; /* جعل الصورة متجاوبة مع الحاوية دون فقدان النسبة */
-        }
-        
-        .job-item h5, .job-item p, .job-item button {
-            margin-top: 10px;
-        }
-        
-        @media (max-width: 600px) {
-            .job-item {
-                min-height: 350px; /* تعديل ارتفاع الكرت للشاشات الصغيرة */
-            }
-        
-            .job-item img {
-                height: 150px; /* تعديل ارتفاع الصورة للشاشات الصغيرة */
-            }
-        }
-        /******************/
-
+     <style>
         body {
-            background-color: #f4f6f9;
+            background-color: #f9f9f9;
             font-family: 'Nunito', sans-serif;
         }
 
-        /* سايد بار في منتصف يمين الصفحة */
-        .sidebar {
-            background-color: #343a40;
-            padding: 10px;
-            border-radius: 8px;
-            width: 250px;
-            position: fixed;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            text-align: center;
-        }
-
-        .sidebar a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .main-content {
-            margin-top: 50px;
-            margin-right: 300px; /* لإعطاء مساحة للسايد بار */
-            text-align: center;
+        .profile-container {
+            max-width: 800px;
+            margin: 50px auto;
             padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* تصميم جديد لعرض البيانات */
-        .profile-info {
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .profile-info h1 {
-            font-size: 2rem;
-            color: #007bff;
+        .profile-header {
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        .profile-info p {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+        .profile-header h1 {
+            font-size: 1.8rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .profile-header p {
+            color: #666;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item h5 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #007bff;
+        }
+
+        .info-item p {
+            font-size: 0.9rem;
             color: #333;
         }
 
         .btn-edit {
+            display: block;
+            margin: 20px auto;
             background-color: #007bff;
             color: white;
+            padding: 10px 30px;
             border: none;
-            padding: 10px 20px;
             border-radius: 50px;
             transition: background-color 0.3s ease;
-            margin-top: 20px;
         }
 
         .btn-edit:hover {
             background-color: #0056b3;
         }
+    </style>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-        /* تبويبات الطلبات */
-        .tabs-content {
-            padding: 20px;
-            max-width: 600px;
-            margin: 20px auto;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        /* تحسين التخطيط */
-        .tabs-content h3 {
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-
-        /* التنسيق الكامل */
-        .container-fluid {
-            padding: 50px 0;
-        }
-        </style>
     </head>
     
     <body>
@@ -179,8 +123,20 @@
                 <!-- زر تسجيل الدخول/الخروج -->
                 <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
     
-                <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
-    
+                <!-- <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a> -->
+                <div class="dropdown ms-3" id="profileButton" style="display: none;">
+                    <button class="btn btn-secondary dropdown-toggle py-2 px-4 d-flex align-items-center" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-2"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
+                        <li><a class="dropdown-item" href="profile.html">صفحتي الشخصية</a></li>
+                        <li><a class="dropdown-item" href="job-applications.html">طلبات الوظائف</a></li>
+                        <li><a class="dropdown-item" href="cart.html">سلة المشتريات</a></li>
+
+                        <!-- <li><a class="dropdown-item text-danger" href="#" onclick="logout()">تسجيل الخروج</a></li> -->
+                    </ul>
+                </div>
+                
         
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
@@ -212,86 +168,91 @@
       
 
 
-
-<div class="container-fluid">
-    <div class="row">
-        <!-- الشريط الجانبي المبسط في يمين الصفحة -->
-        <div class="sidebar">
-            <a href="profile.html" class="active" onclick="showTab('profile')">معلومات المستخدم</a>
-            <a href="job-applications.html" onclick="showTab('applications')">طلبات التوظيف</a>
-            <a href="cart.html" onclick="showTab('products')">المنتجات المراد شراؤها</a>
+      <div class="profile-container">
+        <div class="profile-header">
+            <h1>معلومات المستخدم</h1>
+            <p>يمكنك تعديل بياناتك الشخصية بسهولة</p>
         </div>
+        <div class="profile-info">
+            <div class="info-item">
+                <h5>الاسم</h5>
+                <p id="userName">غير متوفر</p>
+            </div>
+            <div class="info-item">
+                <h5>الهاتف</h5>
+                <p id="userPhone">غير متوفر</p>
+            </div>
+            <div class="info-item">
+                <h5>العنوان</h5>
+                <p id="userAddress">غير متوفر</p>
+            </div>
+            <div class="info-item">
+                <h5>المهنة</h5>
+                <p id="userProfession">غير متوفر</p>
+            </div>
+            <div class="info-item">
+                <h5>وصف المهنة</h5>
+                <p id="userProfessionDescription">غير متوفر</p>
+            </div>
+            <div class="info-item">
+                <h5>سنوات الخبرة</h5>
+                <p id="userYearsOfExperience">غير متوفر</p>
+            </div>
+            <div class="info-item">
+                <h5>ضمان</h5>
+                <p id="userHasWarranty">غير متوفر</p>
+            </div>
+        </div>
+        <button class="btn-edit" data-bs-toggle="modal" data-bs-target="#editModal">تعديل البيانات</button>
+    </div>
 
-        <!-- محتوى الصفحة -->
-        <div class="main-content">
-            <!-- معلومات المستخدم -->
-            <div class="main-content">
-                <!-- معلومات المستخدم -->
-                <div id="profile-tab" class="profile-info">
-                    <h1>معلومات المستخدم</h1>
-                    <p><strong>الاسم:</strong> <span id="userName"></span></p>
-                    <p><strong>الهاتف:</strong> <span id="userPhone"></span></p>
-                    <p><strong>العنوان:</strong> <span id="userAddress"></span></p>
-                    <p><strong>المهنة:</strong> <span id="userProfession"></span></p>
-                    <p><strong>وصف المهنة:</strong> <span id="userProfessionDescription"></span></p>
-                    <p><strong>سنوات الخبرة:</strong> <span id="userYearsOfExperience"></span></p>
-                    <p><strong>ضمان:</strong> <span id="userHasWarranty"></span></p>
-            
-                    <button class="btn-edit" onclick="enableEditing()">تعديل البيانات</button>
-            
-                    <!-- نموذج تعديل البيانات -->
-                    <form id="userForm" style="display: none;">
-                        <div class="form-group">
-                            <label for="editUserName">الاسم:</label>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">تعديل البيانات</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm">
+                        <div class="mb-3">
+                            <label for="editUserName" class="form-label">الاسم</label>
                             <input type="text" class="form-control" id="editUserName" required>
                         </div>
-                        <div class="form-group">
-                            <label for="editUserPhone">الهاتف:</label>
+                        <div class="mb-3">
+                            <label for="editUserPhone" class="form-label">الهاتف</label>
                             <input type="text" class="form-control" id="editUserPhone" required>
                         </div>
-                        <div class="form-group">
-                            <label for="editUserAddress">العنوان:</label>
+                        <div class="mb-3">
+                            <label for="editUserAddress" class="form-label">العنوان</label>
                             <input type="text" class="form-control" id="editUserAddress" required>
                         </div>
-                        <div class="form-group">
-                            <label for="editUserProfession">المهنة:</label>
+                        <div class="mb-3">
+                            <label for="editUserProfession" class="form-label">المهنة</label>
                             <input type="text" class="form-control" id="editUserProfession" required>
                         </div>
-                        <div class="form-group">
-                            <label for="editUserProfessionDescription">وصف المهنة:</label>
-                            <textarea class="form-control" id="editUserProfessionDescription" required></textarea>
+                        <div class="mb-3">
+                            <label for="editUserProfessionDescription" class="form-label">وصف المهنة</label>
+                            <textarea class="form-control" id="editUserProfessionDescription" rows="3" required></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="editUserYearsOfExperience">سنوات الخبرة:</label>
+                        <div class="mb-3">
+                            <label for="editUserYearsOfExperience" class="form-label">سنوات الخبرة</label>
                             <input type="number" class="form-control" id="editUserYearsOfExperience" required>
                         </div>
-                        <div class="form-group">
-                            <label for="editUserHasWarranty">ضمان:</label>
+                        <div class="mb-3">
+                            <label for="editUserHasWarranty" class="form-label">ضمان</label>
                             <select class="form-control" id="editUserHasWarranty" required>
                                 <option value="true">نعم</option>
                                 <option value="false">لا</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn-edit mt-3">حفظ التعديلات</button>
+                        <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
                     </form>
                 </div>
             </div>
-            
-
-            <!-- تبويبة طلبات التوظيف -->
-            <div id="applications-tab" class="tabs-content" style="display:none;">
-                <h3>الطلبات التي تقدمت لها</h3>
-                <div id="applications-container" class="row"></div>
-            </div>
-
-            <!-- تبويبة المنتجات -->
-            <div id="products-tab" class="tabs-content" style="display:none;">
-                <h3>المنتجات التي يريد شرائها</h3>
-                <div id="products-container" class="row"></div>
-            </div>
         </div>
     </div>
-</div>
 
 
 
@@ -386,6 +347,7 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Owl Carousel JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -515,20 +477,34 @@ document.addEventListener("DOMContentLoaded", getUserData);
         }
     }
     
-    // وظيفة تسجيل الخروج
-    function logout() {
-        // حذف userId من localStorage
-        localStorage.removeItem('userId');
-        alert("تم تسجيل الخروج بنجاح!");
-    
+   // وظيفة تسجيل الخروج
+function logout() {
+    // حذف userId من localStorage
+    localStorage.removeItem('userId');
+
+    // عرض تنبيه باستخدام SweetAlert2
+    Swal.fire({
+        title: "تم تسجيل الخروج",
+        text: "لقد قمت بتسجيل الخروج بنجاح!",
+        icon: "success",
+        confirmButtonText: "موافق",
+    }).then(() => {
         // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
         window.location.href = "login.html";
-    }
+    });
+}
+
     
     // استدعاء الدالة عند تحميل الصفحة
     document.addEventListener('DOMContentLoaded', checkLoginStatus);
     
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+
 </body>
 
 </html>
+
+
+

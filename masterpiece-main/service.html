@@ -47,8 +47,20 @@
             <!-- زر تسجيل الدخول/الخروج -->
             <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
 
-            <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
+            <!-- <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a> -->
+            <div class="dropdown ms-3" id="profileButton" style="display: none;">
+                <button class="btn btn-secondary dropdown-toggle py-2 px-4 d-flex align-items-center" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-2"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
+                    <li><a class="dropdown-item" href="profile.html">صفحتي الشخصية</a></li>
+                    <li><a class="dropdown-item" href="job-applications.html">طلبات الوظائف</a></li>
+                    <li><a class="dropdown-item" href="cart.html">سلة المشتريات</a></li>
 
+                    <!-- <li><a class="dropdown-item text-danger" href="#" onclick="logout()">تسجيل الخروج</a></li> -->
+                </ul>
+            </div>
+            
     
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
@@ -131,7 +143,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
+                <!-- <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
                     <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
                         <div class="service-icon">
                             <i class="fa fa-code text-white"></i>
@@ -142,7 +154,7 @@
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
-                </div>
+                </div> -->
                
     </div>
     </div>

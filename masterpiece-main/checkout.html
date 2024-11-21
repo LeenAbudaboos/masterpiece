@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الطلب</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .checkout-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout-container h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-submit {
+            background-color: #28a745;
+            color: #fff;
+            font-size: 18px;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="checkout-container">
+        <h1>إتمام الطلب</h1>
+        <form id="checkoutForm">
+            <!-- وسيلة النقل -->
+            <div class="form-group mb-3">
+                <label for="transportMethod">وسيلة النقل:</label>
+                <select id="transportMethod" class="form-control" required>
+                    <option value="شاحنة صغيرة" >شاحنة صغيرة</option>
+                    <option value="شاحنة كبيرة">شاحنة كبيرة</option>
+                    <option value="قلاب رمل">قلاب رمل</option>
+                    <option value="آخر">آخر</option>
+                </select>
+                
+            </div>
+
+            <!-- طريقة الدفع -->
+            <div class="form-group mb-3">
+                <label for="paymentMethod">طريقة الدفع:</label>
+                <select id="paymentMethod" class="form-control" required>
+                    <option value="cashOnDelivery">الدفع عند التسليم</option>
+                    <option value="eWallet">محفظة إلكترونية</option>
+                </select>
+            </div>
+
+            <!-- الموقع -->
+            <div class="form-group mb-3">
+                <label for="deliveryAddress">الموقع:</label>
+                <input type="text" id="deliveryAddress" class="form-control" placeholder="اكتب عنوان التسليم" required>
+            </div>
+
+            <!-- رقم الهاتف -->
+            <div class="form-group mb-3">
+                <label for="phoneNumber">رقم الهاتف:</label>
+                <input type="tel" id="phoneNumber" class="form-control" placeholder="اكتب رقم الهاتف" required>
+            </div>
+
+            <!-- رابط اللوكيشن -->
+            <div class="form-group mb-3">
+                <label for="locationLink">رابط اللوكيشن:</label>
+                <input type="url" id="locationLink" class="form-control" placeholder="أدخل رابط اللوكيشن (اختياري)">
+            </div>
+
+            <button type="submit" class="btn-submit">إرسال الطلب</button>
+        </form>
+    </div>
+
+    <script>
+     document.getElementById("checkoutForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("UserId", localStorage.getItem("userId")); // UserId
+    formData.append("TransportMethod", document.getElementById("transportMethod").value);
+    formData.append("PaymentMethod", document.getElementById("paymentMethod").value);
+    formData.append("DeliveryAddress", document.getElementById("deliveryAddress").value);
+    formData.append("PhoneNumber", document.getElementById("phoneNumber").value);
+    formData.append("LocationLink", document.getElementById("locationLink").value);
+
+    // إضافة العناصر (Items) كبيانات متكررة
+    const items = [
+        { ProductId: 1, Quantity: 2, Price: 10.5 }, // بيانات نموذجية
+        { ProductId: 2, Quantity: 1, Price: 20.0 }
+    ];
+
+    items.forEach((item, index) => {
+        formData.append(`Items[${index}].ProductId`, item.ProductId);
+        formData.append(`Items[${index}].Quantity`, item.Quantity);
+        formData.append(`Items[${index}].Price`, item.Price);
+    });
+
+    try {
+        const response = await fetch("https://localhost:7226/api/Order/PlaceOrder", {
+            method: "POST",
+            body: formData,
+        });
+
+        if (response.ok) {
+            debugger;
+            const result = await response.json();
+
+            localStorage.setItem("orderId", result.OrderId);
+            localStorage.setItem("transportMethod", result.transportMethod);
+            localStorage.setItem("paymentMethod", result.paymentMethod);
+            localStorage.setItem("deliveryAddress", result.deliveryAddress);
+            localStorage.setItem("phoneNumber", result.phoneNumber);
+            localStorage.setItem("locationLink", result.locationLink);
+            alert("تم إرسال الطلب بنجاح!");
+            window.location.href = "thankyou.html";
+        } else {
+            const error = await response.json();
+            alert("حدث خطأ أثناء إرسال الطلب: " + error.message);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("حدث خطأ أثناء الاتصال بالخادم.");
+    }
+});
+
+
+    </script>
+</body>
+
+</html>

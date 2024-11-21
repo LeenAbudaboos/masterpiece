@@ -18,6 +18,7 @@ namespace Masterpiece_CoreAPI
 
             builder.Services.AddDbContext<MyDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
+            builder.Services.AddScoped<EmailService>();//للرد على الرسائل
 
             builder.Services.AddCors(options =>
             {
@@ -30,7 +31,7 @@ namespace Masterpiece_CoreAPI
             }); //على شان اربط بين الباك والفرونت
            
             var app = builder.Build();
-             
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -161,8 +161,20 @@
             <!-- زر تسجيل الدخول/الخروج -->
             <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
 
-            <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
+            <!-- <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a> -->
+            <div class="dropdown ms-3" id="profileButton" style="display: none;">
+                <button class="btn btn-secondary dropdown-toggle py-2 px-4 d-flex align-items-center" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-2"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
+                    <li><a class="dropdown-item" href="profile.html">صفحتي الشخصية</a></li>
+                    <li><a class="dropdown-item" href="job-applications.html">طلبات الوظائف</a></li>
+                    <li><a class="dropdown-item" href="cart.html">سلة المشتريات</a></li>
 
+                    <!-- <li><a class="dropdown-item text-danger" href="#" onclick="logout()">تسجيل الخروج</a></li> -->
+                </ul>
+            </div>
+            
     
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
@@ -331,6 +343,7 @@ async function getprodectDetails() {
     debugger;
     const ProdectId = localStorage.getItem('productId'); // Get the jobId from localStorage
     const userId = localStorage.getItem('userId');
+
     if (!ProdectId) {
         document.getElementById('Prodect-details').innerHTML = '<p class="text-center">لم يتم العثور على المنتج</p>';
         return;
@@ -349,7 +362,7 @@ async function getprodectDetails() {
                 <div class="card-body">
                     <h3 class="card-title">${prodect.productName}</h3>
                     <p class="card-text"><strong>الوصف:</strong> ${prodect.descriptions}</p>
-                    <p class="card-text"><strong>السعر:</strong> ${prodect.price}</p>
+                    <p class="card-text"><strong>السعر:</strong> ${prodect.price} دينار ${prodect.priceDetels}</p>
 <div class="quantity-control">
     <label><strong>الكمية:</strong></label>
     <div class="input-group">
@@ -358,7 +371,7 @@ async function getprodectDetails() {
         <button class="btn btn-outline-secondary" id="increaseQuantity" onclick="updateQuantity(1)">+</button>
     </div>
 </div>
-                    <button class="btn btn-primary" onclick="addToCart(${prodect.productId})" >شراء</button>
+                    <button class="btn btn-primary" onclick="addToCart(${prodect.productId})" >إضافة للسلة</button>
 
                 </div>
             </div>
@@ -378,8 +391,10 @@ function IDprodect(id){
 
 async function addToCart(productId) {
     debugger;
+    
     const userId = localStorage.getItem('userId');
     const quantity = parseInt(document.getElementById('quantityInput').value); // جلب الكمية
+    debugger;
 
     if (!userId) {
         alert("يجب تسجيل الدخول قبل الشراء.");
@@ -398,6 +413,7 @@ async function addToCart(productId) {
         });
 
         if (response.ok) {
+            console.log(quantity);
             alert("تم إضافة المنتج إلى السلة بنجاح!");
         } else {
             const error = await response.text();
@@ -430,6 +446,8 @@ function updateQuantity(change) {
 
     // تحديث القيمة في الحقل
     quantityInput.value = currentQuantity;
+
+    
 }
 
 

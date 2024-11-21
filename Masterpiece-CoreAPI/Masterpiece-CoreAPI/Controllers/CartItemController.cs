@@ -44,29 +44,31 @@ namespace Masterpiece_CoreAPI.Controllers
                 return BadRequest("البيانات غير صحيحة. تأكد من إدخال جميع المعلومات.");
             }
 
-         
+
             var existingCart = _db.CartsProducts.FirstOrDefault(c => c.UserId == userId);
 
-         
+
             if (existingCart == null)
             {
                 existingCart = new CartsProduct
                 {
                     UserId = userId,
+                    
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
                 };
 
                 _db.CartsProducts.Add(existingCart);
-                _db.SaveChanges();  
+                _db.SaveChanges();
             }
 
-            
+
             var cartItem = new CartItem
             {
-                CartId = existingCart.CartId,  
+                CartId = existingCart.CartId,
                 ProductId = cartItemDto.ProductId,
-               
+                Quantity = cartItemDto.Quantity,
+
             };
 
             _db.CartItems.Add(cartItem);
@@ -79,7 +81,7 @@ namespace Masterpiece_CoreAPI.Controllers
         [HttpGet("GetCartItems{userId}")]
         public IActionResult GetCartDetails(int userId)
         {
-            
+
             var cart = _db.CartsProducts.FirstOrDefault(c => c.UserId == userId);
 
             if (cart == null)
@@ -87,13 +89,14 @@ namespace Masterpiece_CoreAPI.Controllers
                 return NotFound("لم يتم العثور على سلة لهذا المستخدم.");
             }
 
-            
+
             var cartItems = _db.CartItems
                 .Where(ci => ci.CartId == cart.CartId)
                 .Select(ci => new
                 {
                     ci.CartItemId,
-                    
+                    ci.Quantity,
+
                     ProductDetails = _db.Products
                         .Where(p => p.ProductId == ci.ProductId)
                         .Select(p => new
@@ -102,8 +105,9 @@ namespace Masterpiece_CoreAPI.Controllers
                             p.ProductName,
                             p.Descriptions,
                             p.Price,
+                            p.Quantity,
                             p.ProductImg
-                        }).FirstOrDefault()  
+                        }).FirstOrDefault()
                 }).ToList();
 
             if (cartItems.Count == 0)
@@ -115,11 +119,11 @@ namespace Masterpiece_CoreAPI.Controllers
         }
 
 
-         
+
         [HttpDelete("RemoveItem{cartItemId}")]
         public IActionResult RemoveItemFromCart(int cartItemId)
         {
-           
+
             var cartItem = _db.CartItems.FirstOrDefault(ci => ci.CartItemId == cartItemId);
 
             if (cartItem == null)
@@ -127,9 +131,9 @@ namespace Masterpiece_CoreAPI.Controllers
                 return NotFound("لم يتم العثور على العنصر في السلة.");
             }
 
-           
+
             _db.CartItems.Remove(cartItem);
-            _db.SaveChanges();  
+            _db.SaveChanges();
 
             return Ok("تمت إزالة المنتج من السلة بنجاح.");
         }

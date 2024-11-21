@@ -16,4 +16,6 @@ public partial class ContactU
     public string? Message { get; set; }
 
     public DateTime? SubmittedAt { get; set; }
+
+    public string? Status { get; set; }
 }

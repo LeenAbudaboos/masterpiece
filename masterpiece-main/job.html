@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Startup - Startup Website Template</title>
+    <title>بلا شهادة - الوظائف</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -26,6 +26,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
@@ -74,8 +75,20 @@
             <!-- زر تسجيل الدخول/الخروج -->
             <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
 
-            <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
+            <!-- <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a> -->
+            <div class="dropdown ms-3" id="profileButton" style="display: none;">
+                <button class="btn btn-secondary dropdown-toggle py-2 px-4 d-flex align-items-center" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-2"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
+                    <li><a class="dropdown-item" href="profile.html">صفحتي الشخصية</a></li>
+                    <li><a class="dropdown-item" href="job-applications.html">طلبات الوظائف</a></li>
+                    <li><a class="dropdown-item" href="cart.html">سلة المشتريات</a></li>
 
+                    <!-- <li><a class="dropdown-item text-danger" href="#" onclick="logout()">تسجيل الخروج</a></li> -->
+                </ul>
+            </div>
+            
     
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
@@ -113,78 +126,7 @@
             <h1 class="mb-0">اكتشف الوظائف التي تناسبك</h1>
         </div>
         <div class="row g-4">
-            <!-- Job Card 1 -->
-            <!-- <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <img src="img/7.jpg" class="card-img-top" alt="Job Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">عامل بناء</h5>
-                        <p class="card-text">موقع العمل: عمان، الأردن</p>
-                        <p class="card-text">الراتب: 300 دينار شهريًا</p>
-                        <button class="btn btn-primary" onclick="showJobDetails('عامل بناء', 'عمان، الأردن', '300 دينار', 'img/j.jpg')">تقدم للوظيفة</button>
-                    </div>
-                </div>
-            </div> -->
-            <!-- Job Card 2 -->
-            <!-- <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <img src="img/8.jpg" class="card-img-top" alt="Job Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">حداد</h5>
-                        <p class="card-text">موقع العمل: إربد، الأردن</p>
-                        <p class="card-text">الراتب: 250 دينار شهريًا</p>
-                        <button class="btn btn-primary" onclick="showJobDetails('حداد', 'إربد، الأردن', '250 دينار', 'img/2.jpg')">تقدم للوظيفة</button>
-                    </div>
-                </div>
-            </div> -->
-             <!-- Job Card 1 -->
-             <!-- <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <img src="img/7.jpg" class="card-img-top" alt="Job Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">عامل بناء</h5>
-                        <p class="card-text">موقع العمل: عمان، الأردن</p>
-                        <p class="card-text">الراتب: 20 دينار يوميا</p>
-                        <button class="btn btn-primary" onclick="showJobDetails('عامل بناء', 'عمان، الأردن', '300 دينار', 'img/1.jpg')">تقدم للوظيفة</button>
-                    </div>
-                </div>
-            </div> -->
-            <!-- Job Card 2 -->
-            <!-- <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <img src="img/8.jpg" class="card-img-top" alt="Job Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">عامل بلاط</h5>
-                        <p class="card-text">موقع العمل: إربد، الأردن</p>
-                        <p class="card-text">الراتب: 15 دينار يوميا</p>
-                        <button class="btn btn-primary" onclick="showJobDetails('عامل بلاط', 'إربد، الأردن', '250 دينار', 'img/2.jpg')">تقدم للوظيفة</button>
-                    </div>
-                </div>
-            </div> -->
-             <!-- Job Card 1 -->
-             <!-- <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <img src="img/7.jpg" class="card-img-top" alt="Job Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">عامل بناء</h5>
-                        <p class="card-text">موقع العمل: عمان، الأردن</p>
-                        <p class="card-text">الراتب: 13 دينار يوميا</p>
-                        <button class="btn btn-primary" onclick="showJobDetails('عامل بناء', 'عمان، الأردن', '300 دينار', 'img/1.jpg')">تقدم للوظيفة</button>
-                    </div>
-                </div>
-            </div> -->
-            <!-- Job Card 2 -->
-            <!-- <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <img src="img/8.jpg" class="card-img-top" alt="Job Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">نحات</h5>
-                        <p class="card-text">موقع العمل: إربد، الأردن</p>
-                        <p class="card-text">الراتب: 20 دينار يوميا</p>
-                        <button class="btn btn-primary" onclick="showJobDetails('نحات', 'إربد، الأردن', '250 دينار', 'img/2.jpg')">تقدم للوظيفة</button>
-                    </div>
-                </div>
-            </div> -->
+          
 
             <div class="row g-4" id="jobs">
                 <!-- Dynamic product cards will be inserted here -->
@@ -346,9 +288,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">${element.jobTitle}</h5>
                         <p class="card-text">الوصف: ${element.description}</p>
-                        <p class="card-text">الراتب: ${element.salary}</p>
                         <p class="card-text">الموقع: ${element.location}</p>
-                        <p class="card-text">اسم الشركة: ${element.postedBy}</p>
 
 
                         <button class="btn btn-primary" onclick="myFunction111(${element.jobId})">روية التفاصيل</button>
@@ -363,7 +303,7 @@
 }getjob();
 
 function myFunction111(id){
-    debugger
+    
     localStorage.setItem('jobId',(id));
     window.location.href = "job-details.html";
 }
@@ -458,20 +398,29 @@ GetJobs();
             }
         }
         
-        // وظيفة تسجيل الخروج
-        function logout() {
-            // حذف userId من localStorage
-            localStorage.removeItem('userId');
-            alert("تم تسجيل الخروج بنجاح!");
-        
-            // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
-            window.location.href = "login.html";
-        }
-        
+     // وظيفة تسجيل الخروج
+function logout() {
+    // حذف userId من localStorage
+    localStorage.removeItem('userId');
+
+    // عرض تنبيه باستخدام SweetAlert2
+    Swal.fire({
+        title: "تم تسجيل الخروج",
+        text: "لقد قمت بتسجيل الخروج بنجاح!",
+        icon: "success",
+        confirmButtonText: "موافق",
+    }).then(() => {
+        // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
+        window.location.href = "login.html";
+    });
+}
+
         // استدعاء الدالة عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', checkLoginStatus);
         
             </script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

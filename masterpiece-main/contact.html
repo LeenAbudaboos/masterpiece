@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>بلا شهادة - موقع خدمات ووظائف</title>
+    <title>بلا شهادة - تواصل معنا </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -29,6 +29,8 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 </head>
 
 <body >
@@ -45,9 +47,21 @@
             <!-- زر تسجيل الدخول/الخروج -->
             <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
 
-            <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
+            <!-- <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a> -->
 
-    
+            <div class="dropdown ms-3" id="profileButton" style="display: none;">
+                <button class="btn btn-secondary dropdown-toggle py-2 px-4 d-flex align-items-center" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-2"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
+                    <li><a class="dropdown-item" href="profile.html">صفحتي الشخصية</a></li>
+                    <li><a class="dropdown-item" href="job-applications.html">طلبات الوظائف</a></li>
+                    <li><a class="dropdown-item" href="cart.html">سلة المشتريات</a></li>
+
+                    <!-- <li><a class="dropdown-item text-danger" href="#" onclick="logout()">تسجيل الخروج</a></li> -->
+                </ul>
+            </div>
+            
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="contact.html" class="nav-item nav-link active" >تواصل معنا</a>
@@ -121,19 +135,19 @@
             </div>
             <div class="row g-5">
                 <div class="col-lg-6 wow slideInUp" data-wow-delay="0.3s">
-                    <form>
+                    <form id="contactForm" enctype="multipart/form-data">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <input type="text" class="form-control border-0 bg-light px-4" placeholder="اسمك" style="height: 55px;">
+                                <input type="text" required name="name" class="form-control border-0 bg-light px-4" placeholder="اسمك" style="height: 55px;">
                             </div>
                             <div class="col-md-6">
-                                <input type="email" class="form-control border-0 bg-light px-4" placeholder="بريدك الإلكتروني" style="height: 55px;">
+                                <input type="email" required name="email" class="form-control border-0 bg-light px-4" placeholder="بريدك الإلكتروني" style="height: 55px;">
                             </div>
                             <div class="col-12">
-                                <input type="text" class="form-control border-0 bg-light px-4" placeholder="الموضوع" style="height: 55px;">
+                                <input type="text" required name="subject" class="form-control border-0 bg-light px-4" placeholder="الموضوع" style="height: 55px;">
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control border-0 bg-light px-4 py-3" rows="4" placeholder="رسالتك"></textarea>
+                                <textarea name="message" required class="form-control border-0 bg-light px-4 py-3" rows="4" placeholder="رسالتك"></textarea>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" type="submit">أرسل الرسالة</button>
@@ -240,6 +254,47 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script>
+        const form = document.getElementById("contactForm");
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+    
+            try {
+                const response = await fetch("https://localhost:7226/api/ContactUs/SendMessage", {
+                    method: "POST",
+                    body: formData,
+                });
+    
+                if (response.ok) {
+            // عرض رسالة نجاح
+            Swal.fire({
+                icon: 'success',
+                title: 'تم الإرسال!',
+                text: 'تم إرسال الرسالة بنجاح!',
+                confirmButtonText: 'حسناً'
+            });
+            form.reset();
+        } else {
+            // عرض رسالة خطأ
+            Swal.fire({
+                icon: 'error',
+                title: 'خطأ!',
+                text: 'حدث خطأ أثناء الإرسال. الرجاء المحاولة لاحقاً.',
+                confirmButtonText: 'حسناً'
+            });
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'خطأ!',
+            text: 'حدث خطأ أثناء الاتصال بالخادم.',
+            confirmButtonText: 'حسناً'
+        });
+    }
+});
+    </script>
+    <script>
 
 
         // جلب الزر الخاص بالمصادقة (تسجيل الدخول/تسجيل الخروج) وزر البروفايل
@@ -267,20 +322,30 @@
             }
         }
         
-        // وظيفة تسجيل الخروج
-        function logout() {
-            // حذف userId من localStorage
-            localStorage.removeItem('userId');
-            alert("تم تسجيل الخروج بنجاح!");
-        
-            // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
-            window.location.href = "login.html";
-        }
+      // وظيفة تسجيل الخروج
+function logout() {
+    // حذف userId من localStorage
+    localStorage.removeItem('userId');
+
+    // عرض تنبيه باستخدام SweetAlert2
+    Swal.fire({
+        title: "تم تسجيل الخروج",
+        text: "لقد قمت بتسجيل الخروج بنجاح!",
+        icon: "success",
+        confirmButtonText: "موافق",
+    }).then(() => {
+        // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
+        window.location.href = "login.html";
+    });
+}
+
         
         // استدعاء الدالة عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', checkLoginStatus);
         
             </script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

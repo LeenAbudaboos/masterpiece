@@ -97,20 +97,9 @@ namespace Masterpiece_CoreAPI.Controllers
             var data = _db.Jobs.FirstOrDefault(c=>c.JobId==id);
          
 
-             var uploadImageFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads"); //عللى شان ننشأ ملف ونحمل عليخ الصور
-            if (!Directory.Exists(uploadImageFolder))// اتحقق هل ملف موجود اذا لا 
-            {
-                Directory.CreateDirectory(uploadImageFolder);//انشأ هذا الملف
-            }
-            var imageFile = Path.Combine(uploadImageFolder, jobDto.JobImg.FileName);//صير ارفعلي عليه البيانات
-            using (var stream = new FileStream(imageFile, FileMode.Create)) //
-            {
-                jobDto.JobImg.CopyTo(stream);
-
-            }
+           
 
             data.JobTitle = jobDto.JobTitle;
-            data.JobImg=jobDto.JobImg.FileName;
             data.Description = jobDto.Description;
             data.Location = jobDto.Location;
             data.Salary = jobDto.Salary;

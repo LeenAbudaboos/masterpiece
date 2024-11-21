@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تفاصيل الوظيفة</title>
+    <title> بلا شهادة - تفاصيل الوظيفة </title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -92,6 +92,8 @@
     }
 
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
 </head>
 <body>
    <!-- Navbar Start -->
@@ -100,9 +102,21 @@
         <!-- زر تسجيل الدخول/الخروج -->
         <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
 
-        <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
+        <!-- <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a> -->
 
+        <div class="dropdown ms-3" id="profileButton" style="display: none;">
+            <button class="btn btn-secondary dropdown-toggle py-2 px-4 d-flex align-items-center" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle me-2"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
+                <li><a class="dropdown-item" href="profile.html">صفحتي الشخصية</a></li>
+                <li><a class="dropdown-item" href="job-applications.html">طلبات الوظائف</a></li>
+                <li><a class="dropdown-item" href="cart.html">سلة المشتريات</a></li>
 
+                <!-- <li><a class="dropdown-item text-danger" href="#" onclick="logout()">تسجيل الخروج</a></li> -->
+            </ul>
+        </div>
+        
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="contact.html" class="nav-item nav-link" >تواصل معنا</a>
@@ -156,7 +170,7 @@
                         <input type="text" class="form-control" id="phoneNumber" required>
                     </div>
                     <div class="mb-3">
-                        <label for="professionDescription" class="form-label">وصف المهنة</label>
+                        <label for="professionDescription" class="form-label"> اعمال قد قد قمت بها من قبل</label>
                         <textarea class="form-control" id="professionDescription" required></textarea>
                     </div>
                     <div class="mb-3">
@@ -284,6 +298,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     
     <script>
@@ -301,7 +316,7 @@ async function getJobDetails() {
 
     const response = await fetch(urlGetJobById + jobId ); // Fetch job details by ID
     const job = await response.json();
-    debugger;
+    
 
     // Display job details in the page
     var jobDetails = document.getElementById('job-details');
@@ -318,7 +333,7 @@ async function getJobDetails() {
         <div class="col-lg-6 col-md-12 text-center">
             <h3 class="mb-3">${job.jobTitle}</h3>
             <p class="lead"><strong>الوصف:</strong> ${job.description}</p>
-            <p><strong>الراتب:</strong> ${job.salary}</p>
+            <p><strong>الراتب:</strong> ${job.salary}دينار في اليوم </p>
             <p><strong>الموقع:</strong> ${job.location}</p>
             <p><strong>اسم الشركة:</strong> ${job.postedBy}</p>
             <button class="btn btn-primary" onclick="confirmApplyForJob(${job.jobId}, ${userId})">التقدم للوظيفة</button>
@@ -334,7 +349,7 @@ async function getJobDetails() {
 getJobDetails();
 
 function IDJob(id){
-    debugger
+    
     localStorage.setItem('jobId',(id));
     window.location.href = "prodectdetels.html";
 
@@ -397,12 +412,17 @@ function IDJob(id){
 //         });
 // }
 
-
 function confirmApplyForJob(jobId, userId) {
     if (!userId || !jobId) {
-        alert("الرجاء التأكد من تسجيل الدخول واختيار الوظيفة المناسبة.");
-        localStorage.setItem("redirectAfterLogin", window.location.href);
-        window.location.href = "login.html";
+        Swal.fire({
+            title: 'تنبيه!',
+            text: 'الرجاء التأكد من تسجيل الدخول واختيار الوظيفة المناسبة.',
+            icon: 'warning',
+            confirmButtonText: 'تسجيل الدخول'
+        }).then(() => {
+            localStorage.setItem("redirectAfterLogin", window.location.href);
+            window.location.href = "login.html";
+        });
         return;
     }
 
@@ -429,18 +449,38 @@ function confirmApplyForJob(jobId, userId) {
         })
         .then(async response => {
             if (response.ok) {
-                alert("شكراً لك لقد تقدمت لهذه الوظيفة بنجاح.");
+                Swal.fire({
+                    title: 'نجاح!',
+                    text: 'شكراً لك لقد تقدمت لهذه الوظيفة بنجاح.',
+                    icon: 'success',
+                    confirmButtonText: 'موافق'
+                });
             } else if (response.status === 400) {
                 const errorText = await response.text();
-                alert(`خطأ: ${errorText}`);
+                Swal.fire({
+                    title: 'خطأ!',
+                    text: `خطأ: ${errorText}`,
+                    icon: 'error',
+                    confirmButtonText: 'موافق'
+                });
             } else {
-                alert("حدث خطأ أثناء التقديم. الرجاء المحاولة لاحقاً.");
+                Swal.fire({
+                    title: 'خطأ!',
+                    text: 'حدث خطأ أثناء التقديم. الرجاء المحاولة لاحقاً.',
+                    icon: 'error',
+                    confirmButtonText: 'موافق'
+                });
             }
         })
-        .catch(error => {
-            console.error("Error during job application:", error);
-            alert("حدث خطأ غير معروف أثناء التقديم للوظيفة.");
-        });
+        // .catch(error => {
+        //     console.error("Error during job application:", error);
+        //     Swal.fire({
+        //         title: 'خطأ!',
+        //         text: 'حدث خطأ غير معروف أثناء التقديم للوظيفة.',
+        //         icon: 'error',
+        //         confirmButtonText: 'موافق'
+        //     });
+        // });
 }
 
 function showUpdateUserModal(user) {
@@ -462,7 +502,12 @@ document.getElementById("updateUserForm").addEventListener("submit", function (e
 
     const userId = localStorage.getItem("userId");
     if (!userId) {
-        alert("الرجاء تسجيل الدخول أولاً.");
+        Swal.fire({
+            title: "تنبيه",
+            text: "الرجاء تسجيل الدخول أولاً.",
+            icon: "warning",
+            confirmButtonText: "موافق",
+        });
         return;
     }
 
@@ -480,57 +525,37 @@ document.getElementById("updateUserForm").addEventListener("submit", function (e
     })
         .then(response => {
             if (response.ok) {
-                alert("تم تحديث بياناتك بنجاح!");
-                location.reload(); // تحديث الصفحة بعد حفظ البيانات
+                Swal.fire({
+                    title: "نجاح",
+                    text: "تم تحديث بياناتك بنجاح!",
+                    icon: "success",
+                    confirmButtonText: "موافق",
+                }).then(() => {
+                    location.reload(); // تحديث الصفحة بعد حفظ البيانات
+                });
             } else {
-                alert("حدث خطأ أثناء تحديث البيانات. الرجاء المحاولة لاحقاً.");
+                Swal.fire({
+                    title: "خطأ",
+                    text: "حدث خطأ أثناء تحديث البيانات. الرجاء المحاولة لاحقاً.",
+                    icon: "error",
+                    confirmButtonText: "موافق",
+                });
             }
         })
         .catch(error => {
             console.error("Error updating user data:", error);
-            alert("حدث خطأ أثناء الاتصال بالخادم.");
+            Swal.fire({
+                title: "خطأ",
+                text: "حدث خطأ أثناء الاتصال بالخادم.",
+                icon: "error",
+                confirmButtonText: "موافق",
+            });
         });
 });
 
+
 //*********************************************************************
 
-
-// function confirmApplyForJob(jobId, userId) {
-//     debugger;
-//     // إعداد البيانات التي سيتم إرسالها باستخدام FormData
-//     const formData = new FormData();
-//     formData.append("UserId", userId);
-//     formData.append("JobId", jobId);
-
-//     // إرسال الطلب إلى الـ API
-//     fetch('https://localhost:7226/api/JobApplication/ApplyForJob', {
-//         method: 'POST',
-//         body: formData // استخدام FormData بدلاً من JSON
-//     })
-//     .then(response => {
-//         if (response.ok) {
-//             alert("شكراً لك لقد تقدمت لهذه الوظيفة بنجاح.");
-//         } else {
-//             alert("الرجاء تسجيل الدخول لتتمكن من التقديم للوظيفة ");
-//               window.location.href="login.html";
-
-//         }
-//     })
-//     .catch(error => {
-//         console.error("Error during job application:", error);
-//         alert("حدث خطأ غير معروف أثناء التقديم للوظيفة.");
-//     });
-// }
-
-//*******************************************
-
-
-
-//****************************************
-
-
-
-//*********************************
 
 
 //*******************************************************************
@@ -618,15 +643,23 @@ GetJobs();
             }
         }
         
-        // وظيفة تسجيل الخروج
-        function logout() {
-            // حذف userId من localStorage
-            localStorage.removeItem('userId');
-            alert("تم تسجيل الخروج بنجاح!");
-        
-            // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
-            window.location.href = "login.html";
-        }
+       // وظيفة تسجيل الخروج
+function logout() {
+    // حذف userId من localStorage
+    localStorage.removeItem('userId');
+
+    // عرض تنبيه باستخدام SweetAlert2
+    Swal.fire({
+        title: "تم تسجيل الخروج",
+        text: "لقد قمت بتسجيل الخروج بنجاح!",
+        icon: "success",
+        confirmButtonText: "موافق",
+    }).then(() => {
+        // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
+        window.location.href = "login.html";
+    });
+}
+
         
         // استدعاء الدالة عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', checkLoginStatus);

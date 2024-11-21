@@ -109,20 +109,22 @@
     <!-- شريط جانبي ثابت -->
     <div class="sidebar">
         <h3 class="text-center text-light">بلا شهادة</h3>
-        <a href="all_category.html" ><i class="fas fa-boxes"></i>  الفئات</a>
+        <a href="all_category.html"><i class="fas fa-boxes"></i> الفئات</a>
         <a href="add_category.html"><i class="fas fa-plus"></i> إضافة فئة</a>
-        <a href="products.html" ><i class="fas fa-box"></i> المنتجات</a>
-        <a href="add_product.html" ><i class="fas fa-plus"></i> إضافة منتج</a>
+        <a href="products.html"><i class="fas fa-box"></i> المنتجات</a>
+        <a href="add_product.html"><i class="fas fa-plus"></i> إضافة منتج</a>
         <a href="employees.html"><i class="fas fa-users"></i> الوظائف</a>
         <a href="add_job.html"><i class="fas fa-user-plus"></i> إضافة وظائف</a>
-        <a href="alljob.html" class="active"><i class="fas fa-shopping-cart"></i> المتقدمون للوظائف</a>
-    
-        <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
-        <!-- <a href="contact_requests.html"><i class="fas fa-envelope"></i> طلبات التواصل</a> -->
+        <a href="alljob.html" class="active"><i class="fas fa-users"></i> المتقدمون للوظائف</a>
+        <a href="allOrder.html" ><i class="fas fa-shopping-cart"></i> الطلبات</a>
+
+        <a href="contactmasseg.html" ><i class="fas fa-envelope"></i> الرسائل</a>
     </div>
     <!-- محتوى الصفحة -->
     <div class="main-content">
-        <h1 class="text-center mb-4">عرض الوظائف</h1>
+        <h1 class="text-center mb-4">عرض المتقدمين الوظائف</h1>
+        <button class="btn btn-success mb-3" onclick="downloadExcel()">تنزيل البيانات كملف Excel</button>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -173,6 +175,7 @@
                 const jobsTableBody = document.getElementById("jobsTableBody");
 
                 for (const job of jobs) {
+                    debugger
                     // جلب عدد المتقدمين لكل وظيفة
                     const applicantsCount = await fetch(`${applicantsApiUrl}${job.jobId}`)
                         .then(res => res.json())
@@ -253,7 +256,70 @@
         }
 
         document.addEventListener("DOMContentLoaded", fetchJobs);
+
+
+        async function downloadExcel() {
+    try {
+        // Fetch all jobs and applicants
+        const jobsResponse = await fetch("https://localhost:7226/api/Job/GetAllJob");
+        const jobs = await jobsResponse.json();
+
+        const workbook = XLSX.utils.book_new(); // Create a new workbook
+        
+        for (const job of jobs) {
+            debugger;
+            // Fetch applicants for each job
+            const applicantsResponse = await fetch(`https://localhost:7226/api/Job/GetApplicantsByJobId/${job.jobId}`);
+            const applicants = await applicantsResponse.json();
+
+            // Prepare data for the Excel sheet
+            const data = [
+                ["اسم الوظيفة", job.jobTitle],
+                ["الوصف", job.description],
+                ["الموقع", job.location],
+                ["الراتب", `${job.salary} دينار`],
+                [],
+                ["المتقدمون"]
+            ];
+
+            if (applicants.length > 0) {
+                data.push(["الاسم", "رقم الهاتف", "العنوان", "المهنة", "وصف المهنة", "سنوات الخبرة", "ضمان"]);
+                applicants.forEach(applicant => {
+                    data.push([
+                        applicant.userName,
+                        applicant.phoneNumber,
+                        applicant.address,
+                        applicant.profession,
+                        applicant.professionDescription,
+                        applicant.yearsOfExperience,
+                        applicant.hasWarranty ? "نعم" : "لا"
+                    ]);
+                });
+            } else {
+                data.push(["لا يوجد متقدمون"]);
+            }
+
+            data.push([]); // Add an empty row for spacing
+
+            // Create a worksheet
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+
+            // Add the worksheet to the workbook
+            XLSX.utils.book_append_sheet(workbook, worksheet, job.jobTitle.slice(0, 31)); // Sheet name max 31 chars
+        }
+
+        // Export the workbook as an Excel file
+        XLSX.writeFile(workbook, "Jobs_and_Applicants.xlsx");
+
+    } catch (error) {
+        console.error("Error downloading Excel file:", error);
+        alert("حدث خطأ أثناء تنزيل البيانات.");
+    }
+}
+
+
     </script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

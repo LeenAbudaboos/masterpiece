@@ -86,16 +86,16 @@
    <!-- شريط جانبي ثابت -->
    <div class="sidebar">
     <h3 class="text-center text-light">بلا شهادة</h3>
-    <a href="all_category.html" class="active"><i class="fas fa-boxes"></i>  الفئات</a>
+    <a href="all_category.html" class="active"><i class="fas fa-boxes"></i> الفئات</a>
     <a href="add_category.html"><i class="fas fa-plus"></i> إضافة فئة</a>
-    <a href="products.html" ><i class="fas fa-box"></i> المنتجات</a>
-    <a href="add_product.html" ><i class="fas fa-plus"></i> إضافة منتج</a>
+    <a href="products.html"><i class="fas fa-box"></i> المنتجات</a>
+    <a href="add_product.html"><i class="fas fa-plus"></i> إضافة منتج</a>
     <a href="employees.html"><i class="fas fa-users"></i> الوظائف</a>
     <a href="add_job.html"><i class="fas fa-user-plus"></i> إضافة وظائف</a>
-    <a href="alljob.html" ><i class="fas fa-shopping-cart"></i> المتقدمون للوظائف</a>
+    <a href="alljob.html"><i class="fas fa-users"></i> المتقدمون للوظائف</a>
+    <a href="allOrder.html" ><i class="fas fa-shopping-cart"></i> الطلبات</a>
 
-    <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
-    <!-- <a href="contact_requests.html"><i class="fas fa-envelope"></i> طلبات التواصل</a> -->
+    <a href="contactmasseg.html" ><i class="fas fa-envelope"></i> الرسائل</a>
 </div>
     <!-- محتوى الصفحة -->
     <div class="main-content">
@@ -103,7 +103,6 @@
         <table class="table table-bordered text-center">
             <thead class="table-dark">
                 <tr>
-                    <th>الصورة</th>
                     <th>اسم الفئة</th>
                     <th>الوصف</th>
                     <th>الإجراءات</th>
@@ -158,7 +157,6 @@
                 categories.forEach(category => {
                     categoriesTableBody.innerHTML += `
                         <tr id="category-${category.categoryId}">
-                            <td><img src="../Uploads/${category.categoryImg}" alt="Category Image"></td>
                             <td>${category.categoryName}</td>
                             <td>${category.description}</td>
                             <td>

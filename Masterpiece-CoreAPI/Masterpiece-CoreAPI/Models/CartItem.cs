@@ -13,7 +13,11 @@ public partial class CartItem
 
     public int? CartId { get; set; }
 
+    public int? UserId { get; set; }
+
     public virtual CartsProduct? Cart { get; set; }
 
     public virtual Product? Product { get; set; }
+
+    public virtual User? User { get; set; }
 }

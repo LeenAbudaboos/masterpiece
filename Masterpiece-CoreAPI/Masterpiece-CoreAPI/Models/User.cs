@@ -33,11 +33,15 @@ public partial class User
 
     public string? Role { get; set; }
 
+    public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
+
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     public virtual ICollection<CartsProduct> CartsProducts { get; set; } = new List<CartsProduct>();
 
     public virtual ICollection<JobApplication> JobApplications { get; set; } = new List<JobApplication>();
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual ICollection<RentalRequest> RentalRequests { get; set; } = new List<RentalRequest>();
 

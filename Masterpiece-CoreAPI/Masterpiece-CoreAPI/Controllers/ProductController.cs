@@ -64,7 +64,7 @@ namespace Masterpiece_CoreAPI.Controllers
             var product = db.Products.FirstOrDefault(c => c.ProductId == id);
             db.Products.Remove(product);
             db.SaveChanges();
-            return Ok(product);
+            return Ok(product);  
         }
 
         //[HttpGet("GetproductByID{id}")]
@@ -105,6 +105,7 @@ namespace Masterpiece_CoreAPI.Controllers
                 ProductImg = prodect.ProductImg.FileName,
                 Descriptions = prodect.Descriptions,
                 Price = prodect.Price,
+                PriceDetels = prodect.PriceDetels,  
                 Quantity = prodect.Quantity,
                 CategoryId = prodect.CategoryId
             };
@@ -137,6 +138,7 @@ namespace Masterpiece_CoreAPI.Controllers
             data.ProductImg = prodect.ProductImg.FileName;
             data.Descriptions = prodect.Descriptions;
             data.Price = prodect.Price;
+            data.PriceDetels = prodect.PriceDetels;
             data.Quantity = prodect.Quantity;
             data.CategoryId = prodect.CategoryId;
 

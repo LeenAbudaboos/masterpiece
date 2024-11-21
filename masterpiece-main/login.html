@@ -1,17 +1,18 @@
-<!-- <!DOCTYPE html>
-<!-- Coding By CodingNepal - codingnepalweb.com -->
+ <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Responsive Login and Signup Form </title>
+        <title> بلا شهادة - تسجيل الدخول  </title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="css/style.css">
                 
         <!-- Boxicons CSS -->
         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
              <style>
                 /* Google Fonts - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
@@ -286,9 +287,21 @@ a.google span{
             <!-- زر تسجيل الدخول/الخروج -->
             <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
 
-            <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
+            <!-- <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a> -->
 
-    
+            <div class="dropdown ms-3" id="profileButton" style="display: none;">
+                <button class="btn btn-secondary dropdown-toggle py-2 px-4 d-flex align-items-center" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-2"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
+                    <li><a class="dropdown-item" href="profile.html">صفحتي الشخصية</a></li>
+                    <li><a class="dropdown-item" href="job-applications.html">طلبات الوظائف</a></li>
+                    <li><a class="dropdown-item" href="cart.html">سلة المشتريات</a></li>
+
+                    <!-- <li><a class="dropdown-item text-danger" href="#" onclick="logout()">تسجيل الخروج</a></li> -->
+                </ul>
+            </div>
+            
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="contact.html" class="nav-item nav-link" >تواصل معنا</a>
@@ -324,7 +337,7 @@ a.google span{
                     <header>تسجيل الدخول</header>
                     <form id="login">
                         <div class="field input-field">
-                            <input type="text" name="phoneNumber" placeholder=" رقم الهاتف او الايميل"  class="input">
+                            <input type="text" name="phoneNumber" placeholder=" رقم الهاتف "  class="input">
                         </div>
 
                         <div class="field input-field">
@@ -392,43 +405,63 @@ a.google span{
 
 
 
-    var url = "https://localhost:7226/api/User/login";
-    var form = document.getElementById("login");
+var url = "https://localhost:7226/api/User/login";
+var form = document.getElementById("login");
 
-    async function login() {
+async function login() {
     event.preventDefault(); // منع إعادة تحميل الصفحة عند إرسال النموذج
-    
+
     var data = new FormData(form); // جمع البيانات من النموذج
-    
+
     try {
+       
         // إرسال الطلب إلى API
         var response = await fetch(url, {
             method: "POST",
-            body: data
+            body: data,
         });
 
         if (response.ok) {
             // إذا كانت الاستجابة ناجحة
             var result = await response.json();
-            
+
             // تخزين userId في localStorage
-            localStorage.setItem('userId', result.userId);
+            localStorage.setItem("userId", result.userId);
 
-            // عرض رسالة نجاح
-            alert(" تم تسجيل الدخول بنجاح اهلا بك !" );
-
-            // إعادة التوجيه إلى الصفحة الرئيسية
-            window.location.href = "index.html";
+            // عرض رسالة نجاح باستخدام SweetAlert2
+            Swal.fire({
+                title: "تم تسجيل الدخول بنجاح!",
+                text: "أهلاً بك في موقعنا.",
+                icon: "success",
+                confirmButtonText: "موافق",
+            }).then(() => {
+                // إعادة التوجيه إلى الصفحة الرئيسية
+                window.location.href = "index.html";
+            });
         } else {
             // إذا كانت الاستجابة غير ناجحة
             var errorMessage = await response.text(); // استخراج رسالة الخطأ من الاستجابة
-            alert("خطأ: " + errorMessage); // عرض رسالة الخطأ
+
+            // عرض رسالة خطأ باستخدام SweetAlert2
+            Swal.fire({
+                title: "خطأ في تسجيل الدخول",
+                text: errorMessage,
+                icon: "error",
+                confirmButtonText: "حسناً",
+            });
         }
     } catch (error) {
-        console.error('Error:', error);
-        alert("حدث خطأ أثناء الاتصال بالخادم.");
+        console.error("Error:", error);
+
+        // عرض رسالة خطأ عام باستخدام SweetAlert2
+        Swal.fire({
+            title: "خطأ في الاتصال",
+            text: "حدث خطأ أثناء الاتصال بالخادم. الرجاء المحاولة لاحقاً.",
+            icon: "error",
+            confirmButtonText: "حسناً",
+        });
     }
-    }
+}
 
    
     
@@ -461,19 +494,29 @@ a.google span{
                 }
             }
             
-            // وظيفة تسجيل الخروج
-            function logout() {
-                // حذف userId من localStorage
-                localStorage.removeItem('userId');
-                alert("تم تسجيل الخروج بنجاح!");
-            
-                // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
-                window.location.href = "login.html";
-            }
+          // وظيفة تسجيل الخروج
+function logout() {
+    // حذف userId من localStorage
+    localStorage.removeItem('userId');
+
+    // عرض تنبيه باستخدام SweetAlert2
+    Swal.fire({
+        title: "تم تسجيل الخروج",
+        text: "لقد قمت بتسجيل الخروج بنجاح!",
+        icon: "success",
+        confirmButtonText: "موافق",
+    }).then(() => {
+        // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
+        window.location.href = "login.html";
+    });
+}
+
             
             // استدعاء الدالة عند تحميل الصفحة
             document.addEventListener('DOMContentLoaded', checkLoginStatus);
             
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     </body>
-</html> -->
+</html> 

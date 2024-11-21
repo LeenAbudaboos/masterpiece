@@ -5,13 +5,15 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Responsive Login and Signup Form </title>
+        <title> بلا شهادة , إنشاء حساب</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="css/style.css">
                 
         <!-- Boxicons CSS -->
         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
              <style>
                 /* Google Fonts - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
@@ -273,8 +275,20 @@ a.google span{
                 <!-- زر تسجيل الدخول/الخروج -->
                 <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
     
-                <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
-    
+                <!-- <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a> -->
+                <div class="dropdown ms-3" id="profileButton" style="display: none;">
+                    <button class="btn btn-secondary dropdown-toggle py-2 px-4 d-flex align-items-center" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-2"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
+                        <li><a class="dropdown-item" href="profile.html">صفحتي الشخصية</a></li>
+                        <li><a class="dropdown-item" href="job-applications.html">طلبات الوظائف</a></li>
+                        <li><a class="dropdown-item" href="cart.html">سلة المشتريات</a></li>
+
+                        <!-- <li><a class="dropdown-item text-danger" href="#" onclick="logout()">تسجيل الخروج</a></li> -->
+                    </ul>
+                </div>
+                
         
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
@@ -311,64 +325,57 @@ a.google span{
     <!-- Navbar End -->
         <section class="container forms">
             
-             <div class="form login" >
+            <div class="form login">
                 <div class="form-content">
-                    <div class="form-content">
-                        <header>إنشاء حساب</header>
-                        <form id="registerForm">
-                            <div class="field input-field">
-                                <input type="text" id="username" name="userName" required placeholder="الاسم الكامل" class="input">
-                            </div>
-    
-                            <div class="field input-field">
-                                <input type="text" id="phone" name="phoneNumber" required placeholder="رقم الهاتف" class="input">
-                            </div>
-                            
-                            <div class="field input-field">
-                                <input type="password" id="password" name="password" placeholder=" كلمة السر" class="password">
-                                <i class='bx bx-hide eye-icon'></i>
-                            </div>
-    
-                            <div class="field input-field">
-                                <input type="password" id="password" name="password" placeholder="تأكيد كلمة السر" class="password">
-                                <i class='bx bx-hide eye-icon'></i>
-                            </div>
-                            <div class="field input-field">
-                                <input type="text" id="address" name="address" required placeholder="العنوان" class="input">
-                            </div>
-                            <div class="field input-field">
-                                <select id="profession" name="profession" required class="input">
-                                    <option value="" disabled selected>اختر المهنة</option>
-                                    <option value="نجار">نجار</option>
-                                    <option value="حداد">حداد</option>
-                                    <option value="سباك">سباك</option>
-                                    <option value="عامل بناء">عامل بناء</option>
-                                    <option value="فني كهرباء">فني كهرباء</option>
-                                </select>
-                            </div>
-                            <div class="field input-field"></div>
-                            
-    
-                            <div class="field button-field">
-                                <button type="submit" onclick="regster()">إنشاء</button>
-                            </div>
-                        </form>
-    
-                        <div class="form-link">
-                            <span>هل لديك حساب بالفعل؟ <a href="login.html" class="link login-link">تسجيل الدخول</a></span>
+                    <header>إنشاء حساب</header>
+                    <form id="registerForm" onsubmit="validateForm(event)">
+                        <div class="field input-field">
+                            <input type="text" id="username" name="userName" placeholder="الاسم الكامل" class="input" oninput="validateUsername()" onblur="validateUsername()">
+                            <span id="usernameError" class="error-message"></span>
                         </div>
+            
+                        <div class="field input-field">
+                            <input type="text" id="phone" name="phoneNumber" placeholder="رقم الهاتف" class="input" oninput="validatePhone()" onblur="validatePhone()">
+                            <span id="phoneError" class="error-message"></span>
+                        </div>
+            
+                        <div class="field input-field">
+                            <input type="password" id="password" name="password" placeholder="كلمة السر" class="password" oninput="validatePassword()" onblur="validatePassword()">
+                            <span id="passwordError" class="error-message"></span>
+                        </div>
+            
+                        <div class="field input-field">
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="تأكيد كلمة السر" class="password" oninput="validateConfirmPassword()" onblur="validateConfirmPassword()">
+                            <span id="confirmPasswordError" class="error-message"></span>
+                        </div>
+            
+                        <div class="field input-field">
+                            <input type="text" id="address" name="address" placeholder="العنوان" class="input" oninput="validateAddress()" onblur="validateAddress()">
+                            <span id="addressError" class="error-message"></span>
+                        </div>
+            
+                        <div class="field input-field">
+                            <select id="profession" name="profession" class="input" onchange="validateProfession()" onblur="validateProfession()">
+                                <option value="" disabled selected>اختر المهنة</option>
+                                <option value="نجار">نجار</option>
+                                <option value="حداد">حداد</option>
+                                <option value="سباك">سباك</option>
+                                <option value="عامل بناء">عامل بناء</option>
+                                <option value="فني كهرباء">فني كهرباء</option>
+                            </select>
+                            <span id="professionError" class="error-message"></span>
+                        </div>
+            
+                        <div class="field button-field">
+                            <button type="submit" onclick="regster()">إنشاء</button>
+                        </div>
+                    </form>
+            
+                    <div class="form-link">
+                        <span>هل لديك حساب بالفعل؟ <a href="login.html" class="link login-link">تسجيل الدخول</a></span>
                     </div>
-    
-                    <div class="line"></div>
-    
-                
-                    <div class="media-options">
-                        <a href="#" class="field google">
-                            <img src="img/google.jpg" alt="" class="google-img">
-                            <span>تسجيل الدخول ياستخدام قوقل</span>
-                        </a>
-
-            </div> 
+                </div>
+            </div>
           
         </section>
 
@@ -394,6 +401,7 @@ a.google span{
 <!-- Owl Carousel JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
@@ -403,24 +411,41 @@ a.google span{
 
 
 
-const url="https://localhost:7226/api/User/register";
+const url = "https://localhost:7226/api/User/register";
 
-let form=document.getElementById("registerForm");
+let form = document.getElementById("registerForm");
+
 async function regster() {
     event.preventDefault();
-    debugger;
-    let data=new FormData(form);
-    let response=await fetch(url,{
-        method:"POST",
-        body:data
+  
+
+    let data = new FormData(form);
+    let response = await fetch(url, {
+        method: "POST",
+        body: data,
     });
-    if(response.ok){
-  alert("لقد تم تم انشاء الحساب بنجاح , اهلا بك معنا ");
-  window.location.href="login.html";
-}else{
-  alert("حدث خطأ اثناء انشاء الحساب الرجاء اعادة المحاولة ");
+
+    if (response.ok) {
+        // تنبيه نجاح
+        Swal.fire({
+            title: "تم التسجيل بنجاح!",
+            text: "لقد تم إنشاء الحساب بنجاح، أهلاً بك معنا!",
+            icon: "success",
+            confirmButtonText: "موافق",
+        }).then(() => {
+            window.location.href = "login.html";
+        });
+    } else {
+        // تنبيه خطأ
+        Swal.fire({
+            title: "خطأ",
+            text: "حدث خطأ أثناء إنشاء الحساب، الرجاء إعادة المحاولة.",
+            icon: "error",
+            confirmButtonText: "حسناً",
+        });
+    }
 }
-}
+
 
 
 //************************************************
@@ -451,19 +476,122 @@ async function regster() {
                 }
             }
             
-            // وظيفة تسجيل الخروج
-            function logout() {
-                // حذف userId من localStorage
-                localStorage.removeItem('userId');
-                alert("تم تسجيل الخروج بنجاح!");
-            
-                // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
-                window.location.href = "login.html";
-            }
-            
+         // وظيفة تسجيل الخروج
+function logout() {
+    // حذف userId من localStorage
+    localStorage.removeItem('userId');
+
+    // عرض تنبيه باستخدام SweetAlert2
+    Swal.fire({
+        title: "تم تسجيل الخروج",
+        text: "لقد قمت بتسجيل الخروج بنجاح!",
+        icon: "success",
+        confirmButtonText: "موافق",
+    }).then(() => {
+        // إعادة تحميل الصفحة أو التوجيه إلى صفحة تسجيل الدخول
+        window.location.href = "login.html";
+    });
+}
+
             // استدعاء الدالة عند تحميل الصفحة
             document.addEventListener('DOMContentLoaded', checkLoginStatus);
             
                 </script>
+
+<style>
+    .error-message {
+        color: red;
+        font-size: 0.8em;
+        margin-top: 5px;
+        display: none;
+    }
+</style>
+
+<script>
+    // تحقق الحقول بشكل فردي
+    function validateUsername() {
+        const username = document.getElementById("username").value.trim();
+        const usernameError = document.getElementById("usernameError");
+        if (username.length < 3) {
+            usernameError.textContent = "الاسم الكامل يجب أن يكون أطول من 3 أحرف.";
+            usernameError.style.display = "block";
+        } else {
+            usernameError.style.display = "none";
+        }
+    }
+
+    function validatePhone() {
+        const phone = document.getElementById("phone").value.trim();
+        const phoneError = document.getElementById("phoneError");
+        if (!/^\d{10}$/.test(phone)) {
+            phoneError.textContent = "رقم الهاتف يجب أن يكون مكوناً من 10 أرقام.";
+            phoneError.style.display = "block";
+        } else {
+            phoneError.style.display = "none";
+        }
+    }
+
+    function validatePassword() {
+        const password = document.getElementById("password").value.trim();
+        const passwordError = document.getElementById("passwordError");
+        if (password.length < 6) {
+            passwordError.textContent = "كلمة المرور يجب أن تكون أطول من 6 أحرف.";
+            passwordError.style.display = "block";
+        } else {
+            passwordError.style.display = "none";
+        }
+    }
+
+    function validateConfirmPassword() {
+        const password = document.getElementById("password").value.trim();
+        const confirmPassword = document.getElementById("confirmPassword").value.trim();
+        const confirmPasswordError = document.getElementById("confirmPasswordError");
+        if (confirmPassword !== password) {
+            confirmPasswordError.textContent = "كلمة المرور وتأكيدها غير متطابقتين.";
+            confirmPasswordError.style.display = "block";
+        } else {
+            confirmPasswordError.style.display = "none";
+        }
+    }
+
+    function validateAddress() {
+        const address = document.getElementById("address").value.trim();
+        const addressError = document.getElementById("addressError");
+        if (address.length < 5) {
+            addressError.textContent = "العنوان يجب أن يكون أطول من 5 أحرف.";
+            addressError.style.display = "block";
+        } else {
+            addressError.style.display = "none";
+        }
+    }
+
+    function validateProfession() {
+        const profession = document.getElementById("profession").value;
+        const professionError = document.getElementById("professionError");
+        if (!profession) {
+            professionError.textContent = "يجب اختيار المهنة.";
+            professionError.style.display = "block";
+        } else {
+            professionError.style.display = "none";
+        }
+    }
+
+    // تحقق عند إرسال النموذج
+    function validateForm(event) {
+        event.preventDefault();
+        validateUsername();
+        validatePhone();
+        validatePassword();
+        validateConfirmPassword();
+        validateAddress();
+        validateProfession();
+
+        // تحقق من وجود أي رسالة خطأ ظاهرة
+        const errors = document.querySelectorAll(".error-message:visible");
+        if (errors.length === 0) {
+            regster(); // استدعاء الدالة لإرسال النموذج
+        }
+    }
+</script>
     </body>
 </html>

@@ -11,7 +11,7 @@
 
         public int? Price { get; set; }
 
-        public int? PriceDetels { get; set; }
+        public string? PriceDetels { get; set; }
 
         public int? Quantity { get; set; }
 

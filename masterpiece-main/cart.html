@@ -61,9 +61,21 @@
             <!-- زر تسجيل الدخول/الخروج -->
             <a href="login.html" id="authButton" class="btn btn-primary py-2 px-4 ms-3">تسجيل الدخول</a>
 
-            <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a>
+            <!-- <a href="profile.html" id="profileButton" class="btn btn-secondary py-2 px-4 ms-3" style="display: none;">البروفايل</a> -->
 
-    
+            <div class="dropdown ms-3" id="profileButton" style="display: none;">
+                <button class="btn btn-secondary dropdown-toggle py-2 px-4 d-flex align-items-center" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-2"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
+                    <li><a class="dropdown-item" href="profile.html">صفحتي الشخصية</a></li>
+                    <li><a class="dropdown-item" href="job-applications.html">طلبات الوظائف</a></li>
+                    <li><a class="dropdown-item" href="cart.html">سلة المشتريات</a></li>
+
+                    <!-- <li><a class="dropdown-item text-danger" href="#" onclick="logout()">تسجيل الخروج</a></li> -->
+                </ul>
+            </div>
+            
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="contact.html" class="nav-item nav-link" >تواصل معنا</a>
@@ -113,7 +125,7 @@
         </table>
     
         <div class="text-center">
-            <button class="btn btn-success">إتمام الشراء</button>
+            <button class="btn btn-success" onclick="goToCheckout()">إتمام الشراء</button>
         </div>
     </div>
     <!-- Cart End -->
@@ -197,8 +209,9 @@
     <script src="js/main.js"></script>
 
     <script>
-       const urlGetCartItems = 'https://localhost:7226/api/CartItem/GetCartItems'; // رابط API الخاص بجلب عناصر السلة
-
+function goToCheckout() {
+    window.location.href = "checkout.html";
+}
 async function getCartItems() {
     debugger
     const userId = localStorage.getItem('userId');  // احصل على userId من التخزين المحلي
@@ -228,7 +241,7 @@ async function getCartItems() {
             <td>
                 <div class="input-group">
                             <button class="btn btn-outline-secondary" onclick="updateCartItem(${item.cartItemId}, ${item.productDetails.price}, -1)">-</button>
-                            <input type="number" id="quantity-${item.cartItemId}" value="${item.quantity}" min="1" class="form-control text-center">
+                            <input type="number" id="quantity-${item.cartItemId}" value="${item.quantity || 1}" min="1" class="form-control text-center">
                             <button class="btn btn-outline-secondary" onclick="updateCartItem(${item.cartItemId}, ${item.productDetails.price}, 1)">+</button>
                         </div>
             </td>

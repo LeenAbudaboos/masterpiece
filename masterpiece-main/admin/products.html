@@ -82,34 +82,29 @@
         }
 
         /* تحسين الجدول */
-        table.table {
-            border-collapse: collapse;
-            width: 100%;
-            background-color: #f9f9f9;
-            margin-top: 20px;
-            border: 1px solid #ddd;
+        .table {
+            background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
+            text-align: right;
         }
 
-        table.table thead {
+        .table th,
+        .table td {
+            vertical-align: middle;
+            text-align: right;
+        }
+
+        .btn-primary {
             background-color: #007bff;
-            color: white;
+            border: none;
+            transition: background-color 0.3s ease;
         }
 
-        table.table th, table.table td {
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
+        .btn-primary:hover {
+            background-color: #0056b3;
         }
 
-        table.table th {
-            font-weight: bold;
-        }
-
-        table.table tr:hover {
-            background-color: #f1f1f1;
-        }
 
         /* تحسين أزرار التحكم */
         .btn {
@@ -151,16 +146,16 @@
     <!-- شريط جانبي ثابت -->
     <div class="sidebar">
         <h3 class="text-center text-light">بلا شهادة</h3>
-        <a href="all_category.html" ><i class="fas fa-boxes"></i>  الفئات</a>
+        <a href="all_category.html"><i class="fas fa-boxes"></i> الفئات</a>
         <a href="add_category.html"><i class="fas fa-plus"></i> إضافة فئة</a>
         <a href="products.html" class="active"><i class="fas fa-box"></i> المنتجات</a>
-        <a href="add_product.html" ><i class="fas fa-plus"></i> إضافة منتج</a>
+        <a href="add_product.html"><i class="fas fa-plus"></i> إضافة منتج</a>
         <a href="employees.html"><i class="fas fa-users"></i> الوظائف</a>
         <a href="add_job.html"><i class="fas fa-user-plus"></i> إضافة وظائف</a>
-        <a href="alljob.html" ><i class="fas fa-shopping-cart"></i> المتقدمون للوظائف</a>
-    
-        <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
-        <!-- <a href="contact_requests.html"><i class="fas fa-envelope"></i> طلبات التواصل</a> -->
+        <a href="alljob.html"><i class="fas fa-users"></i> المتقدمون للوظائف</a>
+        <a href="allOrder.html" ><i class="fas fa-shopping-cart"></i> الطلبات</a>
+        <a href="contactmasseg.html" ><i class="fas fa-envelope"></i> الرسائل</a>
+        
     </div>
 
     <div class="main-content">
@@ -177,6 +172,7 @@
                     <th>اسم المنتج</th>
                     <th>الوصف</th>
                     <th>السعر</th>
+                    <th>وحدة القياس</th>
                     <th>الإجراء</th>
                 </tr>
             </thead>
@@ -243,6 +239,8 @@ debugger;
                             <td>${element.productName}</td>
                             <td>${element.descriptions}</td>                            
                             <td>${element.price} دينار</td>
+                            <td>${element.priceDetels} </td>
+
                             <td>
     <button class="btn btn-warning btn-sm" onclick="editProduct(${element.productId}, '${element.productName}', '${element.descriptions}', ${element.price}, '${element.productImg}')">تعديل</button>
                                 <button class="btn btn-danger btn-sm" onclick="deleteProduct(${element.productId})">حذف</button>
@@ -306,7 +304,7 @@ async function saveProductChanges() {
     }
 
     try {
-        const response = await fetch(`https://localhost:7226/api/Product/UpdateProduct/${productId}`, {
+        const response = await fetch(`https://localhost:7226/api/Product/Update${productId}`, {
             method: 'PUT',
             body: formData,
         });

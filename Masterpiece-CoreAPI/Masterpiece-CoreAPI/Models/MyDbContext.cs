@@ -31,6 +31,10 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<JobApplication> JobApplications { get; set; }
 
+    public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+
     public virtual DbSet<PartnerJob> PartnerJobs { get; set; }
 
     public virtual DbSet<PartnerProduct> PartnerProducts { get; set; }
@@ -92,6 +96,8 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.Product).WithMany(p => p.CartItems)
                 .HasForeignKey(d => d.ProductId)
                 .HasConstraintName("FK__CartItems__Produ__440B1D61");
+
+            entity.HasOne(d => d.User).WithMany(p => p.CartItems).HasForeignKey(d => d.UserId);
         });
 
         modelBuilder.Entity<CartsProduct>(entity =>
@@ -125,9 +131,15 @@ public partial class MyDbContext : DbContext
 
         modelBuilder.Entity<ContactU>(entity =>
         {
-            entity.HasKey(e => e.MessageId).HasName("PK__ContactU__C87C037C32CDA1F1");
+            entity.HasKey(e => e.MessageId).HasName("PK__ContactU__C87C037CF67F4D4F");
 
             entity.Property(e => e.MessageId).HasColumnName("MessageID");
+            entity.Property(e => e.Email).HasMaxLength(255);
+            entity.Property(e => e.Name).HasMaxLength(255);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("????");
+            entity.Property(e => e.Subject).HasMaxLength(255);
             entity.Property(e => e.SubmittedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
@@ -164,6 +176,44 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.JobApplications)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__JobApplic__UserI__4BAC3F29");
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF94F992D9");
+
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.OrderDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.OrderStatus)
+                .HasMaxLength(50)
+                .HasDefaultValue("Pending");
+            entity.Property(e => e.PhoneNumber).HasMaxLength(15);
+            entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Orders__UserID__0E6E26BF");
+        });
+
+        modelBuilder.Entity<OrderDetail>(entity =>
+        {
+            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__D3B9D30CAD884991");
+
+            entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("FK__OrderDeta__Order__1332DBDC");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.ProductId)
+                .HasConstraintName("FK__OrderDeta__Produ__14270015");
         });
 
         modelBuilder.Entity<PartnerJob>(entity =>
